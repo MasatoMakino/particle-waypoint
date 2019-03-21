@@ -1,2 +1,2 @@
-# dividable-path
+# particle-waypoint
  Path module for calculating waypoints.
