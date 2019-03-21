@@ -18,8 +18,6 @@ export class ParticleGenerator {
   private isDisposed: boolean = false;
   public speedPerSec: number = 0.07;
 
-  public generateFunc:()=>Particle;
-
   /**
    * @param path
    */
@@ -74,12 +72,16 @@ export class ParticleGenerator {
   };
 
   protected generate(): Particle {
-    const pathParticle: Particle = new Particle(this.path);
+    const pathParticle: Particle = this.generateParticle(this.path);
     this.particles.push(pathParticle);
     pathParticle.visible = this._visible;
-    //TODO ここでコンテナに挿入。
-
     return pathParticle;
+  }
+
+  protected generateParticle( path:ParticleWay ):Particle{
+    const particle = new Particle(path);
+    //TODO ここでコンテナに挿入。
+    return particle;
   }
 
   public generateAll(): void {
