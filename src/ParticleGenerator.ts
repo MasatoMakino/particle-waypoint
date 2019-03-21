@@ -78,7 +78,7 @@ export class ParticleGenerator {
     return pathParticle;
   }
 
-  protected generateParticle( path:ParticleWay ):Particle{
+  protected generateParticle(path: ParticleWay): Particle {
     const particle = new Particle(path);
     //TODO ここでコンテナに挿入。
     return particle;
