@@ -611,19 +611,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@types/createjs-lib@*":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@types/createjs-lib/-/createjs-lib-0.0.29.tgz#fae82e3ba8606663b190e789cec7d9c728fc41d7"
-  integrity sha1-+uguO6hgZmOxkOeJzsfZxyj8Qdc=
-
-"@types/easeljs@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@types/easeljs/-/easeljs-1.0.0.tgz#b339ca0a8d0148819831b0140254d697fd46d974"
-  integrity sha512-DkhxqkgylaZGeuod35MCiv1Rix8GnBGv+URRBZt4rsMvhyi7Iap6SZbeEN5bD3b8BXHozHEKB/to9ohUDr3GIA==
-  dependencies:
-    "@types/createjs-lib" "*"
-    "@types/tweenjs" "*"
-
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
@@ -689,18 +676,6 @@
   dependencies:
     "@types/glob" "*"
     "@types/node" "*"
-
-"@types/three@^0.93.27":
-  version "0.93.27"
-  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.93.27.tgz#2b110e6eb1e2dc3ac13ed0e0d4e65937ea228685"
-  integrity sha512-HncnT9RhhB9zflW3t/hUzaqWPL1vIXuyXaEhoMLJAHisfm8Xl6TscJPHR8U0XlUM1HcUnRxOpla9AJCLgK93lA==
-
-"@types/tweenjs@*":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@types/tweenjs/-/tweenjs-1.0.0.tgz#a27b9e6abe27bac19ebbdb7de1d98c31ac40c064"
-  integrity sha512-qn0yChkBM0uCDdovXCyZT+HREWP5PaPWrGBuQZ0GIANHZ4E4PZ35vrczagmTyewRwTFJ82/TcYQAvozjNmfcTw==
-  dependencies:
-    "@types/createjs-lib" "*"
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
