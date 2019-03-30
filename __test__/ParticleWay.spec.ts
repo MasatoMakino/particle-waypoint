@@ -5,13 +5,13 @@ describe("2D", () => {
   const way = new ParticleWay(points);
 
   test("center", () => {
-    expect(way.getPoint(0.5)).toEqual([1.0, 0.0]);
+    isClosePoint( way.getPoint(0.5), [1.0, 0.0]);
   });
   test("0.75", () => {
-    expect(way.getPoint(0.75)).toEqual([1.0, 0.5]);
+    isClosePoint( way.getPoint(0.75), [1.0, 0.5]);
   });
   test("0.25", () => {
-    expect(way.getPoint(0.25)).toEqual([0.5, 0.0]);
+    isClosePoint( way.getPoint(0.25), [0.5, 0.0]);
   });
 
   test("min", () => {
@@ -33,21 +33,17 @@ describe("3D", () => {
   const way = new ParticleWay(points);
 
   test("center", () => {
-    expect(way.getPoint(0.5)).toEqual([1.0, 0.5, 0.0]);
+    isClosePoint( way.getPoint(0.5), [1.0, 0.5, 0.0]);
   });
   test("0.75", () => {
-    expect(way.getPoint(0.75)).toEqual([1.0, 1.0, 0.25]);
+    isClosePoint( way.getPoint(0.75), [1.0, 1.0, 0.25]);
   });
   test("0.25", () => {
-    expect(way.getPoint(0.25)).toEqual([0.75, 0.0, 0.0]);
+    isClosePoint( way.getPoint(0.25), [0.75, 0.0, 0.0]);
   });
 
   test("0.33", () => {
-    const result = way.getPoint(0.3333333);
-    const expected = [1.0, 0.0, 0.0];
-    expect(expected[0]).toBeCloseTo(result[0]);
-    expect(expected[1]).toBeCloseTo(result[1]);
-    expect(expected[2]).toBeCloseTo(result[2]);
+    isClosePoint( way.getPoint(0.3333333), [1.0, 0.0, 0.0]);
   });
 
   test("min", () => {
@@ -93,3 +89,9 @@ describe("Zero Point", () => {
     expect(way.getPoint(1.0)).toBeNull();
   });
 });
+
+const isClosePoint = (p1: number[], p2: number[]) => {
+  for (let i = 0; i < p1.length; i++) {
+    expect(p1[i]).toBeCloseTo(p2[i], 6);
+  }
+};

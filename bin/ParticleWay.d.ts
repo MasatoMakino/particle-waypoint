@@ -4,7 +4,7 @@
 export declare class ParticleWay {
     name: string;
     protected _points: number[][];
-    protected _total: number;
+    protected _rateTable: number[];
     constructor(points: number[][]);
     setPoints(points: number[][]): void;
     private getDistance;

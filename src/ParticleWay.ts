@@ -4,7 +4,7 @@
 export class ParticleWay {
   public name: string = "";
   protected _points: number[][];
-  protected _total: number;
+  protected _rateTable: number[];
 
   constructor(points: number[][]) {
     this.setPoints(points);
@@ -12,12 +12,18 @@ export class ParticleWay {
 
   public setPoints(points: number[][]): void {
     this._points = points;
-    this._total = 0;
 
-    this._total = this._points.reduce((prev, current, index, array) => {
-      if (index === 0) return prev;
-      return prev + this.getDistance(array[index - 1], current);
-    }, 0);
+    const sumTable = new Array(this._points.length).fill(0);
+    this._points.forEach((val, index, array) => {
+      if (index === 0) return;
+      sumTable[index] =
+        this.getDistance(array[index - 1], val) + sumTable[index - 1];
+    });
+    const total = sumTable[sumTable.length - 1];
+
+    this._rateTable = sumTable.map(val => {
+      return val / total;
+    });
   }
 
   private getDistance(pos1: number[], pos2: number[]): number {
@@ -41,30 +47,25 @@ export class ParticleWay {
       return [...this._points[0]];
     }
 
+    const n = this._points.length;
     t = Math.min(t, 1.0);
+    if (t === 1.0) return [...this._points[n-1]];
     t = Math.max(t, 0.0);
-    let position = this._total * t;
+    if (t === 0.0) return [...this._points[0]];
 
     let i = 1;
-    const n = this._points.length;
     for (i; i < n; i++) {
-      position -= this.getDistance(this._points[i - 1], this._points[i]);
-      if (position < 0.0) {
-        break;
-      }
+      if (this._rateTable[i] >= t) break;
     }
-
     i--;
-    if (i === n - 1) return this._points[i];
 
     const floorPoint = this._points[i];
     const ceilPoint = this._points[i + 1];
-
-    let distance = this.getDistance(floorPoint, ceilPoint);
+    const rateBase = this._rateTable[i];
     return this.getCenterPoint(
       floorPoint,
       ceilPoint,
-      (distance + position) / distance
+      (t - rateBase) / (this._rateTable[i + 1] - rateBase)
     );
   }
 
