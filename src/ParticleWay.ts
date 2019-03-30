@@ -49,7 +49,7 @@ export class ParticleWay {
 
     const n = this._points.length;
     t = Math.min(t, 1.0);
-    if (t === 1.0) return [...this._points[n-1]];
+    if (t === 1.0) return [...this._points[n - 1]];
     t = Math.max(t, 0.0);
     if (t === 0.0) return [...this._points[0]];
 
