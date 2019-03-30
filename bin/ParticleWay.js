@@ -9,10 +9,11 @@ export class ParticleWay {
     setPoints(points) {
         this._points = points;
         this._total = 0;
-        const n = this._points.length;
-        for (let i = 1; i < n; i++) {
-            this._total += this.getDistance(this._points[i - 1], this._points[i]);
-        }
+        this._total = this._points.reduce((prev, current, index, array) => {
+            if (index === 0)
+                return prev;
+            return prev + this.getDistance(array[index - 1], current);
+        }, 0);
     }
     getDistance(pos1, pos2) {
         const dx = pos2[0] - pos1[0];
@@ -26,6 +27,12 @@ export class ParticleWay {
         }
     }
     getPoint(t) {
+        if (!this._points || this._points.length === 0) {
+            return null;
+        }
+        if (this._points.length === 1) {
+            return [...this._points[0]];
+        }
         t = Math.min(t, 1.0);
         t = Math.max(t, 0.0);
         let position = this._total * t;
@@ -42,9 +49,6 @@ export class ParticleWay {
             return this._points[i];
         const floorPoint = this._points[i];
         const ceilPoint = this._points[i + 1];
-        if (floorPoint === undefined || ceilPoint === undefined) {
-            return this._points[0];
-        }
         let distance = this.getDistance(floorPoint, ceilPoint);
         return this.getCenterPoint(floorPoint, ceilPoint, (distance + position) / distance);
     }

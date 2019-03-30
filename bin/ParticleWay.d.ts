@@ -8,7 +8,7 @@ export declare class ParticleWay {
     constructor(points: number[][]);
     setPoints(points: number[][]): void;
     private getDistance;
-    getPoint(t: number): number[];
+    getPoint(t: number): number[] | null;
     private getCenterPoint;
 }
 //# sourceMappingURL=ParticleWay.d.ts.map
