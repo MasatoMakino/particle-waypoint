@@ -27,18 +27,16 @@ export class ParticleGenerator {
             //remove particle
             this.removeCompletedParticles();
             //generate particle
-            if (this.renderID != null) {
-                while (timestamp > this.lastParticleTime + this.particleInterval) {
-                    const current = this.lastParticleTime;
-                    this.lastParticleTime += this.particleInterval;
-                    //すでに寿命切れのパーティクルは生成をスキップ。
-                    if (timestamp > current + (1.0 / this.speedPerSec) * 1000) {
-                        continue;
-                    }
-                    const particle = this.generate();
-                    const move = ((timestamp - current) * this.speedPerSec) / 1000;
-                    particle.add(move);
+            while (timestamp > this.lastParticleTime + this.particleInterval) {
+                const current = this.lastParticleTime;
+                this.lastParticleTime += this.particleInterval;
+                //すでに寿命切れのパーティクルは生成をスキップ。
+                if (timestamp > current + (1.0 / this.speedPerSec) * 1000) {
+                    continue;
                 }
+                const particle = this.generate();
+                const move = ((timestamp - this.lastParticleTime) * this.speedPerSec) / 1000;
+                particle.add(move);
             }
             this.lastAnimateTime = timestamp;
             this.renderID = requestAnimationFrame(this.animate);
