@@ -37,7 +37,7 @@ export declare class ParticleGenerator {
      * 指定されたパーティクルを削除する。
      * @param particle
      */
-    private removeParticle;
+    removeParticle(particle: Particle): void;
     /**
      * 全てのパーティクルを削除する。
      */

@@ -72,10 +72,10 @@ export class ParticleGenerator {
   };
 
   protected generate(): Particle {
-    const pathParticle: Particle = this.generateParticle(this.path);
-    this.particles.push(pathParticle);
-    pathParticle.visible = this._visible;
-    return pathParticle;
+    const particle: Particle = this.generateParticle(this.path);
+    this.particles.push(particle);
+    particle.visible = this._visible;
+    return particle;
   }
 
   /**
@@ -94,16 +94,10 @@ export class ParticleGenerator {
     let pos: number = 0.0;
 
     while (pos < 1.0) {
-      this.generate();
-
-      const n: number = this.particles.length;
-      for (let i = 0; i < n; i++) {
-        const particle: Particle = this.particles[i];
-        particle.add(move);
-      }
+      const particle = this.generate();
+      particle.update(pos);
       pos += move;
     }
-
     this.removeCompletedParticles();
   }
 
@@ -127,7 +121,7 @@ export class ParticleGenerator {
    * 指定されたパーティクルを削除する。
    * @param particle
    */
-  private removeParticle(particle: Particle): void {
+  public removeParticle(particle: Particle): void {
     const i: number = this.particles.indexOf(particle);
     const popped: Particle[] = this.particles.splice(i, 1);
     popped.forEach(val => {
@@ -139,11 +133,10 @@ export class ParticleGenerator {
    * 全てのパーティクルを削除する。
    */
   public removeAllParticles(): void {
-    const n: number = this.particles.length;
-    for (let i = n - 1; i >= 0; i--) {
-      const particle = this.particles[i];
-      this.removeParticle(particle);
-    }
+    this.particles.forEach(p => {
+      p.dispose();
+    });
+    this.particles = [];
   }
 
   /**

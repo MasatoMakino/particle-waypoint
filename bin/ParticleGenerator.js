@@ -58,10 +58,10 @@ export class ParticleGenerator {
         this.renderID = null;
     }
     generate() {
-        const pathParticle = this.generateParticle(this.path);
-        this.particles.push(pathParticle);
-        pathParticle.visible = this._visible;
-        return pathParticle;
+        const particle = this.generateParticle(this.path);
+        this.particles.push(particle);
+        particle.visible = this._visible;
+        return particle;
     }
     /**
      * パーティクルを生成する。
@@ -77,12 +77,8 @@ export class ParticleGenerator {
         const move = (this.speedPerSec * this.particleInterval) / 1000;
         let pos = 0.0;
         while (pos < 1.0) {
-            this.generate();
-            const n = this.particles.length;
-            for (let i = 0; i < n; i++) {
-                const particle = this.particles[i];
-                particle.add(move);
-            }
+            const particle = this.generate();
+            particle.update(pos);
             pos += move;
         }
         this.removeCompletedParticles();
@@ -117,11 +113,10 @@ export class ParticleGenerator {
      * 全てのパーティクルを削除する。
      */
     removeAllParticles() {
-        const n = this.particles.length;
-        for (let i = n - 1; i >= 0; i--) {
-            const particle = this.particles[i];
-            this.removeParticle(particle);
-        }
+        this.particles.forEach(p => {
+            p.dispose();
+        });
+        this.particles = [];
     }
     /**
      * パーティクル生成の停止とパーティクルの破棄を行う。
