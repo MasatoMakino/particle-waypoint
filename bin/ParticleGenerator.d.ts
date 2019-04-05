@@ -22,6 +22,11 @@ export declare class ParticleGenerator {
     stop(): void;
     protected animate: (timestamp: number) => void;
     protected generate(): Particle;
+    /**
+     * パーティクルを生成する。
+     * generate関数の内部処理。
+     * @param path
+     */
     protected generateParticle(path: ParticleWay): Particle;
     generateAll(): void;
     /**

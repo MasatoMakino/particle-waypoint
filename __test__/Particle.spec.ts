@@ -16,12 +16,29 @@ describe("particle", () => {
   const way = new ParticleWay(points);
   const particle = new Particle(way);
 
+  test("visible", () => {
+    expect(particle.visible).toEqual(true);
+    particle.visible = false;
+    expect(particle.visible).toEqual(false);
+  });
+  test("add", () => {
+    particle.update(0.0);
+    const ratio = 0.33333;
+    expect(particle.add(ratio)).toEqual(ratio);
+    expect(particle.ratio).toEqual(ratio);
+  });
+
   test("center", () => {
-    expect(particle.update(0.5)).toEqual(0.5);
+    const ratio = 0.5;
+    expect(particle.update(ratio)).toEqual(ratio);
+    expect(particle.ratio).toEqual(ratio);
   });
   test("min", () => {
-    expect(particle.update(0.0)).toEqual(0.0);
+    const ratio = 0.0;
+    expect(particle.update(ratio)).toEqual(ratio);
+    expect(particle.ratio).toEqual(ratio);
   });
+
   test("minus", () => {
     expect(particle.update(-10.0)).toEqual(-10.0);
   });

@@ -6,7 +6,7 @@ import { ParticleWay } from "./ParticleWay";
  * 各種の描画ライブラリと組み合わせて利用する。
  */
 export class Particle {
-  private _pathPosition: number;
+  private _ratio: number = 0.0;
   protected path: ParticleWay;
   private _visible: boolean = true;
   public ease: (number) => number;
@@ -17,7 +17,6 @@ export class Particle {
    */
   constructor(path: ParticleWay) {
     this.path = path;
-    this._pathPosition = 0.0;
   }
 
   /**
@@ -26,31 +25,32 @@ export class Particle {
    * @return n ease関数で補正済みのt。
    */
   update(t: number): number {
-    this._pathPosition = t;
-
-    let n = this._pathPosition;
-    if (this.ease != null) {
-      n = this.ease(n);
+    this._ratio = t;
+    if (this.ease == null) {
+      return this._ratio;
     }
-    return n;
+    return this.ease(this._ratio);
   }
 
   /**
    * パーティクル位置を指定された量移動する。
    * @param t 移動量
    */
-  add(t: number): void {
-    this.update(this._pathPosition + t);
+  add(t: number): number {
+    return this.update(this._ratio + t);
   }
 
   /**
    * 現在位置を取得する
    * @return number
    */
-  get pathPosition(): number {
-    return this._pathPosition;
+  get ratio(): number {
+    return this._ratio;
   }
 
+  get visible() {
+    return this._visible;
+  }
   set visible(value: boolean) {
     this._visible = value;
   }

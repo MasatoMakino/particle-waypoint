@@ -9,9 +9,9 @@ export class Particle {
      * @param path
      */
     constructor(path) {
+        this._ratio = 0.0;
         this._visible = true;
         this.path = path;
-        this._pathPosition = 0.0;
     }
     /**
      * パーティクルの位置を更新する。
@@ -19,26 +19,28 @@ export class Particle {
      * @return n ease関数で補正済みのt。
      */
     update(t) {
-        this._pathPosition = t;
-        let n = this._pathPosition;
-        if (this.ease != null) {
-            n = this.ease(n);
+        this._ratio = t;
+        if (this.ease == null) {
+            return this._ratio;
         }
-        return n;
+        return this.ease(this._ratio);
     }
     /**
      * パーティクル位置を指定された量移動する。
      * @param t 移動量
      */
     add(t) {
-        this.update(this._pathPosition + t);
+        return this.update(this._ratio + t);
     }
     /**
      * 現在位置を取得する
      * @return number
      */
-    get pathPosition() {
-        return this._pathPosition;
+    get ratio() {
+        return this._ratio;
+    }
+    get visible() {
+        return this._visible;
     }
     set visible(value) {
         this._visible = value;

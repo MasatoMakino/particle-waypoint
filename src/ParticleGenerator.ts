@@ -78,6 +78,11 @@ export class ParticleGenerator {
     return pathParticle;
   }
 
+  /**
+   * パーティクルを生成する。
+   * generate関数の内部処理。
+   * @param path
+   */
   protected generateParticle(path: ParticleWay): Particle {
     const particle = new Particle(path);
     //TODO ここでコンテナに挿入。
@@ -108,13 +113,13 @@ export class ParticleGenerator {
   private removeCompletedParticles(): void {
     const removed = this.particles
       .filter(p => {
-        return p.pathPosition >= 1.0;
+        return p.ratio >= 1.0;
       })
       .forEach(p => {
         p.dispose();
       });
     this.particles = this.particles.filter(p => {
-      return p.pathPosition < 1.0;
+      return p.ratio < 1.0;
     });
   }
 

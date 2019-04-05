@@ -5,7 +5,7 @@ import { ParticleWay } from "./ParticleWay";
  * 各種の描画ライブラリと組み合わせて利用する。
  */
 export declare class Particle {
-    private _pathPosition;
+    private _ratio;
     protected path: ParticleWay;
     private _visible;
     ease: (number: any) => number;
@@ -24,12 +24,12 @@ export declare class Particle {
      * パーティクル位置を指定された量移動する。
      * @param t 移動量
      */
-    add(t: number): void;
+    add(t: number): number;
     /**
      * 現在位置を取得する
      * @return number
      */
-    readonly pathPosition: number;
+    readonly ratio: number;
     visible: boolean;
     dispose(): void;
 }
