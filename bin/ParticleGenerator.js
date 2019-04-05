@@ -70,6 +70,9 @@ export class ParticleGenerator {
      */
     generateParticle(path) {
         const particle = new Particle(path);
+        if (this.ease != null) {
+            particle.ease = this.ease;
+        }
         //TODO ここでコンテナに挿入。
         return particle;
     }

@@ -15,6 +15,7 @@ export class ParticleGenerator {
   public particleInterval: number = 300;
   protected lastParticleTime: number = 0;
   protected lastAnimateTime: number = 0;
+  public ease: (number) => number;
   private isDisposed: boolean = false;
   public speedPerSec: number = 0.07;
 
@@ -85,6 +86,9 @@ export class ParticleGenerator {
    */
   protected generateParticle(path: ParticleWay): Particle {
     const particle = new Particle(path);
+    if (this.ease != null) {
+      particle.ease = this.ease;
+    }
     //TODO ここでコンテナに挿入。
     return particle;
   }

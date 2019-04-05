@@ -12,6 +12,7 @@ export declare class ParticleGenerator {
     particleInterval: number;
     protected lastParticleTime: number;
     protected lastAnimateTime: number;
+    ease: (number: any) => number;
     private isDisposed;
     speedPerSec: number;
     /**
