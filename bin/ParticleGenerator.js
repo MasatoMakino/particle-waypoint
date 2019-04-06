@@ -6,25 +6,26 @@ import { Particle } from "./Particle";
 export class ParticleGenerator {
     /**
      * @param path
+     * @param option
      */
-    constructor(path) {
+    constructor(path, option) {
         this._visible = true;
         this.particles = [];
         this.renderID = null;
         this.particleInterval = 300;
         this.lastParticleTime = 0;
         this.lastAnimateTime = 0;
+        this._isLoop = false;
         this.isDisposed = false;
         this.speedPerSec = 0.07;
+        /**
+         * パーティクルをアニメーションさせる。
+         * @param timestamp
+         */
         this.animate = (timestamp) => {
             if (this.isDisposed)
                 return;
-            //move particle
-            const movement = ((timestamp - this.lastAnimateTime) / 1000) * this.speedPerSec;
-            this.particles.forEach(p => {
-                p.add(movement);
-            });
-            //remove particle
+            this.move(timestamp);
             this.removeCompletedParticles();
             //generate particle
             while (timestamp > this.lastParticleTime + this.particleInterval) {
@@ -38,16 +39,40 @@ export class ParticleGenerator {
                 const move = ((timestamp - this.lastParticleTime) * this.speedPerSec) / 1000;
                 particle.add(move);
             }
-            this.lastAnimateTime = timestamp;
             this.renderID = requestAnimationFrame(this.animate);
         };
+        /**
+         * パーティクルをループアニメーションさせる。
+         * @param timestamp
+         */
+        this.loop = (timestamp) => {
+            if (this.isDisposed)
+                return;
+            if (this.particles.length === 0) {
+                this.generateAll();
+            }
+            this.move(timestamp);
+            this.rollupParticles();
+            this.renderID = requestAnimationFrame(this.loop);
+        };
         this.path = path;
+        if (option == null)
+            return;
+        if (option.isLoop)
+            this._isLoop = option.isLoop;
+        if (option.ease)
+            this.ease = option.ease;
     }
     play() {
         if (this.renderID != null)
             return;
         this.lastParticleTime = this.lastAnimateTime = performance.now();
-        this.renderID = requestAnimationFrame(this.animate);
+        if (this._isLoop) {
+            this.renderID = requestAnimationFrame(this.loop);
+        }
+        else {
+            this.renderID = requestAnimationFrame(this.animate);
+        }
     }
     stop() {
         if (this.renderID == null)
@@ -55,6 +80,20 @@ export class ParticleGenerator {
         cancelAnimationFrame(this.renderID);
         this.renderID = null;
     }
+    /**
+     * パーティクルの位置を経過時間分移動する。
+     * @param timestamp
+     */
+    move(timestamp) {
+        const movement = ((timestamp - this.lastAnimateTime) / 1000) * this.speedPerSec;
+        this.particles.forEach(p => {
+            p.add(movement);
+        });
+        this.lastAnimateTime = timestamp;
+    }
+    /**
+     * パーティクルを1つ追加する。
+     */
     generate() {
         const particle = this.generateParticle(this.path);
         this.particles.push(particle);
@@ -74,6 +113,9 @@ export class ParticleGenerator {
         //TODO ここでコンテナに挿入。
         return particle;
     }
+    /**
+     * 経路上にパーティクルを敷き詰める。
+     */
     generateAll() {
         const move = (this.speedPerSec * this.particleInterval) / 1000;
         let pos = 0.0;
@@ -97,6 +139,11 @@ export class ParticleGenerator {
         });
         this.particles = this.particles.filter(p => {
             return p.ratio < 1.0;
+        });
+    }
+    rollupParticles() {
+        this.particles.forEach(p => {
+            p.update(p.ratio % 1);
         });
     }
     /**
