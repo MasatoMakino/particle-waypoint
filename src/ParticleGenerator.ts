@@ -193,11 +193,23 @@ export class ParticleGenerator {
     this.particles = [];
   }
 
+  /**
+   * 生成インターバルと経路上のパーティクル数から移動スピードを算出し設定する。
+   * loop時に破綻しない値が得られる。
+   * @param interval
+   * @param particleNum
+   */
   public setSpeed(interval: number, particleNum: number): void {
     this.particleInterval = interval;
     this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
   }
 
+  /**
+   * 移動スピードと経路上のパーティクル数から生成インターバルを算出し設定する。
+   * loop時に破綻しない値が得られる。
+   * @param speed
+   * @param particleNum
+   */
   public setInterval(speed: number, particleNum: number): void {
     this.speedPerSec = speed;
     this.particleInterval = ParticleGeneratorUtility.getInterval(

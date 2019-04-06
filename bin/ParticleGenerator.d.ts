@@ -66,7 +66,19 @@ export declare class ParticleGenerator {
      * 全てのパーティクルを削除する。
      */
     removeAllParticles(): void;
+    /**
+     * 生成インターバルと経路上のパーティクル数から移動スピードを算出し設定する。
+     * loop時に破綻しない値が得られる。
+     * @param interval
+     * @param particleNum
+     */
     setSpeed(interval: number, particleNum: number): void;
+    /**
+     * 移動スピードと経路上のパーティクル数から生成インターバルを算出し設定する。
+     * loop時に破綻しない値が得られる。
+     * @param speed
+     * @param particleNum
+     */
     setInterval(speed: number, particleNum: number): void;
     /**
      * パーティクル生成の停止とパーティクルの破棄を行う。
