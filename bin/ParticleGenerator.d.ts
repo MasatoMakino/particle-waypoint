@@ -10,12 +10,12 @@ export declare class ParticleGenerator {
     protected particles: Particle[];
     protected renderID: any;
     particleInterval: number;
-    protected lastParticleTime: number;
-    protected lastAnimateTime: number;
+    speedPerSec: number;
     ease: (number: any) => number;
     protected _isLoop: boolean;
+    private lastParticleTime;
+    private lastAnimateTime;
     private isDisposed;
-    speedPerSec: number;
     /**
      * @param path
      * @param option
@@ -66,6 +66,8 @@ export declare class ParticleGenerator {
      * 全てのパーティクルを削除する。
      */
     removeAllParticles(): void;
+    setSpeed(interval: number, particleNum: number): void;
+    setInterval(speed: number, particleNum: number): void;
     /**
      * パーティクル生成の停止とパーティクルの破棄を行う。
      */
@@ -75,5 +77,9 @@ export declare class ParticleGenerator {
 export interface ParticleGeneratorOption {
     isLoop?: boolean;
     ease?: (number: any) => number;
+}
+export declare class ParticleGeneratorUtility {
+    static getSpeed(interval: number, particleNum: number): number;
+    static getInterval(speed: number, particleNum: number): number;
 }
 //# sourceMappingURL=ParticleGenerator.d.ts.map

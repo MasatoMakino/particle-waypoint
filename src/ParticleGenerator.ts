@@ -1,5 +1,6 @@
 import { ParticleWay } from "./ParticleWay";
 import { Particle } from "./Particle";
+import { returnStatement } from "@babel/types";
 
 /**
  * 一定間隔でパーティクルを生成し、アニメーションさせるクラス。
@@ -12,13 +13,16 @@ export class ParticleGenerator {
   protected particles: Particle[] = [];
   protected renderID = null;
 
+  //animation setting
   public particleInterval: number = 300;
-  protected lastParticleTime: number = 0;
-  protected lastAnimateTime: number = 0;
+  public speedPerSec: number = 0.07;
   public ease: (number) => number;
   protected _isLoop: boolean = false;
+
+  private lastParticleTime: number = 0;
+  private lastAnimateTime: number = 0;
+
   private isDisposed: boolean = false;
-  public speedPerSec: number = 0.07;
 
   /**
    * @param path
@@ -189,6 +193,19 @@ export class ParticleGenerator {
     this.particles = [];
   }
 
+  public setSpeed(interval: number, particleNum: number): void {
+    this.particleInterval = interval;
+    this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
+  }
+
+  public setInterval(speed: number, particleNum: number): void {
+    this.speedPerSec = speed;
+    this.particleInterval = ParticleGeneratorUtility.getInterval(
+      speed,
+      particleNum
+    );
+  }
+
   /**
    * パーティクル生成の停止とパーティクルの破棄を行う。
    */
@@ -215,4 +232,14 @@ export class ParticleGenerator {
 export interface ParticleGeneratorOption {
   isLoop?: boolean;
   ease?: (number) => number;
+}
+
+export class ParticleGeneratorUtility {
+  public static getSpeed(interval: number, particleNum: number): number {
+    return (1.0 / (interval * particleNum)) * 1000;
+  }
+
+  public static getInterval(speed: number, particleNum: number): number {
+    return (1.0 / speed / particleNum) * 1000;
+  }
 }

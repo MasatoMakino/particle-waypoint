@@ -12,12 +12,13 @@ export class ParticleGenerator {
         this._visible = true;
         this.particles = [];
         this.renderID = null;
+        //animation setting
         this.particleInterval = 300;
+        this.speedPerSec = 0.07;
+        this._isLoop = false;
         this.lastParticleTime = 0;
         this.lastAnimateTime = 0;
-        this._isLoop = false;
         this.isDisposed = false;
-        this.speedPerSec = 0.07;
         /**
          * パーティクルをアニメーションさせる。
          * @param timestamp
@@ -166,6 +167,14 @@ export class ParticleGenerator {
         });
         this.particles = [];
     }
+    setSpeed(interval, particleNum) {
+        this.particleInterval = interval;
+        this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
+    }
+    setInterval(speed, particleNum) {
+        this.speedPerSec = speed;
+        this.particleInterval = ParticleGeneratorUtility.getInterval(speed, particleNum);
+    }
     /**
      * パーティクル生成の停止とパーティクルの破棄を行う。
      */
@@ -184,5 +193,13 @@ export class ParticleGenerator {
         for (let i in this.particles) {
             this.particles[i].visible = this._visible;
         }
+    }
+}
+export class ParticleGeneratorUtility {
+    static getSpeed(interval, particleNum) {
+        return (1.0 / (interval * particleNum)) * 1000;
+    }
+    static getInterval(speed, particleNum) {
+        return (1.0 / speed / particleNum) * 1000;
     }
 }
