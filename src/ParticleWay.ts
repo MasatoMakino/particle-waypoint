@@ -1,15 +1,23 @@
 /**
- * 中間点の算出が可能な線分を表すクラス
+ * 中間点の座標の算出が可能な経路を表すクラス
  */
 export class ParticleWay {
   public name: string = "";
   protected _points: number[][];
-  protected _rateTable: number[];
+  protected _ratioTable: number[];
 
+  /**
+   * コンストラクタ
+   * @param points 経路を表す座標の配列。各座標は要素2なら2次元パス、要素3なら3次元パスとして扱われる。
+   */
   constructor(points: number[][]) {
     this.setPoints(points);
   }
 
+  /**
+   * 経路の座標配列を更新する。
+   * @param points
+   */
   public setPoints(points: number[][]): void {
     this._points = points;
 
@@ -32,11 +40,16 @@ export class ParticleWay {
     });
     const total = sumTable[sumTable.length - 1];
 
-    this._rateTable = sumTable.map(val => {
+    this._ratioTable = sumTable.map(val => {
       return val / total;
     });
   }
 
+  /**
+   * 2点間の距離を取得する。
+   * @param pos1
+   * @param pos2
+   */
   private getDistance(pos1: number[], pos2: number[]): number {
     const dx = pos2[0] - pos1[0];
     const dy = pos2[1] - pos1[1];
@@ -50,6 +63,10 @@ export class ParticleWay {
     }
   }
 
+  /**
+   * 経路上の中間点座標を取得する。
+   * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
+   */
   public getPoint(t: number): number[] | null {
     if (!this._points || this._points.length === 0) {
       return null;
@@ -66,20 +83,26 @@ export class ParticleWay {
 
     let i = 1;
     for (i; i < n; i++) {
-      if (this._rateTable[i] >= t) break;
+      if (this._ratioTable[i] >= t) break;
     }
     i--;
 
     const floorPoint = this._points[i];
     const ceilPoint = this._points[i + 1];
-    const rateBase = this._rateTable[i];
+    const ratioBase = this._ratioTable[i];
     return this.getCenterPoint(
       floorPoint,
       ceilPoint,
-      (t - rateBase) / (this._rateTable[i + 1] - rateBase)
+      (t - ratioBase) / (this._ratioTable[i + 1] - ratioBase)
     );
   }
 
+  /**
+   * 線分上の中間点座標を取得する
+   * @param pos1 線分の始点
+   * @param pos2 線分の終点
+   * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
+   */
   private getCenterPoint(pos1, pos2, t): number[] {
     const rt = 1.0 - t;
     let pos = [pos1[0] * rt + pos2[0] * t, pos1[1] * rt + pos2[1] * t];

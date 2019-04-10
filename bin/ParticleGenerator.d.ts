@@ -17,25 +17,32 @@ export declare class ParticleGenerator {
     private lastAnimateTime;
     private isDisposed;
     /**
+     * コンストラクタ
      * @param path
      * @param option
      */
     constructor(path: ParticleWay, option?: ParticleGeneratorOption);
+    /**
+     * パーティクルの生成を開始する。
+     */
     play(): void;
+    /**
+     * パーティクルの生成を停止する。
+     */
     stop(): void;
     /**
      * パーティクルをアニメーションさせる。
-     * @param timestamp
+     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
     protected animate: (timestamp: number) => void;
     /**
      * パーティクルをループアニメーションさせる。
-     * @param timestamp
+     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
     protected loop: (timestamp: number) => void;
     /**
      * パーティクルの位置を経過時間分移動する。
-     * @param timestamp
+     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
     protected move(timestamp: number): void;
     /**
@@ -56,6 +63,9 @@ export declare class ParticleGenerator {
      * 寿命切れのパーティクルを一括で削除する。
      */
     private removeCompletedParticles;
+    /**
+     * 終端にたどり着いたパーティクルを視点に巻き戻す。
+     */
     private rollupParticles;
     /**
      * 指定されたパーティクルを削除する。
@@ -86,12 +96,28 @@ export declare class ParticleGenerator {
     dispose(): void;
     visible: boolean;
 }
+/**
+ * パーティクル生成方法を指定するオプション
+ */
 export interface ParticleGeneratorOption {
     isLoop?: boolean;
     ease?: (number: any) => number;
 }
+/**
+ * ParticleGeneratorで利用する各種の値を算出するヘルパークラス
+ */
 export declare class ParticleGeneratorUtility {
+    /**
+     * パーティクルの生成インターバルと経路上の数から、移動速度を算出する
+     * @param interval
+     * @param particleNum
+     */
     static getSpeed(interval: number, particleNum: number): number;
+    /**
+     * パーティクルの移動速度と経路上の数から、生成インターバルを算出する
+     * @param speed
+     * @param particleNum
+     */
     static getInterval(speed: number, particleNum: number): number;
 }
 //# sourceMappingURL=ParticleGenerator.d.ts.map

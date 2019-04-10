@@ -1,3 +1,3 @@
-export { Particle } from "./Particle";
-export { ParticleWay } from "./ParticleWay";
-export { ParticleGenerator } from "./ParticleGenerator";
+export * from "./Particle";
+export * from "./ParticleWay";
+export * from "./ParticleGenerator";

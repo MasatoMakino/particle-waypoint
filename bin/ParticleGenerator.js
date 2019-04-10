@@ -5,6 +5,7 @@ import { Particle } from "./Particle";
  */
 export class ParticleGenerator {
     /**
+     * コンストラクタ
      * @param path
      * @param option
      */
@@ -21,7 +22,7 @@ export class ParticleGenerator {
         this.isDisposed = false;
         /**
          * パーティクルをアニメーションさせる。
-         * @param timestamp
+         * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
          */
         this.animate = (timestamp) => {
             if (this.isDisposed)
@@ -44,7 +45,7 @@ export class ParticleGenerator {
         };
         /**
          * パーティクルをループアニメーションさせる。
-         * @param timestamp
+         * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
          */
         this.loop = (timestamp) => {
             if (this.isDisposed)
@@ -64,6 +65,9 @@ export class ParticleGenerator {
         if (option.ease)
             this.ease = option.ease;
     }
+    /**
+     * パーティクルの生成を開始する。
+     */
     play() {
         if (this.renderID != null)
             return;
@@ -75,6 +79,9 @@ export class ParticleGenerator {
             this.renderID = requestAnimationFrame(this.animate);
         }
     }
+    /**
+     * パーティクルの生成を停止する。
+     */
     stop() {
         if (this.renderID == null)
             return;
@@ -83,7 +90,7 @@ export class ParticleGenerator {
     }
     /**
      * パーティクルの位置を経過時間分移動する。
-     * @param timestamp
+     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
     move(timestamp) {
         const movement = ((timestamp - this.lastAnimateTime) / 1000) * this.speedPerSec;
@@ -142,6 +149,9 @@ export class ParticleGenerator {
             return p.ratio < 1.0;
         });
     }
+    /**
+     * 終端にたどり着いたパーティクルを視点に巻き戻す。
+     */
     rollupParticles() {
         this.particles.forEach(p => {
             p.update(p.ratio % 1);
@@ -207,10 +217,23 @@ export class ParticleGenerator {
         }
     }
 }
+/**
+ * ParticleGeneratorで利用する各種の値を算出するヘルパークラス
+ */
 export class ParticleGeneratorUtility {
+    /**
+     * パーティクルの生成インターバルと経路上の数から、移動速度を算出する
+     * @param interval
+     * @param particleNum
+     */
     static getSpeed(interval, particleNum) {
         return (1.0 / (interval * particleNum)) * 1000;
     }
+    /**
+     * パーティクルの移動速度と経路上の数から、生成インターバルを算出する
+     * @param speed
+     * @param particleNum
+     */
     static getInterval(speed, particleNum) {
         return (1.0 / speed / particleNum) * 1000;
     }

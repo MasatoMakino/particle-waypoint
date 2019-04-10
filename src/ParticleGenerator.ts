@@ -1,6 +1,5 @@
 import { ParticleWay } from "./ParticleWay";
 import { Particle } from "./Particle";
-import { returnStatement } from "@babel/types";
 
 /**
  * 一定間隔でパーティクルを生成し、アニメーションさせるクラス。
@@ -25,6 +24,7 @@ export class ParticleGenerator {
   private isDisposed: boolean = false;
 
   /**
+   * コンストラクタ
    * @param path
    * @param option
    */
@@ -36,6 +36,9 @@ export class ParticleGenerator {
     if (option.ease) this.ease = option.ease;
   }
 
+  /**
+   * パーティクルの生成を開始する。
+   */
   public play(): void {
     if (this.renderID != null) return;
     this.lastParticleTime = this.lastAnimateTime = performance.now();
@@ -47,6 +50,9 @@ export class ParticleGenerator {
     }
   }
 
+  /**
+   * パーティクルの生成を停止する。
+   */
   public stop(): void {
     if (this.renderID == null) return;
     cancelAnimationFrame(this.renderID);
@@ -55,7 +61,7 @@ export class ParticleGenerator {
 
   /**
    * パーティクルをアニメーションさせる。
-   * @param timestamp
+   * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
    */
   protected animate = (timestamp: number) => {
     if (this.isDisposed) return;
@@ -83,7 +89,7 @@ export class ParticleGenerator {
 
   /**
    * パーティクルをループアニメーションさせる。
-   * @param timestamp
+   * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
    */
   protected loop = (timestamp: number) => {
     if (this.isDisposed) return;
@@ -99,7 +105,7 @@ export class ParticleGenerator {
 
   /**
    * パーティクルの位置を経過時間分移動する。
-   * @param timestamp
+   * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
    */
   protected move(timestamp: number): void {
     const movement =
@@ -165,6 +171,9 @@ export class ParticleGenerator {
     });
   }
 
+  /**
+   * 終端にたどり着いたパーティクルを視点に巻き戻す。
+   */
   private rollupParticles(): void {
     this.particles.forEach(p => {
       p.update(p.ratio % 1);
@@ -241,16 +250,32 @@ export class ParticleGenerator {
   }
 }
 
+/**
+ * パーティクル生成方法を指定するオプション
+ */
 export interface ParticleGeneratorOption {
-  isLoop?: boolean;
+  isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティ栗を巻き戻して再利用する = false. デフォルトはtrue.
   ease?: (number) => number;
 }
 
+/**
+ * ParticleGeneratorで利用する各種の値を算出するヘルパークラス
+ */
 export class ParticleGeneratorUtility {
+  /**
+   * パーティクルの生成インターバルと経路上の数から、移動速度を算出する
+   * @param interval
+   * @param particleNum
+   */
   public static getSpeed(interval: number, particleNum: number): number {
     return (1.0 / (interval * particleNum)) * 1000;
   }
 
+  /**
+   * パーティクルの移動速度と経路上の数から、生成インターバルを算出する
+   * @param speed
+   * @param particleNum
+   */
   public static getInterval(speed: number, particleNum: number): number {
     return (1.0 / speed / particleNum) * 1000;
   }

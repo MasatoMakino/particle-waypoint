@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>中間点の算出が可能な線分を表すクラス</p>
+						<p>中間点の座標の算出が可能な経路を表すクラス</p>
 					</div>
 				</div>
 			</section>
@@ -98,7 +98,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_particleway_.particleway.html#_points" class="tsd-kind-icon">_points</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_particleway_.particleway.html#_ratetable" class="tsd-kind-icon">_rate<wbr>Table</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_particleway_.particleway.html#_ratiotable" class="tsd-kind-icon">_ratio<wbr>Table</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_particleway_.particleway.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
@@ -126,13 +126,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L7">ParticleWay.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L7">ParticleWay.ts:7</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>コンストラクタ</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>points: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>経路を表す座標の配列。各座標は要素2なら2次元パス、要素3なら3次元パスとして扱われる。</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a></h4>
@@ -148,17 +158,17 @@
 					<div class="tsd-signature tsd-kind-icon">_points<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L6">ParticleWay.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L6">ParticleWay.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="_ratetable" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _rate<wbr>Table</h3>
-					<div class="tsd-signature tsd-kind-icon">_rate<wbr>Table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="_ratiotable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _ratio<wbr>Table</h3>
+					<div class="tsd-signature tsd-kind-icon">_ratio<wbr>Table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L7">ParticleWay.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L7">ParticleWay.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -168,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L5">ParticleWay.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L5">ParticleWay.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -185,19 +195,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L83">ParticleWay.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L106">ParticleWay.ts:106</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>線分上の中間点座標を取得する</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>pos1: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>線分の始点</p>
+									</div>
 								</li>
 								<li>
 									<h5>pos2: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>線分の終点</p>
+									</div>
 								</li>
 								<li>
 									<h5>t: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -214,9 +238,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L40">ParticleWay.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L53">ParticleWay.ts:53</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>2点間の距離を取得する。</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -224,6 +253,8 @@
 								</li>
 								<li>
 									<h5>pos2: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -240,13 +271,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L53">ParticleWay.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L70">ParticleWay.ts:70</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>経路上の中間点座標を取得する。</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>t: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span>
@@ -266,13 +305,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/ab46f2c/src/ParticleWay.ts#L13">ParticleWay.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/e30db31/src/ParticleWay.ts#L21">ParticleWay.ts:21</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>経路の座標配列を更新する。</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>points: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -315,7 +361,7 @@
 								<a href="_particleway_.particleway.html#_points" class="tsd-kind-icon">_points</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_particleway_.particleway.html#_ratetable" class="tsd-kind-icon">_rate<wbr>Table</a>
+								<a href="_particleway_.particleway.html#_ratiotable" class="tsd-kind-icon">_ratio<wbr>Table</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_particleway_.particleway.html#name" class="tsd-kind-icon">name</a>
