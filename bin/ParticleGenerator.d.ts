@@ -6,13 +6,13 @@ import { Particle } from "./Particle";
  */
 export declare class ParticleGenerator {
     path: ParticleWay;
-    protected _visible: boolean;
-    protected particles: Particle[];
-    protected renderID: any;
+    private _visible;
+    private particles;
+    private renderID;
     particleInterval: number;
     speedPerSec: number;
     ease: (number: any) => number;
-    protected _isLoop: boolean;
+    private _isLoop;
     private elapsedFromGenerate;
     private lastAnimateTime;
     private isDisposed;
@@ -34,12 +34,12 @@ export declare class ParticleGenerator {
      * パーティクルをアニメーションさせる。
      * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
-    protected animate: (timestamp: number) => void;
+    private animate;
     /**
      * パーティクルをループアニメーションさせる。
      * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
-    protected loop: (timestamp: number) => void;
+    private loop;
     /**
      * 前回アニメーション実行時からの経過時間を取得する。
      * @param timestamp
@@ -49,11 +49,11 @@ export declare class ParticleGenerator {
      * パーティクルの位置を経過時間分移動する。
      * @param delta 前回アニメーションが実行されてからの経過時間
      */
-    protected move(delta: number): void;
+    private move;
     /**
      * パーティクルを1つ追加する。
      */
-    protected generate(): Particle;
+    private generate;
     /**
      * パーティクルを生成する。
      * generate関数の内部処理。

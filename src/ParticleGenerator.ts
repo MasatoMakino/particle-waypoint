@@ -7,16 +7,16 @@ import { Particle } from "./Particle";
  */
 export class ParticleGenerator {
   public path: ParticleWay;
-  protected _visible: boolean = true;
+  private _visible: boolean = true;
 
-  protected particles: Particle[] = [];
-  protected renderID = null;
+  private particles: Particle[] = [];
+  private renderID = null;
 
   //animation setting
   public particleInterval: number = 300;
   public speedPerSec: number = 0.07;
   public ease: (number) => number;
-  protected _isLoop: boolean = false;
+  private _isLoop: boolean = false;
 
   private elapsedFromGenerate: number = 0; //前回パーティクル生成時からの経過時間　単位ms
   private lastAnimateTime: number = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
@@ -63,7 +63,7 @@ export class ParticleGenerator {
    * パーティクルをアニメーションさせる。
    * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
    */
-  protected animate = (timestamp: number) => {
+  private animate = (timestamp: number) => {
     if (this.isDisposed) return;
 
     const delta = this.getDelta(timestamp);
@@ -91,7 +91,7 @@ export class ParticleGenerator {
    * パーティクルをループアニメーションさせる。
    * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
    */
-  protected loop = (timestamp: number) => {
+  private loop = (timestamp: number) => {
     if (this.isDisposed) return;
 
     if (this.particles.length === 0) {
@@ -119,7 +119,7 @@ export class ParticleGenerator {
    * パーティクルの位置を経過時間分移動する。
    * @param delta 前回アニメーションが実行されてからの経過時間
    */
-  protected move(delta: number): void {
+  private move(delta: number): void {
     const movement = (delta / 1000) * this.speedPerSec;
     this.particles.forEach(p => {
       p.add(movement);
@@ -129,7 +129,7 @@ export class ParticleGenerator {
   /**
    * パーティクルを1つ追加する。
    */
-  protected generate(): Particle {
+  private generate(): Particle {
     const particle: Particle = this.generateParticle(this.path);
     this.particles.push(particle);
     particle.visible = this._visible;
