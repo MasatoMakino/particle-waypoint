@@ -269,10 +269,10 @@ export class ParticleGenerator {
 
     this._isLoop = value;
 
-    if (!this._isLoop) return;
+    if (this._isLoop) {
+      this.removeAllParticles();
+    }
 
-    //ループモードに変更した際の処理
-    this.removeAllParticles();
     //再生中なら一旦停止して再度再生
     if (this.renderID != null) {
       this.stop();

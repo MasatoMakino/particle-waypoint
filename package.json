@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "build": "npm run prettier:src && tsc",
+    "build": "npm run prettier:src && tsc && npm run doc",
     "prettier:src": "prettier --write './!(bin|docs|coverage)/**/*.{js,ts,json}' ",
     "watch": "npm run watch:tsc",
     "watch:tsc": "tsc -w",
@@ -30,7 +30,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build"
+      "pre-commit": "npm run prettier:src && tsc"
     }
   }
 }
