@@ -13,7 +13,7 @@ export declare class ParticleGenerator {
     speedPerSec: number;
     ease: (number: any) => number;
     protected _isLoop: boolean;
-    private lastParticleTime;
+    private elapsedFromGenerate;
     private lastAnimateTime;
     private isDisposed;
     /**
@@ -41,10 +41,15 @@ export declare class ParticleGenerator {
      */
     protected loop: (timestamp: number) => void;
     /**
-     * パーティクルの位置を経過時間分移動する。
-     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+     * 前回アニメーション実行時からの経過時間を取得する。
+     * @param timestamp
      */
-    protected move(timestamp: number): void;
+    private getDelta;
+    /**
+     * パーティクルの位置を経過時間分移動する。
+     * @param delta 前回アニメーションが実行されてからの経過時間
+     */
+    protected move(delta: number): void;
     /**
      * パーティクルを1つ追加する。
      */

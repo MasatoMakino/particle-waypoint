@@ -17,8 +17,8 @@ export class ParticleGenerator {
         this.particleInterval = 300;
         this.speedPerSec = 0.07;
         this._isLoop = false;
-        this.lastParticleTime = 0;
-        this.lastAnimateTime = 0;
+        this.elapsedFromGenerate = 0; //前回パーティクル生成時からの経過時間　単位ms
+        this.lastAnimateTime = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
         this.isDisposed = false;
         /**
          * パーティクルをアニメーションさせる。
@@ -27,18 +27,19 @@ export class ParticleGenerator {
         this.animate = (timestamp) => {
             if (this.isDisposed)
                 return;
-            this.move(timestamp);
+            const delta = this.getDelta(timestamp);
+            this.move(delta);
             this.removeCompletedParticles();
             //generate particle
-            while (timestamp > this.lastParticleTime + this.particleInterval) {
-                const current = this.lastParticleTime;
-                this.lastParticleTime += this.particleInterval;
+            this.elapsedFromGenerate += delta;
+            while (this.elapsedFromGenerate > this.particleInterval) {
+                this.elapsedFromGenerate -= this.particleInterval;
                 //すでに寿命切れのパーティクルは生成をスキップ。
-                if (timestamp > current + (1.0 / this.speedPerSec) * 1000) {
+                if (this.elapsedFromGenerate > (1.0 / this.speedPerSec) * 1000) {
                     continue;
                 }
                 const particle = this.generate();
-                const move = ((timestamp - this.lastParticleTime) * this.speedPerSec) / 1000;
+                const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
                 particle.add(move);
             }
             this.renderID = requestAnimationFrame(this.animate);
@@ -53,7 +54,8 @@ export class ParticleGenerator {
             if (this.particles.length === 0) {
                 this.generateAll();
             }
-            this.move(timestamp);
+            const delta = this.getDelta(timestamp);
+            this.move(delta);
             this.rollupParticles();
             this.renderID = requestAnimationFrame(this.loop);
         };
@@ -71,7 +73,7 @@ export class ParticleGenerator {
     play() {
         if (this.renderID != null)
             return;
-        this.lastParticleTime = this.lastAnimateTime = performance.now();
+        this.lastAnimateTime = performance.now();
         if (this._isLoop) {
             this.renderID = requestAnimationFrame(this.loop);
         }
@@ -89,15 +91,23 @@ export class ParticleGenerator {
         this.renderID = null;
     }
     /**
-     * パーティクルの位置を経過時間分移動する。
-     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+     * 前回アニメーション実行時からの経過時間を取得する。
+     * @param timestamp
      */
-    move(timestamp) {
-        const movement = ((timestamp - this.lastAnimateTime) / 1000) * this.speedPerSec;
+    getDelta(timestamp) {
+        const delta = timestamp - this.lastAnimateTime;
+        this.lastAnimateTime = timestamp;
+        return delta;
+    }
+    /**
+     * パーティクルの位置を経過時間分移動する。
+     * @param delta 前回アニメーションが実行されてからの経過時間
+     */
+    move(delta) {
+        const movement = (delta / 1000) * this.speedPerSec;
         this.particles.forEach(p => {
             p.add(movement);
         });
-        this.lastAnimateTime = timestamp;
     }
     /**
      * パーティクルを1つ追加する。
@@ -133,6 +143,7 @@ export class ParticleGenerator {
             pos += move;
         }
         this.removeCompletedParticles();
+        this.elapsedFromGenerate = 0;
     }
     /**
      * 寿命切れのパーティクルを一括で削除する。
