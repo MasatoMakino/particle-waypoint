@@ -100,6 +100,7 @@ export declare class ParticleGenerator {
      */
     dispose(): void;
     visible: boolean;
+    isLoop: boolean;
 }
 /**
  * パーティクル生成方法を指定するオプション
