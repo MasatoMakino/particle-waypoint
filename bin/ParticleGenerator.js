@@ -14,9 +14,10 @@ export class ParticleGenerator {
         this.particles = [];
         this.renderID = null;
         //animation setting
-        this.particleInterval = 300;
+        this._particleInterval = 300;
         this.speedPerSec = 0.07;
         this._isLoop = false;
+        this._isOpenValve = true;
         this.elapsedFromGenerate = 0; //前回パーティクル生成時からの経過時間　単位ms
         this.lastAnimateTime = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
         this.isDisposed = false;
@@ -30,18 +31,7 @@ export class ParticleGenerator {
             const delta = this.getDelta(timestamp);
             this.move(delta);
             this.removeCompletedParticles();
-            //generate particle
-            this.elapsedFromGenerate += delta;
-            while (this.elapsedFromGenerate > this.particleInterval) {
-                this.elapsedFromGenerate -= this.particleInterval;
-                //すでに寿命切れのパーティクルは生成をスキップ。
-                if (this.elapsedFromGenerate > (1.0 / this.speedPerSec) * 1000) {
-                    continue;
-                }
-                const particle = this.generate();
-                const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
-                particle.add(move);
-            }
+            this.addParticle(delta);
             this.renderID = requestAnimationFrame(this.animate);
         };
         /**
@@ -68,7 +58,7 @@ export class ParticleGenerator {
             this._ease = option.ease;
     }
     /**
-     * パーティクルの生成を開始する。
+     * パーティクルアニメーションを開始する。
      */
     play() {
         if (this.renderID != null)
@@ -82,13 +72,57 @@ export class ParticleGenerator {
         }
     }
     /**
-     * パーティクルの生成を停止する。
+     * パーティクルアニメーションを停止する。
      */
     stop() {
         if (this.renderID == null)
             return;
         cancelAnimationFrame(this.renderID);
         this.renderID = null;
+    }
+    /**
+     * パーティクル生成を開始する。
+     */
+    openValve() {
+        if (this._isOpenValve)
+            return;
+        this._isOpenValve = true;
+        this.warnValve();
+    }
+    /**
+     * パーティクル生成を停止する。
+     * アニメーションは続行される。
+     */
+    closeValve() {
+        if (!this._isOpenValve)
+            return;
+        this._isOpenValve = false;
+        this.warnValve();
+    }
+    warnValve() {
+        if (!this._isLoop)
+            return;
+        console.warn("ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。");
+        console.trace();
+    }
+    /**
+     * アニメーションに伴い、新規パーティクルを追加する。
+     * @param delta
+     */
+    addParticle(delta) {
+        if (!this._isOpenValve)
+            return;
+        this.elapsedFromGenerate += delta;
+        while (this.elapsedFromGenerate > this._particleInterval) {
+            this.elapsedFromGenerate -= this._particleInterval;
+            //すでに寿命切れのパーティクルは生成をスキップ。
+            if (this.elapsedFromGenerate > (1.0 / this.speedPerSec) * 1000) {
+                continue;
+            }
+            const particle = this.generate();
+            const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
+            particle.add(move);
+        }
     }
     /**
      * 前回アニメーション実行時からの経過時間を取得する。
@@ -135,7 +169,7 @@ export class ParticleGenerator {
      * 経路上にパーティクルを敷き詰める。
      */
     generateAll() {
-        const move = (this.speedPerSec * this.particleInterval) / 1000;
+        const move = (this.speedPerSec * this._particleInterval) / 1000;
         let pos = 0.0;
         while (pos < 1.0) {
             const particle = this.generate();
@@ -195,7 +229,7 @@ export class ParticleGenerator {
      * @param particleNum
      */
     setSpeed(interval, particleNum) {
-        this.particleInterval = interval;
+        this._particleInterval = interval;
         this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
     }
     /**
@@ -206,7 +240,7 @@ export class ParticleGenerator {
      */
     setInterval(speed, particleNum) {
         this.speedPerSec = speed;
-        this.particleInterval = ParticleGeneratorUtility.getInterval(speed, particleNum);
+        this._particleInterval = ParticleGeneratorUtility.getInterval(speed, particleNum);
     }
     /**
      * パーティクル生成の停止とパーティクルの破棄を行う。
@@ -217,6 +251,18 @@ export class ParticleGenerator {
         this.removeAllParticles();
         this.particles = null;
         this.path = null;
+    }
+    get particleInterval() {
+        return this._particleInterval;
+    }
+    set particleInterval(value) {
+        if (this._particleInterval === value)
+            return;
+        this._particleInterval = value;
+        if (this._isLoop) {
+            console.warn("ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。");
+            console.trace();
+        }
     }
     get visible() {
         return this._visible;
@@ -254,7 +300,7 @@ export class ParticleGenerator {
     updateEase(ease, override = true) {
         this._ease = ease;
         if (!override && this._isLoop) {
-            console.warn("ParticleGenerator : ループ指定時にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。");
+            console.warn("ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。");
             console.trace();
         }
         if (override || this._isLoop) {

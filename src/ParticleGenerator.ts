@@ -13,10 +13,11 @@ export class ParticleGenerator {
   private renderID = null;
 
   //animation setting
-  public particleInterval: number = 300;
+  private _particleInterval: number = 300;
   public speedPerSec: number = 0.07;
   private _ease: (number) => number;
   private _isLoop: boolean = false;
+  private _isOpenValve: boolean = true;
 
   private elapsedFromGenerate: number = 0; //前回パーティクル生成時からの経過時間　単位ms
   private lastAnimateTime: number = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
@@ -37,7 +38,7 @@ export class ParticleGenerator {
   }
 
   /**
-   * パーティクルの生成を開始する。
+   * パーティクルアニメーションを開始する。
    */
   public play(): void {
     if (this.renderID != null) return;
@@ -51,12 +52,41 @@ export class ParticleGenerator {
   }
 
   /**
-   * パーティクルの生成を停止する。
+   * パーティクルアニメーションを停止する。
    */
   public stop(): void {
     if (this.renderID == null) return;
     cancelAnimationFrame(this.renderID);
     this.renderID = null;
+  }
+
+  /**
+   * パーティクル生成を開始する。
+   */
+  public openValve(): void {
+    if (this._isOpenValve) return;
+
+    this._isOpenValve = true;
+    this.warnValve();
+  }
+
+  /**
+   * パーティクル生成を停止する。
+   * アニメーションは続行される。
+   */
+  public closeValve(): void {
+    if (!this._isOpenValve) return;
+
+    this._isOpenValve = false;
+    this.warnValve();
+  }
+
+  private warnValve(): void {
+    if (!this._isLoop) return;
+    console.warn(
+      "ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。"
+    );
+    console.trace();
   }
 
   /**
@@ -69,11 +99,21 @@ export class ParticleGenerator {
     const delta = this.getDelta(timestamp);
     this.move(delta);
     this.removeCompletedParticles();
+    this.addParticle(delta);
 
-    //generate particle
+    this.renderID = requestAnimationFrame(this.animate);
+  };
+
+  /**
+   * アニメーションに伴い、新規パーティクルを追加する。
+   * @param delta
+   */
+  private addParticle(delta: number): void {
+    if (!this._isOpenValve) return;
+
     this.elapsedFromGenerate += delta;
-    while (this.elapsedFromGenerate > this.particleInterval) {
-      this.elapsedFromGenerate -= this.particleInterval;
+    while (this.elapsedFromGenerate > this._particleInterval) {
+      this.elapsedFromGenerate -= this._particleInterval;
       //すでに寿命切れのパーティクルは生成をスキップ。
       if (this.elapsedFromGenerate > (1.0 / this.speedPerSec) * 1000) {
         continue;
@@ -83,9 +123,7 @@ export class ParticleGenerator {
       const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
       particle.add(move);
     }
-
-    this.renderID = requestAnimationFrame(this.animate);
-  };
+  }
 
   /**
    * パーティクルをループアニメーションさせる。
@@ -154,7 +192,7 @@ export class ParticleGenerator {
    * 経路上にパーティクルを敷き詰める。
    */
   public generateAll(): void {
-    const move: number = (this.speedPerSec * this.particleInterval) / 1000;
+    const move: number = (this.speedPerSec * this._particleInterval) / 1000;
     let pos: number = 0.0;
 
     while (pos < 1.0) {
@@ -220,7 +258,7 @@ export class ParticleGenerator {
    * @param particleNum
    */
   public setSpeed(interval: number, particleNum: number): void {
-    this.particleInterval = interval;
+    this._particleInterval = interval;
     this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
   }
 
@@ -232,7 +270,7 @@ export class ParticleGenerator {
    */
   public setInterval(speed: number, particleNum: number): void {
     this.speedPerSec = speed;
-    this.particleInterval = ParticleGeneratorUtility.getInterval(
+    this._particleInterval = ParticleGeneratorUtility.getInterval(
       speed,
       particleNum
     );
@@ -248,6 +286,22 @@ export class ParticleGenerator {
     this.removeAllParticles();
     this.particles = null;
     this.path = null;
+  }
+
+  get particleInterval(): number {
+    return this._particleInterval;
+  }
+
+  set particleInterval(value: number) {
+    if (this._particleInterval === value) return;
+
+    this._particleInterval = value;
+    if (this._isLoop) {
+      console.warn(
+        "ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。"
+      );
+      console.trace();
+    }
   }
 
   get visible(): boolean {
@@ -293,7 +347,7 @@ export class ParticleGenerator {
     this._ease = ease;
     if (!override && this._isLoop) {
       console.warn(
-        "ParticleGenerator : ループ指定時にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
+        "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
       );
       console.trace();
     }

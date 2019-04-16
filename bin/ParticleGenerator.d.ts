@@ -9,10 +9,11 @@ export declare class ParticleGenerator {
     private _visible;
     private particles;
     private renderID;
-    particleInterval: number;
+    private _particleInterval;
     speedPerSec: number;
     private _ease;
     private _isLoop;
+    private _isOpenValve;
     private elapsedFromGenerate;
     private lastAnimateTime;
     private isDisposed;
@@ -23,18 +24,33 @@ export declare class ParticleGenerator {
      */
     constructor(path: ParticleWay, option?: ParticleGeneratorOption);
     /**
-     * パーティクルの生成を開始する。
+     * パーティクルアニメーションを開始する。
      */
     play(): void;
     /**
-     * パーティクルの生成を停止する。
+     * パーティクルアニメーションを停止する。
      */
     stop(): void;
+    /**
+     * パーティクル生成を開始する。
+     */
+    openValve(): void;
+    /**
+     * パーティクル生成を停止する。
+     * アニメーションは続行される。
+     */
+    closeValve(): void;
+    private warnValve;
     /**
      * パーティクルをアニメーションさせる。
      * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
      */
     private animate;
+    /**
+     * アニメーションに伴い、新規パーティクルを追加する。
+     * @param delta
+     */
+    private addParticle;
     /**
      * パーティクルをループアニメーションさせる。
      * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
@@ -99,6 +115,7 @@ export declare class ParticleGenerator {
      * パーティクル生成の停止とパーティクルの破棄を行う。
      */
     dispose(): void;
+    particleInterval: number;
     visible: boolean;
     isLoop: boolean;
     readonly ease: (number: any) => number;
