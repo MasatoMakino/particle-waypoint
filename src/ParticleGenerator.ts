@@ -15,7 +15,7 @@ export class ParticleGenerator {
   //animation setting
   public particleInterval: number = 300;
   public speedPerSec: number = 0.07;
-  public ease: (number) => number;
+  private _ease: (number) => number;
   private _isLoop: boolean = false;
 
   private elapsedFromGenerate: number = 0; //前回パーティクル生成時からの経過時間　単位ms
@@ -33,7 +33,7 @@ export class ParticleGenerator {
 
     if (option == null) return;
     if (option.isLoop) this._isLoop = option.isLoop;
-    if (option.ease) this.ease = option.ease;
+    if (option.ease) this._ease = option.ease;
   }
 
   /**
@@ -133,8 +133,8 @@ export class ParticleGenerator {
     const particle: Particle = this.generateParticle(this.path);
     this.particles.push(particle);
     particle.visible = this._visible;
-    if (this.ease != null) {
-      particle.ease = this.ease;
+    if (this._ease != null) {
+      particle.ease = this._ease;
     }
     return particle;
   }
@@ -277,6 +277,30 @@ export class ParticleGenerator {
     if (this.renderID != null) {
       this.stop();
       this.play();
+    }
+  }
+
+  get ease(): (number) => number {
+    return this._ease;
+  }
+
+  /**
+   * 各パーティクルのEase関数を更新する。
+   * @param ease イージング関数。
+   * @param override 現存するパーティクルのEase関数を上書きするか否か。規定値はtrue。
+   */
+  updateEase(ease: (number) => number, override: boolean = true) {
+    this._ease = ease;
+    if (!override && this._isLoop) {
+      console.warn(
+        "ParticleGenerator : ループ指定時にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
+      );
+      console.trace();
+    }
+    if (override || this._isLoop) {
+      this.particles.forEach(p => {
+        p.ease = ease;
+      });
     }
   }
 }

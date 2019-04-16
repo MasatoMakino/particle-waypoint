@@ -11,7 +11,7 @@ export declare class ParticleGenerator {
     private renderID;
     particleInterval: number;
     speedPerSec: number;
-    ease: (number: any) => number;
+    private _ease;
     private _isLoop;
     private elapsedFromGenerate;
     private lastAnimateTime;
@@ -101,6 +101,13 @@ export declare class ParticleGenerator {
     dispose(): void;
     visible: boolean;
     isLoop: boolean;
+    readonly ease: (number: any) => number;
+    /**
+     * 各パーティクルのEase関数を更新する。
+     * @param ease イージング関数。
+     * @param override 現存するパーティクルのEase関数を上書きするか否か。規定値はtrue。
+     */
+    updateEase(ease: (number: any) => number, override?: boolean): void;
 }
 /**
  * パーティクル生成方法を指定するオプション

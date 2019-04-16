@@ -65,7 +65,7 @@ export class ParticleGenerator {
         if (option.isLoop)
             this._isLoop = option.isLoop;
         if (option.ease)
-            this.ease = option.ease;
+            this._ease = option.ease;
     }
     /**
      * パーティクルの生成を開始する。
@@ -116,8 +116,8 @@ export class ParticleGenerator {
         const particle = this.generateParticle(this.path);
         this.particles.push(particle);
         particle.visible = this._visible;
-        if (this.ease != null) {
-            particle.ease = this.ease;
+        if (this._ease != null) {
+            particle.ease = this._ease;
         }
         return particle;
     }
@@ -241,6 +241,26 @@ export class ParticleGenerator {
         if (this.renderID != null) {
             this.stop();
             this.play();
+        }
+    }
+    get ease() {
+        return this._ease;
+    }
+    /**
+     * 各パーティクルのEase関数を更新する。
+     * @param ease イージング関数。
+     * @param override 現存するパーティクルのEase関数を上書きするか否か。規定値はtrue。
+     */
+    updateEase(ease, override = true) {
+        this._ease = ease;
+        if (!override && this._isLoop) {
+            console.warn("ParticleGenerator : ループ指定時にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。");
+            console.trace();
+        }
+        if (override || this._isLoop) {
+            this.particles.forEach(p => {
+                p.ease = ease;
+            });
         }
     }
 }
