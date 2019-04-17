@@ -193,14 +193,13 @@ export class ParticleGenerator {
    */
   public generateAll(): void {
     const move: number = (this.speedPerSec * this._particleInterval) / 1000;
-    let pos: number = 0.0;
 
-    while (pos < 1.0) {
+    let pos: number = 1.0;
+    while (pos > 0.0) {
       const particle = this.generate();
       particle.update(pos);
-      pos += move;
+      pos -= move;
     }
-    this.removeCompletedParticles();
     this.elapsedFromGenerate = 0;
   }
 
