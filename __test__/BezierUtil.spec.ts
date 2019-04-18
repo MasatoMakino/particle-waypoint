@@ -2,7 +2,7 @@ import { BezierUtil } from "../src/BezierUtil";
 const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
 
 // 3次元ベジェで正円を描く際のコントロールポイント定数
-const K = 0.55228474983;
+const K = (4 * (Math.sqrt(2) - 1)) / 3;
 
 describe("BezierUtil : arc", () => {
   const R = 1;
@@ -41,6 +41,7 @@ describe("BezierUtil : arc", () => {
     equalCommand(t, p);
   });
 
+  //0、45, 90度のそれぞれの点は、ベジェ曲線でも数学的に正しい座標が取得できる。
   test("0.5", () => {
     const t = 0.5;
     const p = getPoint(t);
@@ -97,13 +98,13 @@ describe("BezierUtil : arc", () => {
   test("length div 64", () => {
     const div = 64;
     const length = getLength(div);
-    expect(length).toBeCloseTo((R * 2 * Math.PI) / 4, 3);
+    expect(length / ((R * 2 * Math.PI) / 4)).toBeCloseTo(1.0, 3);
     equalLengthWithCommand(div, length);
   });
 });
 
 describe("BezierUtil : circle", () => {
-  const R = 1;
+  const R = 1.0;
   const circle = [
     [R, 0],
     [R, R * K, R * K, R, 0, R],
@@ -118,6 +119,6 @@ describe("BezierUtil : circle", () => {
     for (let i = 1; i < circle.length; i++) {
       length += BezierUtil.getLengthFromCommand(circle[i - 1], circle[i], div);
     }
-    expect(length).toBeCloseTo(R * 2 * Math.PI, 2);
+    expect(length / (R * 2 * Math.PI)).toBeCloseTo(1.0, 3);
   });
 });
