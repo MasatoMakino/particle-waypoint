@@ -90,7 +90,6 @@ describe("BezierUtil.arc", () => {
       path[3],
       64
     );
-    expect(length).toBeCloseTo(R * 2 * Math.PI /4, 3);
+    expect(length).toBeCloseTo((R * 2 * Math.PI) / 4, 3);
   });
-
 });
