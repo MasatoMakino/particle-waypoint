@@ -1,13 +1,13 @@
-/**
- * 中間点の座標の算出が可能な経路を表すクラス
- */
 export declare class ParticleWay {
     name: string;
     protected _points: number[][];
     protected _ratioTable: number[];
     /**
      * コンストラクタ
-     * @param points 経路を表す座標の配列。各座標は要素2なら2次元パス、要素3なら3次元パスとして扱われる。
+     * @param points 経路を表す座標の配列。要素数によってどのようなパスかが判定される。
+     *   要素数2 : 2次元パス
+     *   要素数3 : 3次元パス
+     *   要素数6 : 平面3次元ベジェ曲線
      */
     constructor(points: number[][]);
     /**
@@ -20,7 +20,7 @@ export declare class ParticleWay {
      * @param pos1
      * @param pos2
      */
-    private getDistance;
+    static getDistance(pos1: number[], pos2: number[]): number;
     /**
      * 経路上の中間点座標を取得する。
      * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。

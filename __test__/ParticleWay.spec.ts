@@ -1,4 +1,5 @@
 import { ParticleWay } from "../src/ParticleWay";
+import { BezierPath } from "./BezierPath";
 
 const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
 
@@ -62,6 +63,44 @@ describe("3D", () => {
   });
 });
 
+describe("Bezier", () => {
+  const points = BezierPath.getCircle();
+  const way = new ParticleWay(points);
+
+  test("center", () => {
+    isNear(way.getPoint(0.5), [-1.0, 0.0]);
+  });
+  test("0.75", () => {
+    isNear(way.getPoint(0.75), [0, -1.0]);
+  });
+  test("0.25", () => {
+    isNear(way.getPoint(0.25), [0.0, 1.0]);
+  });
+
+  test("30", () => {
+    isNear(
+      way.getPoint(0.25 / 3),
+      [Math.cos((Math.PI / 180) * 30), Math.sin((Math.PI / 180) * 30)],
+      2
+    );
+  });
+
+  test("min", () => {
+    expect(way.getPoint(0.0)).toEqual(points[0]);
+  });
+  test("minus", () => {
+    expect(way.getPoint(-10.0)).toEqual(points[0]);
+  });
+
+  const maxPoint = points[points.length - 1].slice(-2);
+  test("max", () => {
+    expect(way.getPoint(1.0)).toEqual(maxPoint);
+  });
+  test("over", () => {
+    expect(way.getPoint(10.0)).toEqual(maxPoint);
+  });
+});
+
 describe("1Point", () => {
   const points = [[100, 100]];
   const way = new ParticleWay(points);
@@ -97,8 +136,8 @@ describe("Zero Point", () => {
  * @param p1 点を表す座標
  * @param p2 点を表す座標
  */
-const isNear = (p1: number[], p2: number[]) => {
+const isNear = (p1: number[], p2: number[], precision: number = 6) => {
   for (let i = 0; i < p1.length; i++) {
-    expect(p1[i]).toBeCloseTo(p2[i], 6);
+    expect(p1[i]).toBeCloseTo(p2[i], precision);
   }
 };

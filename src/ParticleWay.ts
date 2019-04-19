@@ -1,6 +1,8 @@
 /**
  * 中間点の座標の算出が可能な経路を表すクラス
  */
+import { BezierUtil } from "./BezierUtil";
+
 export class ParticleWay {
   public name: string = "";
   protected _points: number[][];
@@ -8,7 +10,10 @@ export class ParticleWay {
 
   /**
    * コンストラクタ
-   * @param points 経路を表す座標の配列。各座標は要素2なら2次元パス、要素3なら3次元パスとして扱われる。
+   * @param points 経路を表す座標の配列。要素数によってどのようなパスかが判定される。
+   *   要素数2 : 2次元パス
+   *   要素数3 : 3次元パス
+   *   要素数6 : 平面3次元ベジェ曲線
    */
   constructor(points: number[][]) {
     this.setPoints(points);
@@ -36,7 +41,7 @@ export class ParticleWay {
     this._points.forEach((val, index, array) => {
       if (index === 0) return;
       sumTable[index] =
-        this.getDistance(array[index - 1], val) + sumTable[index - 1];
+        ParticleWay.getDistance(array[index - 1], val) + sumTable[index - 1];
     });
     const total = sumTable[sumTable.length - 1];
 
@@ -50,11 +55,13 @@ export class ParticleWay {
    * @param pos1
    * @param pos2
    */
-  private getDistance(pos1: number[], pos2: number[]): number {
+  public static getDistance(pos1: number[], pos2: number[]): number {
     const dx = pos2[0] - pos1[0];
     const dy = pos2[1] - pos1[1];
 
-    switch (pos1.length) {
+    switch (pos2.length) {
+      case 6:
+        return BezierUtil.getLengthFromCommand(pos1, pos2);
       case 3:
         const dz = pos2[2] - pos1[2];
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
@@ -77,7 +84,13 @@ export class ParticleWay {
 
     const n = this._points.length;
     t = Math.min(t, 1.0);
-    if (t === 1.0) return [...this._points[n - 1]];
+    if (t === 1.0) {
+      let result = this._points[n - 1];
+      if (result.length === 6) {
+        result = result.slice(-2);
+      }
+      return [...result];
+    }
     t = Math.max(t, 0.0);
     if (t === 0.0) return [...this._points[0]];
 
@@ -103,10 +116,12 @@ export class ParticleWay {
    * @param pos2 線分の終点
    * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
    */
-  private getCenterPoint(pos1, pos2, t): number[] {
+  private getCenterPoint(pos1: number[], pos2: number[], t: number): number[] {
     const rt = 1.0 - t;
     let pos = [pos1[0] * rt + pos2[0] * t, pos1[1] * rt + pos2[1] * t];
-    switch (pos1.length) {
+    switch (pos2.length) {
+      case 6:
+        return BezierUtil.getPointFromCommand(t, pos1, pos2);
       case 3:
         pos.push(pos1[2] * rt + pos2[2] * t);
         return pos;

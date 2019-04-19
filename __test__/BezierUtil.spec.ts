@@ -1,13 +1,11 @@
 import { BezierUtil } from "../src/BezierUtil";
+import { BezierPath } from "./BezierPath";
 const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
 
-// 3次元ベジェで正円を描く際のコントロールポイント定数
-const K = (4 * (Math.sqrt(2) - 1)) / 3;
-
 describe("BezierUtil : arc", () => {
-  const R = 1;
-  const path = [[R, 0], [R, R * K], [R * K, R], [0, R]];
-  const command = [path[0], [...path[1], ...path[2], ...path[3]]];
+  const R = 1.0;
+  const path = BezierPath.getArcPath();
+  const command = BezierPath.getArc();
 
   //getPointOnBezierCurveの結果とgetPointFromArrayの結果が同じであることを確認する。
   const getPoint = t => {
@@ -105,13 +103,7 @@ describe("BezierUtil : arc", () => {
 
 describe("BezierUtil : circle", () => {
   const R = 1.0;
-  const circle = [
-    [R, 0],
-    [R, R * K, R * K, R, 0, R],
-    [-R * K, R, -R, R * K, -R, 0],
-    [-R, -R * K, -R * K, -R, 0, -R],
-    [R * K, -R, R, -R * K, R, 0]
-  ];
+  const circle = BezierPath.getCircle();
 
   test("length div 64", () => {
     const div = 64;
