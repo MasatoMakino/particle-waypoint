@@ -8,7 +8,7 @@ export declare class BezierUtil {
      * @param c2 コントロールポイント2
      * @param to 終点
      */
-    static getPointOnBezierCurve(t: number, from: number[], c1: number[], c2: number[], to: number[]): number[];
+    static getPoint(t: number, from: number[], c1: number[], c2: number[], to: number[]): number[];
     /**
      * ベジェ曲線描画コマンドから、ベジェ曲線の中間座標を取得する。
      * @param t
@@ -26,7 +26,7 @@ export declare class BezierUtil {
      * @param to 終点
      * @param div 分割数 多いほど精度が向上し、計算負荷は上昇する。 既定値16
      */
-    static getLengthOfBezierCurve(from: number[], c1: number[], c2: number[], to: number[], div?: number): number;
+    static getLength(from: number[], c1: number[], c2: number[], to: number[], div?: number): number;
     /**
      * ベジェ曲線描画コマンドから、ベジェ曲線の長さを取得する。
      *
@@ -35,5 +35,7 @@ export declare class BezierUtil {
      * @param div 分割数 多いほど精度が向上し、計算負荷は上昇する。 既定値16
      */
     static getLengthFromCommand(command1: number[], command2: number[], div?: number): number;
+    static differentiate(commands: number[][], div?: number): number[][];
+    private static differentiateSubPath;
 }
 //# sourceMappingURL=BezierUtil.d.ts.map

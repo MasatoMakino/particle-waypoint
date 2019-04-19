@@ -10,7 +10,7 @@ export class BezierUtil {
    * @param c2 コントロールポイント2
    * @param to 終点
    */
-  public static getPointOnBezierCurve(
+  public static getPoint(
     t: number,
     from: number[],
     c1: number[],
@@ -51,7 +51,7 @@ export class BezierUtil {
     command1: number[],
     command2: number[]
   ): number[] {
-    return this.getPointOnBezierCurve(
+    return this.getPoint(
       t,
       command1.slice(-2),
       command2.slice(0, 2),
@@ -70,7 +70,7 @@ export class BezierUtil {
    * @param to 終点
    * @param div 分割数 多いほど精度が向上し、計算負荷は上昇する。 既定値16
    */
-  public static getLengthOfBezierCurve(
+  public static getLength(
     from: number[],
     c1: number[],
     c2: number[],
@@ -80,7 +80,7 @@ export class BezierUtil {
     let result = 0;
     let prevPoint;
     for (let i = 0; i < div + 1; i++) {
-      const p = this.getPointOnBezierCurve(i / div, from, c1, c2, to);
+      const p = this.getPoint(i / div, from, c1, c2, to);
       if (prevPoint) {
         result += ParticleWay.getDistance(prevPoint, p);
       }
@@ -101,12 +101,38 @@ export class BezierUtil {
     command2: number[],
     div: number = 16
   ): number {
-    return this.getLengthOfBezierCurve(
+    return this.getLength(
       command1.slice(-2),
       command2.slice(0, 2),
       command2.slice(2, 4),
       command2.slice(-2),
       div
     );
+  }
+
+  public static differentiate(
+    commands: number[][],
+    div: number = 16
+  ): number[][] {
+    const points = [];
+    for (let i = 1; i < commands.length; i++) {
+      let sub = this.differentiateSubPath(commands[i - 1], commands[i], div);
+      if (i !== 1) {
+        sub = sub.slice(1);
+      }
+      points.push(...sub);
+    }
+    return points;
+  }
+  private static differentiateSubPath(
+    command1: number[],
+    command2: number[],
+    div: number = 16
+  ): number[][] {
+    const points = [];
+    for (let i = 0; i < div + 1; i++) {
+      points.push(this.getPointFromCommand(i / div, command1, command2));
+    }
+    return points;
   }
 }

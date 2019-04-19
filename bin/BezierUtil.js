@@ -9,7 +9,7 @@ export class BezierUtil {
      * @param c2 コントロールポイント2
      * @param to 終点
      */
-    static getPointOnBezierCurve(t, from, c1, c2, to) {
+    static getPoint(t, from, c1, c2, to) {
         const addPoint = (p1, p2, coefficient) => {
             p1[0] += coefficient * p2[0];
             p1[1] += coefficient * p2[1];
@@ -33,7 +33,7 @@ export class BezierUtil {
      * @param command2 終点側の描画コマンド 要素数6の配列
      */
     static getPointFromCommand(t, command1, command2) {
-        return this.getPointOnBezierCurve(t, command1.slice(-2), command2.slice(0, 2), command2.slice(2, 4), command2.slice(-2));
+        return this.getPoint(t, command1.slice(-2), command2.slice(0, 2), command2.slice(2, 4), command2.slice(-2));
     }
     /**
      * ベジェ曲線の長さを取得する。
@@ -45,11 +45,11 @@ export class BezierUtil {
      * @param to 終点
      * @param div 分割数 多いほど精度が向上し、計算負荷は上昇する。 既定値16
      */
-    static getLengthOfBezierCurve(from, c1, c2, to, div = 16) {
+    static getLength(from, c1, c2, to, div = 16) {
         let result = 0;
         let prevPoint;
         for (let i = 0; i < div + 1; i++) {
-            const p = this.getPointOnBezierCurve(i / div, from, c1, c2, to);
+            const p = this.getPoint(i / div, from, c1, c2, to);
             if (prevPoint) {
                 result += ParticleWay.getDistance(prevPoint, p);
             }
@@ -65,6 +65,24 @@ export class BezierUtil {
      * @param div 分割数 多いほど精度が向上し、計算負荷は上昇する。 既定値16
      */
     static getLengthFromCommand(command1, command2, div = 16) {
-        return this.getLengthOfBezierCurve(command1.slice(-2), command2.slice(0, 2), command2.slice(2, 4), command2.slice(-2), div);
+        return this.getLength(command1.slice(-2), command2.slice(0, 2), command2.slice(2, 4), command2.slice(-2), div);
+    }
+    static differentiate(commands, div = 16) {
+        const points = [];
+        for (let i = 1; i < commands.length; i++) {
+            let sub = this.differentiateSubPath(commands[i - 1], commands[i], div);
+            if (i !== 1) {
+                sub = sub.slice(1);
+            }
+            points.push(...sub);
+        }
+        return points;
+    }
+    static differentiateSubPath(command1, command2, div = 16) {
+        const points = [];
+        for (let i = 0; i < div + 1; i++) {
+            points.push(this.getPointFromCommand(i / div, command1, command2));
+        }
+        return points;
     }
 }

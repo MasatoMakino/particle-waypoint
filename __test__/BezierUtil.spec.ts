@@ -1,5 +1,6 @@
 import { BezierUtil } from "../src/BezierUtil";
 import { BezierPath } from "./BezierPath";
+import { ParticleWay } from "../src/ParticleWay";
 const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
 
 describe("BezierUtil : arc", () => {
@@ -9,13 +10,7 @@ describe("BezierUtil : arc", () => {
 
   //getPointOnBezierCurveの結果とgetPointFromArrayの結果が同じであることを確認する。
   const getPoint = t => {
-    return BezierUtil.getPointOnBezierCurve(
-      t,
-      path[0],
-      path[1],
-      path[2],
-      path[3]
-    );
+    return BezierUtil.getPoint(t, path[0], path[1], path[2], path[3]);
   };
   const equalCommand = (t, point) => {
     const pC = BezierUtil.getPointFromCommand(t, command[0], command[1]);
@@ -65,13 +60,7 @@ describe("BezierUtil : arc", () => {
   });
 
   const getLength = div => {
-    return BezierUtil.getLengthOfBezierCurve(
-      path[0],
-      path[1],
-      path[2],
-      path[3],
-      div
-    );
+    return BezierUtil.getLength(path[0], path[1], path[2], path[3], div);
   };
   const equalLengthWithCommand = (div, length) => {
     const lengthC = BezierUtil.getLengthFromCommand(
@@ -112,5 +101,61 @@ describe("BezierUtil : circle", () => {
       length += BezierUtil.getLengthFromCommand(circle[i - 1], circle[i], div);
     }
     expect(length / (R * 2 * Math.PI)).toBeCloseTo(1.0, 3);
+  });
+});
+
+describe("BezierUtil : differentiate", () => {
+  const circle = BezierPath.getCircle();
+
+  test("div 1", () => {
+    const div = 1;
+    const points = BezierUtil.differentiate(circle, div);
+    expect(points).toEqual([[1, 0], [0, 1], [-1, 0], [0, -1], [1, 0]]);
+  });
+
+  test("div 2", () => {
+    const div = 2;
+    const q = 0.7071067811865476;
+    const points = BezierUtil.differentiate(circle, div);
+    expect(points).toEqual([
+      [1, 0],
+      [q, q],
+      [0, 1],
+      [-q, q],
+      [-1, 0],
+      [-q, -q],
+      [0, -1],
+      [q, -q],
+      [1, 0]
+    ]);
+  });
+
+  test("div 64", () => {
+    const div = 64;
+    const points = BezierUtil.differentiate(circle, div);
+    const way = new ParticleWay(circle);
+    const differWay = new ParticleWay(points);
+
+    const isCloseTo = t => {
+      const p1 = way.getPoint(t);
+      const p2 = differWay.getPoint(t);
+      expect(p1[0]).toBeCloseTo(p2[0]);
+      expect(p1[1]).toBeCloseTo(p2[1]);
+    };
+
+    const isNear = t => {
+      const p1 = way.getPoint(t);
+      const p2 = differWay.getPoint(t);
+      expect(p1[0]).toBeCloseTo(p2[0], 2);
+      expect(p1[1]).toBeCloseTo(p2[1], 2);
+    };
+
+    isCloseTo(0.0);
+    isCloseTo(0.25);
+    isCloseTo(0.5);
+    isCloseTo(0.75);
+    isCloseTo(1.0);
+    isNear(0.1);
+    isNear(1 / 3);
   });
 });
