@@ -1,6 +1,6 @@
 export declare class ParticleWay {
     name: string;
-    protected _points: number[][];
+    private _points;
     protected _ratioTable: number[];
     /**
      * コンストラクタ
@@ -14,7 +14,7 @@ export declare class ParticleWay {
      * 経路の座標配列を更新する。
      * @param points
      */
-    setPoints(points: number[][]): void;
+    points: number[][];
     /**
      * 2点間の距離を取得する。
      * @param pos1

@@ -5,7 +5,7 @@ import { BezierUtil } from "./BezierUtil";
 
 export class ParticleWay {
   public name: string = "";
-  protected _points: number[][];
+  private _points: number[][];
   protected _ratioTable: number[];
 
   /**
@@ -16,14 +16,14 @@ export class ParticleWay {
    *   要素数6 : 平面3次元ベジェ曲線
    */
   constructor(points: number[][]) {
-    this.setPoints(points);
+    this.points = points;
   }
 
   /**
    * 経路の座標配列を更新する。
    * @param points
    */
-  public setPoints(points: number[][]): void {
+  set points(points: number[][]) {
     this._points = points;
 
     if (this._points.length === 0) {
@@ -48,6 +48,10 @@ export class ParticleWay {
     this._ratioTable = sumTable.map(val => {
       return val / total;
     });
+  }
+
+  get points(): number[][] {
+    return this._points;
   }
 
   /**

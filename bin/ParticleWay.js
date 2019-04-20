@@ -12,13 +12,13 @@ export class ParticleWay {
      */
     constructor(points) {
         this.name = "";
-        this.setPoints(points);
+        this.points = points;
     }
     /**
      * 経路の座標配列を更新する。
      * @param points
      */
-    setPoints(points) {
+    set points(points) {
         this._points = points;
         if (this._points.length === 0) {
             console.warn("ParticleWay : 長さゼロの配列が指定されました。座標が算出できないため、getPoint関数は常にnullを返します。");
@@ -37,6 +37,9 @@ export class ParticleWay {
         this._ratioTable = sumTable.map(val => {
             return val / total;
         });
+    }
+    get points() {
+        return this._points;
     }
     /**
      * 2点間の距離を取得する。
