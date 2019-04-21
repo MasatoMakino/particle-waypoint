@@ -169,12 +169,12 @@ export class ParticleGenerator {
      * 経路上にパーティクルを敷き詰める。
      */
     generateAll() {
-        const move = (this.speedPerSec * this._particleInterval) / 1000;
-        let pos = 1.0;
-        while (pos > 0.0) {
+        //パーティクルの最大生存期間 単位ミリ秒
+        let lifeTime = 1000.0 / this.speedPerSec;
+        while (lifeTime > 0.0) {
             const particle = this.generate();
-            particle.update(pos);
-            pos -= move;
+            particle.update((lifeTime / 1000) * this.speedPerSec);
+            lifeTime -= this._particleInterval;
         }
         this.elapsedFromGenerate = 0;
     }
