@@ -110,13 +110,15 @@ export class BezierUtil {
     );
   }
 
-  public static differentiate(
-    commands: number[][],
-    div: number = 16
-  ): number[][] {
+  /**
+   * 3次ベジェ曲線を2次元座標の配列に分解する。
+   * @param commands
+   * @param div 分割数 デフォルトは16
+   */
+  public static subdivide(commands: number[][], div: number = 16): number[][] {
     const points = [];
     for (let i = 1; i < commands.length; i++) {
-      let sub = this.differentiateSubPath(commands[i - 1], commands[i], div);
+      let sub = this.subdivideSubPath(commands[i - 1], commands[i], div);
       if (i !== 1) {
         sub = sub.slice(1);
       }
@@ -124,7 +126,7 @@ export class BezierUtil {
     }
     return points;
   }
-  private static differentiateSubPath(
+  private static subdivideSubPath(
     command1: number[],
     command2: number[],
     div: number = 16

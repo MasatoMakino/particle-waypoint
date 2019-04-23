@@ -67,10 +67,15 @@ export class BezierUtil {
     static getLengthFromCommand(command1, command2, div = 16) {
         return this.getLength(command1.slice(-2), command2.slice(0, 2), command2.slice(2, 4), command2.slice(-2), div);
     }
-    static differentiate(commands, div = 16) {
+    /**
+     * 3次ベジェ曲線を2次元座標の配列に分解する。
+     * @param commands
+     * @param div 分割数 デフォルトは16
+     */
+    static subdivide(commands, div = 16) {
         const points = [];
         for (let i = 1; i < commands.length; i++) {
-            let sub = this.differentiateSubPath(commands[i - 1], commands[i], div);
+            let sub = this.subdivideSubPath(commands[i - 1], commands[i], div);
             if (i !== 1) {
                 sub = sub.slice(1);
             }
@@ -78,7 +83,7 @@ export class BezierUtil {
         }
         return points;
     }
-    static differentiateSubPath(command1, command2, div = 16) {
+    static subdivideSubPath(command1, command2, div = 16) {
         const points = [];
         for (let i = 0; i < div + 1; i++) {
             points.push(this.getPointFromCommand(i / div, command1, command2));

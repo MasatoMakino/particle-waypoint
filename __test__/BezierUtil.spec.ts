@@ -104,19 +104,19 @@ describe("BezierUtil : circle", () => {
   });
 });
 
-describe("BezierUtil : differentiate", () => {
+describe("BezierUtil : subdivide", () => {
   const circle = BezierPath.getCircle();
 
   test("div 1", () => {
     const div = 1;
-    const points = BezierUtil.differentiate(circle, div);
+    const points = BezierUtil.subdivide(circle, div);
     expect(points).toEqual([[1, 0], [0, 1], [-1, 0], [0, -1], [1, 0]]);
   });
 
   test("div 2", () => {
     const div = 2;
     const q = 0.7071067811865476;
-    const points = BezierUtil.differentiate(circle, div);
+    const points = BezierUtil.subdivide(circle, div);
     expect(points).toEqual([
       [1, 0],
       [q, q],
@@ -132,7 +132,7 @@ describe("BezierUtil : differentiate", () => {
 
   test("div 64", () => {
     const div = 64;
-    const points = BezierUtil.differentiate(circle, div);
+    const points = BezierUtil.subdivide(circle, div);
     const way = new ParticleWay(circle);
     const differWay = new ParticleWay(points);
 

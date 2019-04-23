@@ -35,7 +35,12 @@ export declare class BezierUtil {
      * @param div 分割数 多いほど精度が向上し、計算負荷は上昇する。 既定値16
      */
     static getLengthFromCommand(command1: number[], command2: number[], div?: number): number;
-    static differentiate(commands: number[][], div?: number): number[][];
-    private static differentiateSubPath;
+    /**
+     * 3次ベジェ曲線を2次元座標の配列に分解する。
+     * @param commands
+     * @param div 分割数 デフォルトは16
+     */
+    static subdivide(commands: number[][], div?: number): number[][];
+    private static subdivideSubPath;
 }
 //# sourceMappingURL=BezierUtil.d.ts.map
