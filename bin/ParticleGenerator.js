@@ -17,6 +17,7 @@ export class ParticleGenerator {
         this._particleInterval = 300;
         this.speedPerSec = 0.07;
         this._isLoop = false;
+        this._probability = 1.0;
         this._isOpenValve = true;
         this.elapsedFromGenerate = 0; //前回パーティクル生成時からの経過時間　単位ms
         this.lastAnimateTime = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
@@ -56,6 +57,8 @@ export class ParticleGenerator {
             this._isLoop = option.isLoop;
         if (option.ease)
             this._ease = option.ease;
+        if (option.probability)
+            this._probability = option.probability;
     }
     /**
      * パーティクルアニメーションを開始する。
@@ -121,7 +124,8 @@ export class ParticleGenerator {
             }
             const particle = this.generate();
             const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
-            particle.add(move);
+            if (particle)
+                particle.add(move);
         }
     }
     /**
@@ -147,6 +151,11 @@ export class ParticleGenerator {
      * パーティクルを1つ追加する。
      */
     generate() {
+        //発生確率に応じて生成の可否を判定する。
+        if (this._probability !== 1.0) {
+            if (Math.random() > this._probability)
+                return null;
+        }
         const particle = this.generateParticle(this.path);
         this.particles.push(particle);
         particle.visible = this._visible;
@@ -173,7 +182,8 @@ export class ParticleGenerator {
         let lifeTime = 1000.0 / this.speedPerSec;
         while (lifeTime > 0.0) {
             const particle = this.generate();
-            particle.update((lifeTime / 1000) * this.speedPerSec);
+            if (particle)
+                particle.update((lifeTime / 1000) * this.speedPerSec);
             lifeTime -= this._particleInterval;
         }
         this.elapsedFromGenerate = 0;

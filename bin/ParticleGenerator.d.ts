@@ -13,6 +13,7 @@ export declare class ParticleGenerator {
     speedPerSec: number;
     private _ease;
     private _isLoop;
+    private _probability;
     private _isOpenValve;
     private elapsedFromGenerate;
     private lastAnimateTime;
@@ -132,6 +133,7 @@ export declare class ParticleGenerator {
 export interface ParticleGeneratorOption {
     isLoop?: boolean;
     ease?: (number: any) => number;
+    probability?: number;
 }
 /**
  * ParticleGeneratorで利用する各種の値を算出するヘルパークラス

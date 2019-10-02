@@ -64,36 +64,54 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="particle-waypoint">particle-waypoint</h1>
+				<a href="#particle-waypoint" id="particle-waypoint" style="color: inherit; text-decoration: none;">
+					<h1>particle-waypoint</h1>
+				</a>
 				<blockquote>
 					<p>Path module for calculating waypoints.</p>
 				</blockquote>
-				<h2 id="api-documents">API Documents</h2>
+				<a href="#api-documents" id="api-documents" style="color: inherit; text-decoration: none;">
+					<h2>API Documents</h2>
+				</a>
 				<p><a href="https://masatomakino.github.io/particle-waypoint/api/">API documents</a></p>
-				<h2 id="getting-started">Getting Started</h2>
-				<h3 id="install">Install</h3>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started</h2>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h3>Install</h3>
+				</a>
 				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/particle-waypoint.git --save-dev</code></pre>
-				<h3 id="import">Import</h3>
+				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
+					<h3>Import</h3>
+				</a>
 				<p>particle-waypoint is composed of ES6 modules and TypeScript d.ts files.</p>
 				<p>At first, import classes.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> {
+				<pre><code class="language-.js">import {
   ParticleWay,
   Particle,
   ParticleGenerator
-} <span class="hljs-keyword">from</span> <span class="hljs-string">"particle-waypoint"</span>;</code></pre>
-				<h3 id="create-particle-way">Create particle way</h3>
-				<pre><code class="language-js">  <span class="hljs-keyword">const</span> points = [[<span class="hljs-number">100</span>, <span class="hljs-number">100</span>], [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>], [<span class="hljs-number">200</span>, <span class="hljs-number">200</span>], [<span class="hljs-number">200</span>, <span class="hljs-number">300</span>]];
-  <span class="hljs-keyword">const</span> wayPoint = <span class="hljs-keyword">new</span> ParticleWay(points);</code></pre>
-				<h3 id="create-generator">Create generator</h3>
-				<pre><code class="language-js">  <span class="hljs-keyword">const</span> generator = <span class="hljs-keyword">new</span> ParticleGenerator( wayPoint, {
-    <span class="hljs-attr">isLoop</span>: <span class="hljs-literal">true</span>
+} from &quot;particle-waypoint&quot;;</code></pre>
+				<a href="#create-particle-way" id="create-particle-way" style="color: inherit; text-decoration: none;">
+					<h3>Create particle way</h3>
+				</a>
+				<pre><code class="language-.js">  const points = [[100, 100], [100, 200], [200, 200], [200, 300]];
+  const wayPoint = new ParticleWay(points);</code></pre>
+				<a href="#create-generator" id="create-generator" style="color: inherit; text-decoration: none;">
+					<h3>Create generator</h3>
+				</a>
+				<pre><code class="language-.js">  const generator = new ParticleGenerator( wayPoint, {
+    isLoop: true
   });
-  generator.setSpeed(<span class="hljs-number">600</span>, <span class="hljs-number">20</span>);
+  generator.setSpeed(600, 20);
   generator.play();</code></pre>
 				<p>Particles animate on <code>wayPoint</code>.</p>
-				<h2 id="uninstall">Uninstall</h2>
+				<a href="#uninstall" id="uninstall" style="color: inherit; text-decoration: none;">
+					<h2>Uninstall</h2>
+				</a>
 				<pre><code class="language-bash">npm uninstall https://github.com/MasatoMakino/particle-waypoint.git --save-dev</code></pre>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p>particle-waypoint is <a href="LICENSE">MIT licensed</a>.</p>
 			</div>
 		</div>
@@ -139,6 +157,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -187,7 +206,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
