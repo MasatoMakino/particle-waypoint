@@ -17,6 +17,7 @@ export class ParticleGenerator {
   public speedPerSec: number = 0.07;
   private _ease: (number) => number;
   private _isLoop: boolean = false;
+  private _probability: number = 1.0;
   private _isOpenValve: boolean = true;
 
   private elapsedFromGenerate: number = 0; //前回パーティクル生成時からの経過時間　単位ms
@@ -35,6 +36,7 @@ export class ParticleGenerator {
     if (option == null) return;
     if (option.isLoop) this._isLoop = option.isLoop;
     if (option.ease) this._ease = option.ease;
+    if (option.probability) this._probability = option.probability;
   }
 
   /**
@@ -121,7 +123,7 @@ export class ParticleGenerator {
 
       const particle = this.generate();
       const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
-      particle.add(move);
+      if (particle) particle.add(move);
     }
   }
 
@@ -168,6 +170,11 @@ export class ParticleGenerator {
    * パーティクルを1つ追加する。
    */
   private generate(): Particle {
+    //発生確率に応じて生成の可否を判定する。
+    if (this._probability !== 1.0) {
+      if (Math.random() > this._probability) return null;
+    }
+
     const particle: Particle = this.generateParticle(this.path);
     this.particles.push(particle);
     particle.visible = this._visible;
@@ -197,7 +204,7 @@ export class ParticleGenerator {
 
     while (lifeTime > 0.0) {
       const particle = this.generate();
-      particle.update((lifeTime / 1000) * this.speedPerSec);
+      if (particle) particle.update((lifeTime / 1000) * this.speedPerSec);
       lifeTime -= this._particleInterval;
     }
     this.elapsedFromGenerate = 0;
@@ -364,6 +371,7 @@ export class ParticleGenerator {
 export interface ParticleGeneratorOption {
   isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティ栗を巻き戻して再利用する = false. デフォルトはtrue.
   ease?: (number) => number;
+  probability?: number;
 }
 
 /**
