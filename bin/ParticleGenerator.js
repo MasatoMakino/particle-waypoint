@@ -301,6 +301,12 @@ export class ParticleGenerator {
     get ease() {
         return this._ease;
     }
+    get probability() {
+        return this._probability;
+    }
+    set probability(value) {
+        this._probability = value;
+    }
     /**
      * 各パーティクルのEase関数を更新する。
      * @param ease イージング関数。

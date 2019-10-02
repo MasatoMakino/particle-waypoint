@@ -6,7 +6,6 @@ import { Particle } from "./Particle";
  * パーティクルインスタンスの生成と管理を行う。
  */
 export class ParticleGenerator {
-
   public path: ParticleWay;
   private _visible: boolean = true;
 

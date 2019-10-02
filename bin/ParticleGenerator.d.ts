@@ -120,6 +120,7 @@ export declare class ParticleGenerator {
     visible: boolean;
     isLoop: boolean;
     readonly ease: (number: any) => number;
+    probability: number;
     /**
      * 各パーティクルのEase関数を更新する。
      * @param ease イージング関数。
