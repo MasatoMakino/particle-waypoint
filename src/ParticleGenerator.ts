@@ -6,6 +6,7 @@ import { Particle } from "./Particle";
  * パーティクルインスタンスの生成と管理を行う。
  */
 export class ParticleGenerator {
+
   public path: ParticleWay;
   private _visible: boolean = true;
 
@@ -342,6 +343,14 @@ export class ParticleGenerator {
 
   get ease(): (number) => number {
     return this._ease;
+  }
+
+  get probability(): number {
+    return this._probability;
+  }
+
+  set probability(value: number) {
+    this._probability = value;
   }
 
   /**
