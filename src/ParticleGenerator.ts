@@ -377,7 +377,7 @@ export class ParticleGenerator {
  * パーティクル生成方法を指定するオプション
  */
 export interface ParticleGeneratorOption {
-  isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティ栗を巻き戻して再利用する = false. デフォルトはtrue.
+  isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティクルを巻き戻して再利用する = false. デフォルトはtrue.
   ease?: (number) => number;
   probability?: number;
 }
