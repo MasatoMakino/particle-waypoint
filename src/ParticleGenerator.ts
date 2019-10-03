@@ -6,7 +6,9 @@ import { Particle } from "./Particle";
  * パーティクルインスタンスの生成と管理を行う。
  */
 export class ParticleGenerator {
-  public path: ParticleWay;
+  public path: ParticleWay[] = [];
+  public pathSelectType: PathSelectType = PathSelectType.Sequential;
+  private pathSelectionCount: number = 0;
   private _visible: boolean = true;
 
   private particles: Particle[] = [];
@@ -30,8 +32,15 @@ export class ParticleGenerator {
    * @param path
    * @param option
    */
-  constructor(path: ParticleWay, option?: ParticleGeneratorOption) {
-    this.path = path;
+  constructor(
+    path: ParticleWay | ParticleWay[],
+    option?: ParticleGeneratorOption
+  ) {
+    if (Array.isArray(path)) {
+      this.path = path;
+    } else {
+      this.path = [path];
+    }
 
     if (option == null) return;
     if (option.isLoop) this._isLoop = option.isLoop;
@@ -170,18 +179,35 @@ export class ParticleGenerator {
    * パーティクルを1つ追加する。
    */
   private generate(): Particle {
+    this.pathSelectionCount = (this.pathSelectionCount + 1) % this.path.length;
+
     //発生確率に応じて生成の可否を判定する。
     if (this._probability !== 1.0) {
       if (Math.random() > this._probability) return null;
     }
 
-    const particle: Particle = this.generateParticle(this.path);
+    const path = this.getPath(this.pathSelectionCount);
+    const particle: Particle = this.generateParticle(path);
+
     this.particles.push(particle);
     particle.visible = this._visible;
     if (this._ease != null) {
       particle.ease = this._ease;
     }
     return particle;
+  }
+
+  private getPath(count: number): ParticleWay {
+    let index;
+    switch (this.pathSelectType) {
+      case PathSelectType.Sequential:
+        index = count;
+        break;
+      case PathSelectType.Random:
+        index = Math.floor(Math.random() * this.path.length);
+        break;
+    }
+    return this.path[index];
   }
 
   /**
@@ -403,4 +429,9 @@ export class ParticleGeneratorUtility {
   public static getInterval(speed: number, particleNum: number): number {
     return (1.0 / speed / particleNum) * 1000;
   }
+}
+
+export enum PathSelectType {
+  Random,
+  Sequential
 }
