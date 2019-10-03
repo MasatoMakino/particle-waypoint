@@ -227,7 +227,7 @@ export class ParticleGenerator {
   }
 
   /**
-   * 終端にたどり着いたパーティクルを視点に巻き戻す。
+   * 終端にたどり着いたパーティクルを始点に巻き戻す。
    */
   private rollupParticles(): void {
     this.particles.forEach(p => {
