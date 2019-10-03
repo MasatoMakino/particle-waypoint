@@ -109,6 +109,8 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#lastanimatetime" class="tsd-kind-icon">last<wbr>Animate<wbr>Time</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#particles" class="tsd-kind-icon">particles</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#path" class="tsd-kind-icon">path</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#pathselecttype" class="tsd-kind-icon">path<wbr>Select<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#pathselectioncount" class="tsd-kind-icon">path<wbr>Selection<wbr>Count</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#renderid" class="tsd-kind-icon">renderID</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#speedpersec" class="tsd-kind-icon">speed<wbr>Per<wbr>Sec</a></li>
 							</ul>
@@ -119,6 +121,7 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#ease" class="tsd-kind-icon">ease</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#isloop" class="tsd-kind-icon">is<wbr>Loop</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#particleinterval" class="tsd-kind-icon">particle<wbr>Interval</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#probability" class="tsd-kind-icon">probability</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#visible" class="tsd-kind-icon">visible</a></li>
 							</ul>
 						</section>
@@ -133,6 +136,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#generateall" class="tsd-kind-icon">generate<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_particlegenerator_.particlegenerator.html#generateparticle" class="tsd-kind-icon">generate<wbr>Particle</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#getdelta" class="tsd-kind-icon">get<wbr>Delta</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#getpath" class="tsd-kind-icon">get<wbr>Path</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#loop" class="tsd-kind-icon">loop</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_particlegenerator_.particlegenerator.html#move" class="tsd-kind-icon">move</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_particlegenerator_.particlegenerator.html#openvalve" class="tsd-kind-icon">open<wbr>Valve</a></li>
@@ -157,13 +161,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Particle<wbr>Generator<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a>, option<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_particlegenerator_.particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_particlegenerator_.particlegenerator.html" class="tsd-signature-type">ParticleGenerator</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Particle<wbr>Generator<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a><span class="tsd-signature-symbol"> | </span><a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a><span class="tsd-signature-symbol">[]</span>, option<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_particlegenerator_.particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_particlegenerator_.particlegenerator.html" class="tsd-signature-type">ParticleGenerator</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L26">ParticleGenerator.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L28">ParticleGenerator.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -174,7 +178,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>path: <a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a></h5>
+									<h5>path: <a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a><span class="tsd-signature-symbol"> | </span><a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> option: <a href="../interfaces/_particlegenerator_.particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a></h5>
@@ -197,7 +201,7 @@
 					<div class="tsd-signature tsd-kind-icon">_ease<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L18">ParticleGenerator.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L20">ParticleGenerator.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -228,7 +232,7 @@
 					<div class="tsd-signature tsd-kind-icon">_is<wbr>Loop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L19">ParticleGenerator.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L21">ParticleGenerator.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -238,7 +242,7 @@
 					<div class="tsd-signature tsd-kind-icon">_is<wbr>Open<wbr>Valve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L21">ParticleGenerator.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L23">ParticleGenerator.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -248,7 +252,7 @@
 					<div class="tsd-signature tsd-kind-icon">_particle<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;300</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L16">ParticleGenerator.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L18">ParticleGenerator.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -258,7 +262,7 @@
 					<div class="tsd-signature tsd-kind-icon">_probability<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L20">ParticleGenerator.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L22">ParticleGenerator.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -268,7 +272,7 @@
 					<div class="tsd-signature tsd-kind-icon">_visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L10">ParticleGenerator.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L12">ParticleGenerator.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -278,7 +282,7 @@
 					<div class="tsd-signature tsd-kind-icon">elapsed<wbr>From<wbr>Generate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L23">ParticleGenerator.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L25">ParticleGenerator.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -288,7 +292,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Disposed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L26">ParticleGenerator.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L28">ParticleGenerator.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -298,7 +302,7 @@
 					<div class="tsd-signature tsd-kind-icon">last<wbr>Animate<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L24">ParticleGenerator.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L26">ParticleGenerator.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -308,17 +312,37 @@
 					<div class="tsd-signature tsd-kind-icon">particles<span class="tsd-signature-symbol">:</span> <a href="_particle_.particle.html" class="tsd-signature-type">Particle</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L12">ParticleGenerator.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L14">ParticleGenerator.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="path" class="tsd-anchor"></a>
 					<h3>path</h3>
-					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a></div>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L9">ParticleGenerator.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L9">ParticleGenerator.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="pathselecttype" class="tsd-anchor"></a>
+					<h3>path<wbr>Select<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">path<wbr>Select<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/_particlegenerator_.pathselecttype.html" class="tsd-signature-type">PathSelectType</a><span class="tsd-signature-symbol"> =&nbsp;PathSelectType.Sequential</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L10">ParticleGenerator.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="pathselectioncount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> path<wbr>Selection<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">path<wbr>Selection<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L11">ParticleGenerator.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -328,7 +352,7 @@
 					<div class="tsd-signature tsd-kind-icon">renderID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L13">ParticleGenerator.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L15">ParticleGenerator.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -338,7 +362,7 @@
 					<div class="tsd-signature tsd-kind-icon">speed<wbr>Per<wbr>Sec<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.07</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L17">ParticleGenerator.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L19">ParticleGenerator.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -355,7 +379,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L343">ParticleGenerator.ts:343</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L369">ParticleGenerator.ts:369</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
@@ -391,7 +415,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L323">ParticleGenerator.ts:323</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L349">ParticleGenerator.ts:349</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -399,7 +423,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L327">ParticleGenerator.ts:327</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L353">ParticleGenerator.ts:353</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -423,7 +447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L297">ParticleGenerator.ts:297</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L323">ParticleGenerator.ts:323</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -431,7 +455,39 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L301">ParticleGenerator.ts:301</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L327">ParticleGenerator.ts:327</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="probability" class="tsd-anchor"></a>
+					<h3>probability</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> probability<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> probability<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L373">ParticleGenerator.ts:373</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L377">ParticleGenerator.ts:377</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -455,7 +511,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L313">ParticleGenerator.ts:313</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L339">ParticleGenerator.ts:339</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -463,7 +519,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L316">ParticleGenerator.ts:316</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L342">ParticleGenerator.ts:342</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -489,7 +545,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L113">ParticleGenerator.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L122">ParticleGenerator.ts:122</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -519,7 +575,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L98">ParticleGenerator.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L107">ParticleGenerator.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -552,7 +608,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L79">ParticleGenerator.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L88">ParticleGenerator.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -575,7 +631,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L288">ParticleGenerator.ts:288</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L314">ParticleGenerator.ts:314</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -597,7 +653,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L172">ParticleGenerator.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L181">ParticleGenerator.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -619,7 +675,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L201">ParticleGenerator.ts:201</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L227">ParticleGenerator.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -641,7 +697,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L192">ParticleGenerator.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L218">ParticleGenerator.ts:218</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -672,7 +728,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L152">ParticleGenerator.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L161">ParticleGenerator.ts:161</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -693,6 +749,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getpath" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Path<span class="tsd-signature-symbol">(</span>count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L200">ParticleGenerator.ts:200</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>count: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_particleway_.particleway.html" class="tsd-signature-type">ParticleWay</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a name="loop" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> loop</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -702,7 +781,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L134">ParticleGenerator.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L143">ParticleGenerator.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -735,7 +814,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L162">ParticleGenerator.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L171">ParticleGenerator.ts:171</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -766,7 +845,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L68">ParticleGenerator.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L77">ParticleGenerator.ts:77</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -788,7 +867,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L45">ParticleGenerator.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L54">ParticleGenerator.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -810,7 +889,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L253">ParticleGenerator.ts:253</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L279">ParticleGenerator.ts:279</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -832,7 +911,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L216">ParticleGenerator.ts:216</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L242">ParticleGenerator.ts:242</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -854,7 +933,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L242">ParticleGenerator.ts:242</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L268">ParticleGenerator.ts:268</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -884,12 +963,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L232">ParticleGenerator.ts:232</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L258">ParticleGenerator.ts:258</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>終端にたどり着いたパーティクルを視点に巻き戻す。</p>
+									<p>終端にたどり着いたパーティクルを始点に巻き戻す。</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -906,7 +985,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L277">ParticleGenerator.ts:277</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L303">ParticleGenerator.ts:303</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -940,7 +1019,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L266">ParticleGenerator.ts:266</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L292">ParticleGenerator.ts:292</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -974,7 +1053,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L59">ParticleGenerator.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L68">ParticleGenerator.ts:68</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -996,7 +1075,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L352">ParticleGenerator.ts:352</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L386">ParticleGenerator.ts:386</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1051,7 +1130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/85b369c/src/ParticleGenerator.ts#L86">ParticleGenerator.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c34cb4f/src/ParticleGenerator.ts#L95">ParticleGenerator.ts:95</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -1085,6 +1164,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_particlegenerator_.pathselecttype.html" class="tsd-kind-icon">Path<wbr>Select<wbr>Type</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
@@ -1126,6 +1208,12 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_particlegenerator_.particlegenerator.html#path" class="tsd-kind-icon">path</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_particlegenerator_.particlegenerator.html#pathselecttype" class="tsd-kind-icon">path<wbr>Select<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_particlegenerator_.particlegenerator.html#pathselectioncount" class="tsd-kind-icon">path<wbr>Selection<wbr>Count</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_particlegenerator_.particlegenerator.html#renderid" class="tsd-kind-icon">renderID</a>
 							</li>
@@ -1140,6 +1228,9 @@
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="_particlegenerator_.particlegenerator.html#particleinterval" class="tsd-kind-icon">particle<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="_particlegenerator_.particlegenerator.html#probability" class="tsd-kind-icon">probability</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="_particlegenerator_.particlegenerator.html#visible" class="tsd-kind-icon">visible</a>
@@ -1167,6 +1258,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_particlegenerator_.particlegenerator.html#getdelta" class="tsd-kind-icon">get<wbr>Delta</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_particlegenerator_.particlegenerator.html#getpath" class="tsd-kind-icon">get<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_particlegenerator_.particlegenerator.html#loop" class="tsd-kind-icon">loop</a>

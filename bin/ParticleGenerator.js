@@ -10,6 +10,9 @@ export class ParticleGenerator {
      * @param option
      */
     constructor(path, option) {
+        this.path = [];
+        this.pathSelectType = PathSelectType.Sequential;
+        this.pathSelectionCount = 0;
         this._visible = true;
         this.particles = [];
         this.renderID = null;
@@ -50,7 +53,12 @@ export class ParticleGenerator {
             this.rollupParticles();
             this.renderID = requestAnimationFrame(this.loop);
         };
-        this.path = path;
+        if (Array.isArray(path)) {
+            this.path = path;
+        }
+        else {
+            this.path = [path];
+        }
         if (option == null)
             return;
         if (option.isLoop)
@@ -151,18 +159,32 @@ export class ParticleGenerator {
      * パーティクルを1つ追加する。
      */
     generate() {
+        this.pathSelectionCount = (this.pathSelectionCount + 1) % this.path.length;
         //発生確率に応じて生成の可否を判定する。
         if (this._probability !== 1.0) {
             if (Math.random() > this._probability)
                 return null;
         }
-        const particle = this.generateParticle(this.path);
+        const path = this.getPath(this.pathSelectionCount);
+        const particle = this.generateParticle(path);
         this.particles.push(particle);
         particle.visible = this._visible;
         if (this._ease != null) {
             particle.ease = this._ease;
         }
         return particle;
+    }
+    getPath(count) {
+        let index;
+        switch (this.pathSelectType) {
+            case PathSelectType.Sequential:
+                index = count;
+                break;
+            case PathSelectType.Random:
+                index = Math.floor(Math.random() * this.path.length);
+                break;
+        }
+        return this.path[index];
     }
     /**
      * パーティクルを生成する。
@@ -204,7 +226,7 @@ export class ParticleGenerator {
         });
     }
     /**
-     * 終端にたどり着いたパーティクルを視点に巻き戻す。
+     * 終端にたどり着いたパーティクルを始点に巻き戻す。
      */
     rollupParticles() {
         this.particles.forEach(p => {
@@ -346,3 +368,8 @@ export class ParticleGeneratorUtility {
         return (1.0 / speed / particleNum) * 1000;
     }
 }
+export var PathSelectType;
+(function (PathSelectType) {
+    PathSelectType[PathSelectType["Random"] = 0] = "Random";
+    PathSelectType[PathSelectType["Sequential"] = 1] = "Sequential";
+})(PathSelectType || (PathSelectType = {}));

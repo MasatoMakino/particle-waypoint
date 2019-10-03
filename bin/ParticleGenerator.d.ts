@@ -5,7 +5,9 @@ import { Particle } from "./Particle";
  * パーティクルインスタンスの生成と管理を行う。
  */
 export declare class ParticleGenerator {
-    path: ParticleWay;
+    path: ParticleWay[];
+    pathSelectType: PathSelectType;
+    private pathSelectionCount;
     private _visible;
     private particles;
     private renderID;
@@ -23,7 +25,7 @@ export declare class ParticleGenerator {
      * @param path
      * @param option
      */
-    constructor(path: ParticleWay, option?: ParticleGeneratorOption);
+    constructor(path: ParticleWay | ParticleWay[], option?: ParticleGeneratorOption);
     /**
      * パーティクルアニメーションを開始する。
      */
@@ -71,6 +73,7 @@ export declare class ParticleGenerator {
      * パーティクルを1つ追加する。
      */
     private generate;
+    private getPath;
     /**
      * パーティクルを生成する。
      * generate関数の内部処理。
@@ -86,7 +89,7 @@ export declare class ParticleGenerator {
      */
     private removeCompletedParticles;
     /**
-     * 終端にたどり着いたパーティクルを視点に巻き戻す。
+     * 終端にたどり着いたパーティクルを始点に巻き戻す。
      */
     private rollupParticles;
     /**
@@ -152,5 +155,9 @@ export declare class ParticleGeneratorUtility {
      * @param particleNum
      */
     static getInterval(speed: number, particleNum: number): number;
+}
+export declare enum PathSelectType {
+    Random = 0,
+    Sequential = 1
 }
 //# sourceMappingURL=ParticleGenerator.d.ts.map
