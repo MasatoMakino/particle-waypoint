@@ -1,5 +1,7 @@
 import { ParticleWay } from "./ParticleWay";
 import { Particle } from "./Particle";
+import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
+import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
 
 /**
  * 一定間隔でパーティクルを生成し、アニメーションさせるクラス。
@@ -12,7 +14,7 @@ export class ParticleGenerator {
   private _visible: boolean = true;
 
   private particles: Particle[] = [];
-  private renderID = null;
+  private isPlaying: boolean = false;
 
   //animation setting
   private _particleInterval: number = 300;
@@ -23,7 +25,6 @@ export class ParticleGenerator {
   private _isOpenValve: boolean = true;
 
   private elapsedFromGenerate: number = 0; //前回パーティクル生成時からの経過時間　単位ms
-  private lastAnimateTime: number = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
 
   private isDisposed: boolean = false;
 
@@ -52,13 +53,13 @@ export class ParticleGenerator {
    * パーティクルアニメーションを開始する。
    */
   public play(): void {
-    if (this.renderID != null) return;
-    this.lastAnimateTime = performance.now();
+    if (this.isPlaying) return;
+    this.isPlaying = true;
 
     if (this._isLoop) {
-      this.renderID = requestAnimationFrame(this.loop);
+      RAFTicker.addEventListener(RAFTickerEventType.tick, this.loop);
     } else {
-      this.renderID = requestAnimationFrame(this.animate);
+      RAFTicker.addEventListener(RAFTickerEventType.tick, this.animate);
     }
   }
 
@@ -66,9 +67,10 @@ export class ParticleGenerator {
    * パーティクルアニメーションを停止する。
    */
   public stop(): void {
-    if (this.renderID == null) return;
-    cancelAnimationFrame(this.renderID);
-    this.renderID = null;
+    if (!this.isPlaying) return;
+    this.isPlaying = false;
+    RAFTicker.removeEventListener(RAFTickerEventType.tick, this.loop);
+    RAFTicker.removeEventListener(RAFTickerEventType.tick, this.animate);
   }
 
   /**
@@ -102,17 +104,14 @@ export class ParticleGenerator {
 
   /**
    * パーティクルをアニメーションさせる。
-   * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+   * @param e
    */
-  private animate = (timestamp: number) => {
+  private animate = (e: RAFTickerEvent) => {
     if (this.isDisposed) return;
 
-    const delta = this.getDelta(timestamp);
-    this.move(delta);
+    this.move(e.delta);
     this.removeCompletedParticles();
-    this.addParticle(delta);
-
-    this.renderID = requestAnimationFrame(this.animate);
+    this.addParticle(e.delta);
   };
 
   /**
@@ -138,31 +137,18 @@ export class ParticleGenerator {
 
   /**
    * パーティクルをループアニメーションさせる。
-   * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+   * @param e
    */
-  private loop = (timestamp: number) => {
+  private loop = (e: RAFTickerEvent) => {
     if (this.isDisposed) return;
 
     if (this.particles.length === 0) {
       this.generateAll();
     }
 
-    const delta = this.getDelta(timestamp);
-    this.move(delta);
+    this.move(e.delta);
     this.rollupParticles();
-
-    this.renderID = requestAnimationFrame(this.loop);
   };
-
-  /**
-   * 前回アニメーション実行時からの経過時間を取得する。
-   * @param timestamp
-   */
-  private getDelta(timestamp: number): number {
-    const delta = timestamp - this.lastAnimateTime;
-    this.lastAnimateTime = timestamp;
-    return delta;
-  }
 
   /**
    * パーティクルの位置を経過時間分移動する。
@@ -360,7 +346,7 @@ export class ParticleGenerator {
     }
 
     //再生中なら一旦停止して再度再生
-    if (this.renderID != null) {
+    if (this.isPlaying) {
       this.stop();
       this.play();
     }
@@ -406,29 +392,6 @@ export interface ParticleGeneratorOption {
   isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティクルを巻き戻して再利用する = false. デフォルトはtrue.
   ease?: (number) => number;
   probability?: number;
-}
-
-/**
- * ParticleGeneratorで利用する各種の値を算出するヘルパークラス
- */
-export class ParticleGeneratorUtility {
-  /**
-   * パーティクルの生成インターバルと経路上の数から、移動速度を算出する
-   * @param interval
-   * @param particleNum
-   */
-  public static getSpeed(interval: number, particleNum: number): number {
-    return (1.0 / (interval * particleNum)) * 1000;
-  }
-
-  /**
-   * パーティクルの移動速度と経路上の数から、生成インターバルを算出する
-   * @param speed
-   * @param particleNum
-   */
-  public static getInterval(speed: number, particleNum: number): number {
-    return (1.0 / speed / particleNum) * 1000;
-  }
 }
 
 export enum PathSelectType {

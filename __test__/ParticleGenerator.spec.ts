@@ -1,4 +1,4 @@
-import { ParticleGeneratorUtility } from "../src/ParticleGenerator";
+import { ParticleGeneratorUtility } from "../src/ParticleGeneratorUtility";
 
 describe("ParticleGeneratorUtility", () => {
   test("interval", () => {
