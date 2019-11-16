@@ -10,7 +10,7 @@ export declare class ParticleGenerator {
     private pathSelectionCount;
     private _visible;
     private particles;
-    private renderID;
+    private isPlaying;
     private _particleInterval;
     speedPerSec: number;
     private _ease;
@@ -18,7 +18,6 @@ export declare class ParticleGenerator {
     private _probability;
     private _isOpenValve;
     private elapsedFromGenerate;
-    private lastAnimateTime;
     private isDisposed;
     /**
      * コンストラクタ
@@ -46,7 +45,7 @@ export declare class ParticleGenerator {
     private warnValve;
     /**
      * パーティクルをアニメーションさせる。
-     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+     * @param e
      */
     private animate;
     /**
@@ -56,14 +55,9 @@ export declare class ParticleGenerator {
     private addParticle;
     /**
      * パーティクルをループアニメーションさせる。
-     * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+     * @param e
      */
     private loop;
-    /**
-     * 前回アニメーション実行時からの経過時間を取得する。
-     * @param timestamp
-     */
-    private getDelta;
     /**
      * パーティクルの位置を経過時間分移動する。
      * @param delta 前回アニメーションが実行されてからの経過時間
@@ -138,23 +132,6 @@ export interface ParticleGeneratorOption {
     isLoop?: boolean;
     ease?: (number: any) => number;
     probability?: number;
-}
-/**
- * ParticleGeneratorで利用する各種の値を算出するヘルパークラス
- */
-export declare class ParticleGeneratorUtility {
-    /**
-     * パーティクルの生成インターバルと経路上の数から、移動速度を算出する
-     * @param interval
-     * @param particleNum
-     */
-    static getSpeed(interval: number, particleNum: number): number;
-    /**
-     * パーティクルの移動速度と経路上の数から、生成インターバルを算出する
-     * @param speed
-     * @param particleNum
-     */
-    static getInterval(speed: number, particleNum: number): number;
 }
 export declare enum PathSelectType {
     Random = 0,

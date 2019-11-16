@@ -1,4 +1,6 @@
 import { Particle } from "./Particle";
+import { RAFTicker, RAFTickerEventType } from "raf-ticker";
+import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
 /**
  * 一定間隔でパーティクルを生成し、アニメーションさせるクラス。
  * パーティクルインスタンスの生成と管理を行う。
@@ -15,7 +17,7 @@ export class ParticleGenerator {
         this.pathSelectionCount = 0;
         this._visible = true;
         this.particles = [];
-        this.renderID = null;
+        this.isPlaying = false;
         //animation setting
         this._particleInterval = 300;
         this.speedPerSec = 0.07;
@@ -23,35 +25,30 @@ export class ParticleGenerator {
         this._probability = 1.0;
         this._isOpenValve = true;
         this.elapsedFromGenerate = 0; //前回パーティクル生成時からの経過時間　単位ms
-        this.lastAnimateTime = 0; //アニメーションを最後に実行した時点のタイムスタンプ　単位ms
         this.isDisposed = false;
         /**
          * パーティクルをアニメーションさせる。
-         * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+         * @param e
          */
-        this.animate = (timestamp) => {
+        this.animate = (e) => {
             if (this.isDisposed)
                 return;
-            const delta = this.getDelta(timestamp);
-            this.move(delta);
+            this.move(e.delta);
             this.removeCompletedParticles();
-            this.addParticle(delta);
-            this.renderID = requestAnimationFrame(this.animate);
+            this.addParticle(e.delta);
         };
         /**
          * パーティクルをループアニメーションさせる。
-         * @param timestamp requestAnimationFrameのタイムスタンプ。単位ミリ秒。
+         * @param e
          */
-        this.loop = (timestamp) => {
+        this.loop = (e) => {
             if (this.isDisposed)
                 return;
             if (this.particles.length === 0) {
                 this.generateAll();
             }
-            const delta = this.getDelta(timestamp);
-            this.move(delta);
+            this.move(e.delta);
             this.rollupParticles();
-            this.renderID = requestAnimationFrame(this.loop);
         };
         if (Array.isArray(path)) {
             this.path = path;
@@ -72,24 +69,25 @@ export class ParticleGenerator {
      * パーティクルアニメーションを開始する。
      */
     play() {
-        if (this.renderID != null)
+        if (this.isPlaying)
             return;
-        this.lastAnimateTime = performance.now();
+        this.isPlaying = true;
         if (this._isLoop) {
-            this.renderID = requestAnimationFrame(this.loop);
+            RAFTicker.addEventListener(RAFTickerEventType.tick, this.loop);
         }
         else {
-            this.renderID = requestAnimationFrame(this.animate);
+            RAFTicker.addEventListener(RAFTickerEventType.tick, this.animate);
         }
     }
     /**
      * パーティクルアニメーションを停止する。
      */
     stop() {
-        if (this.renderID == null)
+        if (!this.isPlaying)
             return;
-        cancelAnimationFrame(this.renderID);
-        this.renderID = null;
+        this.isPlaying = false;
+        RAFTicker.removeEventListener(RAFTickerEventType.tick, this.loop);
+        RAFTicker.removeEventListener(RAFTickerEventType.tick, this.animate);
     }
     /**
      * パーティクル生成を開始する。
@@ -135,15 +133,6 @@ export class ParticleGenerator {
             if (particle)
                 particle.add(move);
         }
-    }
-    /**
-     * 前回アニメーション実行時からの経過時間を取得する。
-     * @param timestamp
-     */
-    getDelta(timestamp) {
-        const delta = timestamp - this.lastAnimateTime;
-        this.lastAnimateTime = timestamp;
-        return delta;
     }
     /**
      * パーティクルの位置を経過時間分移動する。
@@ -315,7 +304,7 @@ export class ParticleGenerator {
             this.removeAllParticles();
         }
         //再生中なら一旦停止して再度再生
-        if (this.renderID != null) {
+        if (this.isPlaying) {
             this.stop();
             this.play();
         }
@@ -345,27 +334,6 @@ export class ParticleGenerator {
                 p.ease = ease;
             });
         }
-    }
-}
-/**
- * ParticleGeneratorで利用する各種の値を算出するヘルパークラス
- */
-export class ParticleGeneratorUtility {
-    /**
-     * パーティクルの生成インターバルと経路上の数から、移動速度を算出する
-     * @param interval
-     * @param particleNum
-     */
-    static getSpeed(interval, particleNum) {
-        return (1.0 / (interval * particleNum)) * 1000;
-    }
-    /**
-     * パーティクルの移動速度と経路上の数から、生成インターバルを算出する
-     * @param speed
-     * @param particleNum
-     */
-    static getInterval(speed, particleNum) {
-        return (1.0 / speed / particleNum) * 1000;
     }
 }
 export var PathSelectType;
