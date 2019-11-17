@@ -9,7 +9,7 @@ export declare class ParticleGenerator {
     pathSelectType: PathSelectType;
     private pathSelectionCount;
     private _visible;
-    private particles;
+    protected _particles: Particle[];
     private isPlaying;
     private _particleInterval;
     speedPerSec: number;

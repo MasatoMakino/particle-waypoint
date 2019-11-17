@@ -16,7 +16,7 @@ export class ParticleGenerator {
         this.pathSelectType = PathSelectType.Sequential;
         this.pathSelectionCount = 0;
         this._visible = true;
-        this.particles = [];
+        this._particles = [];
         this.isPlaying = false;
         //animation setting
         this._particleInterval = 300;
@@ -44,7 +44,7 @@ export class ParticleGenerator {
         this.loop = (e) => {
             if (this.isDisposed)
                 return;
-            if (this.particles.length === 0) {
+            if (this._particles.length === 0) {
                 this.generateAll();
             }
             this.move(e.delta);
@@ -140,7 +140,7 @@ export class ParticleGenerator {
      */
     move(delta) {
         const movement = (delta / 1000) * this.speedPerSec;
-        this.particles.forEach(p => {
+        this._particles.forEach(p => {
             p.add(movement);
         });
     }
@@ -156,7 +156,7 @@ export class ParticleGenerator {
         }
         const path = this.getPath(this.pathSelectionCount);
         const particle = this.generateParticle(path);
-        this.particles.push(particle);
+        this._particles.push(particle);
         particle.visible = this._visible;
         if (this._ease != null) {
             particle.ease = this._ease;
@@ -203,14 +203,14 @@ export class ParticleGenerator {
      * 寿命切れのパーティクルを一括で削除する。
      */
     removeCompletedParticles() {
-        const removed = this.particles
+        const removed = this._particles
             .filter(p => {
             return p.ratio >= 1.0;
         })
             .forEach(p => {
             p.dispose();
         });
-        this.particles = this.particles.filter(p => {
+        this._particles = this._particles.filter(p => {
             return p.ratio < 1.0;
         });
     }
@@ -218,7 +218,7 @@ export class ParticleGenerator {
      * 終端にたどり着いたパーティクルを始点に巻き戻す。
      */
     rollupParticles() {
-        this.particles.forEach(p => {
+        this._particles.forEach(p => {
             p.update(p.ratio % 1);
         });
     }
@@ -227,8 +227,8 @@ export class ParticleGenerator {
      * @param particle
      */
     removeParticle(particle) {
-        const i = this.particles.indexOf(particle);
-        const popped = this.particles.splice(i, 1);
+        const i = this._particles.indexOf(particle);
+        const popped = this._particles.splice(i, 1);
         popped.forEach(val => {
             val.dispose();
         });
@@ -237,10 +237,10 @@ export class ParticleGenerator {
      * 全てのパーティクルを削除する。
      */
     removeAllParticles() {
-        this.particles.forEach(p => {
+        this._particles.forEach(p => {
             p.dispose();
         });
-        this.particles = [];
+        this._particles = [];
     }
     /**
      * 生成インターバルと経路上のパーティクル数から移動スピードを算出し設定する。
@@ -269,7 +269,7 @@ export class ParticleGenerator {
         this.stop();
         this.isDisposed = true;
         this.removeAllParticles();
-        this.particles = null;
+        this._particles = null;
         this.path = null;
     }
     get particleInterval() {
@@ -289,8 +289,8 @@ export class ParticleGenerator {
     }
     set visible(value) {
         this._visible = value;
-        for (let i in this.particles) {
-            this.particles[i].visible = this._visible;
+        for (let i in this._particles) {
+            this._particles[i].visible = this._visible;
         }
     }
     get isLoop() {
@@ -330,7 +330,7 @@ export class ParticleGenerator {
             console.trace();
         }
         if (override || this._isLoop) {
-            this.particles.forEach(p => {
+            this._particles.forEach(p => {
                 p.ease = ease;
             });
         }
