@@ -29,8 +29,9 @@ export declare class Particle {
      * 現在位置を取得する
      * @return number
      */
-    readonly ratio: number;
-    visible: boolean;
+    get ratio(): number;
+    get visible(): boolean;
+    set visible(value: boolean);
     dispose(): void;
 }
 //# sourceMappingURL=Particle.d.ts.map

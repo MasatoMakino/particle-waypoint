@@ -113,11 +113,15 @@ export declare class ParticleGenerator {
      * パーティクル生成の停止とパーティクルの破棄を行う。
      */
     dispose(): void;
-    particleInterval: number;
-    visible: boolean;
-    isLoop: boolean;
-    readonly ease: (number: any) => number;
-    probability: number;
+    get particleInterval(): number;
+    set particleInterval(value: number);
+    get visible(): boolean;
+    set visible(value: boolean);
+    get isLoop(): boolean;
+    set isLoop(value: boolean);
+    get ease(): (number: any) => number;
+    get probability(): number;
+    set probability(value: number);
     /**
      * 各パーティクルのEase関数を更新する。
      * @param ease イージング関数。

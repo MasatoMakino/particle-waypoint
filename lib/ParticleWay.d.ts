@@ -14,7 +14,8 @@ export declare class ParticleWay {
      * 経路の座標配列を更新する。
      * @param points
      */
-    points: number[][];
+    set points(points: number[][]);
+    get points(): number[][];
     /**
      * 2点間の距離を取得する。
      * @param pos1
