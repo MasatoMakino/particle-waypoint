@@ -3,3 +3,4 @@ exclude_paths:
   - esm/**/*
   - docs/**/*
   - coverage/**/*
+  - __test__/**/*
