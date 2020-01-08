@@ -86,24 +86,13 @@ export class ParticleWay {
       return [...this._points[0]];
     }
 
-    const n = this._points.length;
-    t = Math.min(t, 1.0);
+    t = ParticleWayUtil.clamp(t, 1.0, 0.0);
     if (t === 1.0) {
-      let result = this._points[n - 1];
-      if (result.length === 6) {
-        result = result.slice(-2);
-      }
-      return [...result];
+      return ParticleWayUtil.getPositionWithMaxT(this._points);
     }
-    t = Math.max(t, 0.0);
     if (t === 0.0) return [...this._points[0]];
 
-    let i = 1;
-    for (i; i < n; i++) {
-      if (this._ratioTable[i] >= t) break;
-    }
-    i--;
-
+    const i = ParticleWayUtil.getTIndex(t, this._ratioTable);
     const floorPoint = this._points[i];
     const ceilPoint = this._points[i + 1];
     const ratioBase = this._ratioTable[i];
@@ -132,5 +121,29 @@ export class ParticleWay {
       case 2:
         return pos;
     }
+  }
+}
+
+class ParticleWayUtil {
+  static clamp(val: number, max: number, min: number): number {
+    return Math.min(Math.max(val, min), max);
+  }
+  static getPositionWithMaxT(points: number[][]): number[] {
+    const n = points.length;
+    let result = points[n - 1];
+    if (result.length === 6) {
+      result = result.slice(-2);
+    }
+    return [...result];
+  }
+
+  static getTIndex(t: number, ratioTable: number[]): number {
+    let i = 1;
+    const n = ratioTable.length;
+    for (i; i < n; i++) {
+      if (ratioTable[i] >= t) break;
+    }
+    i--;
+    return i;
   }
 }
