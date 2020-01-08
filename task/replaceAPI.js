@@ -10,7 +10,8 @@ const options = {
 
 try {
   let changedFiles = replace.sync(options);
-  console.log("Modified files:", changedFiles.join(", "));
+
+  console.log("Modified files:", changedFiles);
 } catch (error) {
   console.error("Error occurred:", error);
 }

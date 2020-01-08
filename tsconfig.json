@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "es6",
-    "module": "es2015",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "module": "commonjs",
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */,
-    "outDir": "./bin" /* Redirect output structure to the directory. */,
+    "outDir": "./lib" /* Redirect output structure to the directory. */,
     "rootDir": "./src",
+    "incremental": true,
 
     /* Module Resolution Options */
     "moduleResolution": "node",
