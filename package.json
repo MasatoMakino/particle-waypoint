@@ -14,6 +14,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.25",
+    "gulp": "^4.0.2",
+    "gulptask-tsc": "https://github.com/MasatoMakino/gulptask-tsc.git",
+    "gulptask-tsdoc": "https://github.com/MasatoMakino/gulptask-tsdoc.git",
     "husky": "^4.0.1",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
@@ -25,12 +28,8 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig.esm.json && npm run doc",
-    "watch": "npm run watch:tsc",
-    "watch:tsc": "tsc -w",
-    "doc": "npm run doc:generate && npm run doc:replaceNode && npm run doc:card",
-    "doc:generate": "typedoc --tsconfig tsdocconfig.json src",
-    "doc:replaceNode": "node ./task/replaceAPI.js",
+    "start_dev": "gulp start_dev",
+    "build": "gulp build && npm run doc:card",
     "doc:card": "repoimg -n MasatoMakino/particle-waypoint -o ./docs/card.png"
   },
   "husky": {
