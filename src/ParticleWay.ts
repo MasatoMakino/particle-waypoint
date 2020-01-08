@@ -23,7 +23,7 @@ export class ParticleWay {
    * 経路の座標配列を更新する。
    * @param points
    */
-  set points(points: number[][]) {
+  public set points(points: number[][]) {
     this._points = points;
 
     if (this._points.length === 0) {
@@ -50,7 +50,7 @@ export class ParticleWay {
     });
   }
 
-  get points(): number[][] {
+  public get points(): number[][] {
     return this._points;
   }
 
