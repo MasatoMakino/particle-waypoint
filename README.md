@@ -2,6 +2,10 @@
 
 > Path module for calculating waypoints.
 
+[![Build Status](https://travis-ci.org/MasatoMakino/particle-waypoint.svg?branch=master)](https://travis-ci.org/MasatoMakino/particle-waypoint)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8f61441c3c7b97b4bed8/maintainability)](https://codeclimate.com/github/MasatoMakino/particle-waypoint/maintainability)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+
 ## API Documents
 
 [API documents](https://masatomakino.github.io/particle-waypoint/api/)
@@ -36,6 +40,7 @@ import {
 ```
 
 ### Create generator
+
 ```.js
   const generator = new ParticleGenerator( wayPoint, {
     isLoop: true
@@ -44,7 +49,7 @@ import {
   generator.play();
 ```
 
-Particles animate on ``wayPoint``.
+Particles animate on `wayPoint`.
 
 ## Uninstall
 
