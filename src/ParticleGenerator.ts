@@ -44,9 +44,9 @@ export class ParticleGenerator {
     }
 
     if (option == null) return;
-    if (option.isLoop) this._isLoop = option.isLoop;
-    if (option.ease) this._ease = option.ease;
-    if (option.probability) this._probability = option.probability;
+    this._isLoop = option.isLoop ?? this._isLoop;
+    this._ease = option.ease ?? this._ease;
+    this._probability = option.probability ?? this._probability;
   }
 
   /**
