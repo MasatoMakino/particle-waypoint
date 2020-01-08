@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ParticleGeneratorOption | particle-waypoint - v0.4.0</title>
+	<title>ParticleWayUtil | particle-waypoint - v0.4.0</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,28 +56,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="particlegeneratoroption.html">ParticleGeneratorOption</a>
+					<a href="particlewayutil.html">ParticleWayUtil</a>
 				</li>
 			</ul>
-			<h1>Interface ParticleGeneratorOption</h1>
+			<h1>Class ParticleWayUtil</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>パーティクル生成方法を指定するオプション</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ParticleGeneratorOption</span>
+						<span class="target">ParticleWayUtil</span>
 					</li>
 				</ul>
 			</section>
@@ -85,69 +78,96 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="particlegeneratoroption.html#ease" class="tsd-kind-icon">ease</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="particlegeneratoroption.html#isloop" class="tsd-kind-icon">is<wbr>Loop</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="particlegeneratoroption.html#probability" class="tsd-kind-icon">probability</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported"><a href="particlewayutil.html#clamp" class="tsd-kind-icon">clamp</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported"><a href="particlewayutil.html#getpositionwithmaxt" class="tsd-kind-icon">get<wbr>Position<wbr>With<wbr>MaxT</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported"><a href="particlewayutil.html#gettindex" class="tsd-kind-icon">getTIndex</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="ease" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ease</h3>
-					<div class="tsd-signature tsd-kind-icon">ease<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/8de48ca/src/ParticleGenerator.ts#L393">ParticleGenerator.ts:393</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+					<a name="clamp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> clamp</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">clamp<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/8de48ca/src/ParticleWay.ts#L128">ParticleWay.ts:128</a></li>
 								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>number: <span class="tsd-signature-type">any</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-									</li>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>val: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>max: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>min: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+					<a name="getpositionwithmaxt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Position<wbr>With<wbr>MaxT</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Position<wbr>With<wbr>MaxT<span class="tsd-signature-symbol">(</span>points<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/8de48ca/src/ParticleWay.ts#L131">ParticleWay.ts:131</a></li>
 								</ul>
-							</li>
-						</ul>
-					</div>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>points: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="isloop" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> is<wbr>Loop</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Loop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/8de48ca/src/ParticleGenerator.ts#L392">ParticleGenerator.ts:392</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="probability" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> probability</h3>
-					<div class="tsd-signature tsd-kind-icon">probability<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/8de48ca/src/ParticleGenerator.ts#L394">ParticleGenerator.ts:394</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+					<a name="gettindex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> getTIndex</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">getTIndex<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, ratioTable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/8de48ca/src/ParticleWay.ts#L140">ParticleWay.ts:140</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>t: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>ratioTable: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -165,41 +185,41 @@
 						<a href="../enums/pathselecttype.html" class="tsd-kind-icon">Path<wbr>Select<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a>
+						<a href="bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/particle.html" class="tsd-kind-icon">Particle</a>
+						<a href="particle.html" class="tsd-kind-icon">Particle</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
+						<a href="particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
+						<a href="particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
-					</li>
-					<li class=" tsd-kind-class tsd-is-not-exported">
-						<a href="../classes/particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
+						<a href="particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
+					<li class="current tsd-kind-class tsd-is-not-exported">
+						<a href="particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="particlegeneratoroption.html#ease" class="tsd-kind-icon">ease</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+								<a href="particlewayutil.html#clamp" class="tsd-kind-icon">clamp</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="particlegeneratoroption.html#isloop" class="tsd-kind-icon">is<wbr>Loop</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+								<a href="particlewayutil.html#getpositionwithmaxt" class="tsd-kind-icon">get<wbr>Position<wbr>With<wbr>MaxT</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="particlegeneratoroption.html#probability" class="tsd-kind-icon">probability</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static tsd-is-not-exported">
+								<a href="particlewayutil.html#gettindex" class="tsd-kind-icon">getTIndex</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
