@@ -20,12 +20,18 @@ export class ParticleWay {
      */
     set points(points) {
         this._points = points;
+        this.onSetPoints();
+    }
+    warnPoints() {
         if (this._points.length === 0) {
             console.warn("ParticleWay : 長さゼロの配列が指定されました。座標が算出できないため、getPoint関数は常にnullを返します。");
         }
         if (this._points.length === 1) {
             console.warn("ParticleWay : 長さ1の配列が指定されました。座標が算出できないため、getPoint関数は常に固定の座標を返します。");
         }
+    }
+    onSetPoints() {
+        this.warnPoints();
         const sumTable = new Array(this._points.length).fill(0);
         this._points.forEach((val, index, array) => {
             if (index === 0)

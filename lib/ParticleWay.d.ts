@@ -15,6 +15,8 @@ export declare class ParticleWay {
      * @param points
      */
     set points(points: number[][]);
+    private warnPoints;
+    protected onSetPoints(): void;
     get points(): number[][];
     /**
      * 2点間の距離を取得する。
