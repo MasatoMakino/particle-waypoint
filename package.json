@@ -1,6 +1,6 @@
 {
   "name": "particle-waypoint",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Path module for calculating waypoints.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -13,18 +13,18 @@
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^24.0.25",
+    "@types/jest": "^25.2.1",
     "gulp": "^4.0.2",
     "gulptask-tsc": "https://github.com/MasatoMakino/gulptask-tsc.git",
     "gulptask-tsdoc": "https://github.com/MasatoMakino/gulptask-tsdoc.git",
-    "husky": "^4.0.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.19.1",
+    "husky": "^4.2.5",
+    "jest": "^25.5.2",
+    "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
-    "replace-in-file": "^5.0.2",
-    "ts-jest": "^24.3.0",
-    "typedoc": "^0.15.6",
-    "typescript": "^3.7.4"
+    "replace-in-file": "^6.0.0",
+    "ts-jest": "^25.4.0",
+    "typedoc": "^0.17.6",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "test": "jest --coverage",

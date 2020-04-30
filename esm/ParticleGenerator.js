@@ -59,9 +59,9 @@ export class ParticleGenerator {
         }
         if (option == null)
             return;
-        this._isLoop = (_a = option.isLoop, (_a !== null && _a !== void 0 ? _a : this._isLoop));
-        this._ease = (_b = option.ease, (_b !== null && _b !== void 0 ? _b : this._ease));
-        this._probability = (_c = option.probability, (_c !== null && _c !== void 0 ? _c : this._probability));
+        this._isLoop = (_a = option.isLoop) !== null && _a !== void 0 ? _a : this._isLoop;
+        this._ease = (_b = option.ease) !== null && _b !== void 0 ? _b : this._ease;
+        this._probability = (_c = option.probability) !== null && _c !== void 0 ? _c : this._probability;
     }
     /**
      * パーティクルアニメーションを開始する。
