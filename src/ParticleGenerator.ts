@@ -14,7 +14,13 @@ export class ParticleGenerator {
   private _visible: boolean = true;
 
   protected _particles: Particle[] = [];
+  get particles(): Particle[] {
+    return this._particles;
+  }
   private _isPlaying: boolean = false;
+  get isPlaying(): boolean {
+    return this._isPlaying;
+  }
 
   //animation setting
   private _particleInterval: number = 300;
@@ -362,10 +368,6 @@ export class ParticleGenerator {
 
   set probability(value: number) {
     this._probability = value;
-  }
-
-  get isPlaying(): boolean {
-    return this._isPlaying;
   }
 
   get isOpenValve(): boolean {
