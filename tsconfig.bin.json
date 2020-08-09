@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "lib": ["es6", "dom"],
+    "incremental": true
+  },
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

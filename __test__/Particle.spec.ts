@@ -1,7 +1,6 @@
-import { Particle } from "../src/Particle";
-import { ParticleWay } from "../src/ParticleWay";
+import { Particle, ParticleWay } from "../src/index";
 
-const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
+const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
 
 //easing function
 const sineInOut = (t: number): number => {
@@ -12,7 +11,11 @@ const linear = (t: number): number => {
 };
 
 describe("particle", () => {
-  const points = [[0, 0], [1.0, 0], [1.0, 1.0]];
+  const points = [
+    [0, 0],
+    [1.0, 0],
+    [1.0, 1.0],
+  ];
   const way = new ParticleWay(points);
   const particle = new Particle(way);
 
@@ -51,7 +54,11 @@ describe("particle", () => {
 });
 
 describe("linear", () => {
-  const points = [[0, 0], [1.0, 0], [1.0, 1.0]];
+  const points = [
+    [0, 0],
+    [1.0, 0],
+    [1.0, 1.0],
+  ];
   const way = new ParticleWay(points);
   const particle = new Particle(way);
   particle.ease = linear;
@@ -74,7 +81,11 @@ describe("linear", () => {
 });
 
 describe("sineInOut", () => {
-  const points = [[0, 0], [1.0, 0], [1.0, 1.0]];
+  const points = [
+    [0, 0],
+    [1.0, 0],
+    [1.0, 1.0],
+  ];
   const way = new ParticleWay(points);
   const particle = new Particle(way);
   particle.ease = sineInOut;

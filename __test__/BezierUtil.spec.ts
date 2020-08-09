@@ -1,7 +1,7 @@
-import { BezierUtil } from "../src/BezierUtil";
+import { BezierUtil, ParticleWay } from "../src/index";
 import { BezierPath } from "./BezierPath";
-import { ParticleWay } from "../src/ParticleWay";
-const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
+
+const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
 
 describe("BezierUtil : arc", () => {
   const R = 1.0;
@@ -9,7 +9,7 @@ describe("BezierUtil : arc", () => {
   const command = BezierPath.getArc();
 
   //getPointOnBezierCurveの結果とgetPointFromArrayの結果が同じであることを確認する。
-  const getPoint = t => {
+  const getPoint = (t) => {
     return BezierUtil.getPoint(t, path[0], path[1], path[2], path[3]);
   };
   const equalCommand = (t, point) => {
@@ -59,7 +59,7 @@ describe("BezierUtil : arc", () => {
     equalCommand(t, p);
   });
 
-  const getLength = div => {
+  const getLength = (div) => {
     return BezierUtil.getLength(path[0], path[1], path[2], path[3], div);
   };
   const equalLengthWithCommand = (div, length) => {
@@ -110,7 +110,13 @@ describe("BezierUtil : subdivide", () => {
   test("div 1", () => {
     const div = 1;
     const points = BezierUtil.subdivide(circle, div);
-    expect(points).toEqual([[1, 0], [0, 1], [-1, 0], [0, -1], [1, 0]]);
+    expect(points).toEqual([
+      [1, 0],
+      [0, 1],
+      [-1, 0],
+      [0, -1],
+      [1, 0],
+    ]);
   });
 
   test("div 2", () => {
@@ -126,7 +132,7 @@ describe("BezierUtil : subdivide", () => {
       [-q, -q],
       [0, -1],
       [q, -q],
-      [1, 0]
+      [1, 0],
     ]);
   });
 
@@ -136,14 +142,14 @@ describe("BezierUtil : subdivide", () => {
     const way = new ParticleWay(circle);
     const differWay = new ParticleWay(points);
 
-    const isCloseTo = t => {
+    const isCloseTo = (t) => {
       const p1 = way.getPoint(t);
       const p2 = differWay.getPoint(t);
       expect(p1[0]).toBeCloseTo(p2[0]);
       expect(p1[1]).toBeCloseTo(p2[1]);
     };
 
-    const isNear = t => {
+    const isNear = (t) => {
       const p1 = way.getPoint(t);
       const p2 = differWay.getPoint(t);
       expect(p1[0]).toBeCloseTo(p2[0], 2);

@@ -1,10 +1,14 @@
-import { ParticleWay } from "../src/ParticleWay";
+import { ParticleWay } from "../src/index";
 import { BezierPath } from "./BezierPath";
 
-const spyWarn = jest.spyOn(console, "warn").mockImplementation(x => x);
+const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
 
 describe("2D", () => {
-  const points = [[0, 0], [1.0, 0], [1.0, 1.0]];
+  const points = [
+    [0, 0],
+    [1.0, 0],
+    [1.0, 1.0],
+  ];
   const way = new ParticleWay(points);
 
   test("center", () => {
@@ -32,7 +36,12 @@ describe("2D", () => {
 });
 
 describe("3D", () => {
-  const points = [[0, 0, 0], [1.0, 0, 0], [1.0, 1.0, 0], [1.0, 1.0, 1.0]];
+  const points = [
+    [0, 0, 0],
+    [1.0, 0, 0],
+    [1.0, 1.0, 0],
+    [1.0, 1.0, 1.0],
+  ];
   const way = new ParticleWay(points);
 
   test("center", () => {
