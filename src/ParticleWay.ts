@@ -40,6 +40,11 @@ export class ParticleWay {
       );
     }
   }
+
+  /**
+   * pointsが更新された際の処理。
+   * set pointsをトリガーにして実行される。
+   */
   protected onSetPoints(): void {
     this.warnPoints();
 
@@ -51,7 +56,7 @@ export class ParticleWay {
     });
     const total = sumTable[sumTable.length - 1];
 
-    this._ratioTable = sumTable.map(val => {
+    this._ratioTable = sumTable.map((val) => {
       return val / total;
     });
   }
