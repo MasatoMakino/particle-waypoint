@@ -1,17 +1,5 @@
-import { RAFTicker } from "raf-ticker";
-import { ParticleGeneratorUtility } from "../src/ParticleGeneratorUtility";
+import { getTestGenerators } from "./ParticleGenerator.common";
 import { ParticleGenerator, ParticleWay, PathSelectType } from "../src/index";
-
-describe("ParticleGeneratorUtility", () => {
-  test("interval", () => {
-    expect(ParticleGeneratorUtility.getInterval(0.5, 4)).toBeCloseTo(500);
-  });
-  test("speed", () => {
-    expect(ParticleGeneratorUtility.getSpeed(300, 4)).toBeCloseTo(
-      (1.0 / 1200) * 1000
-    );
-  });
-});
 
 describe("ParticleGenerator", () => {
   const spyWarn = jest.spyOn(console, "warn");
@@ -120,11 +108,6 @@ describe("ParticleGenerator", () => {
     generator.removeAllParticles();
   });
 
-  test("animate", () => {
-    const gen = new ParticleGenerator(way);
-    //TODO emit RAF event
-  });
-
   test("update ease", () => {
     const gen = new ParticleGenerator(way);
     const easing = (n) => {
@@ -190,24 +173,6 @@ describe("ParticleGenerator", () => {
     expect(generator.particles).toBeNull();
   });
 });
-
-function getTestGenerators(): {
-  generator: ParticleGenerator;
-  way: ParticleWay;
-} {
-  const points = [
-    [0, 0],
-    [1.0, 0],
-    [1.0, 1.0],
-  ];
-  const way = new ParticleWay(points);
-  const generator = new ParticleGenerator(way);
-
-  return {
-    generator,
-    way,
-  };
-}
 
 function testParticleVisible(
   generator: ParticleGenerator,
