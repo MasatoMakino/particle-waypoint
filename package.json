@@ -1,6 +1,6 @@
 {
   "name": "particle-waypoint",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Path module for calculating waypoints.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
