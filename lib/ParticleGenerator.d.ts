@@ -10,7 +10,9 @@ export declare class ParticleGenerator {
     private pathSelectionCount;
     private _visible;
     protected _particles: Particle[];
-    private isPlaying;
+    get particles(): Particle[];
+    private _isPlaying;
+    get isPlaying(): boolean;
     private _particleInterval;
     speedPerSec: number;
     private _ease;
@@ -122,6 +124,7 @@ export declare class ParticleGenerator {
     get ease(): (number: any) => number;
     get probability(): number;
     set probability(value: number);
+    get isOpenValve(): boolean;
     /**
      * 各パーティクルのEase関数を更新する。
      * @param ease イージング関数。

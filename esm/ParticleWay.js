@@ -30,6 +30,10 @@ export class ParticleWay {
             console.warn("ParticleWay : 長さ1の配列が指定されました。座標が算出できないため、getPoint関数は常に固定の座標を返します。");
         }
     }
+    /**
+     * pointsが更新された際の処理。
+     * set pointsをトリガーにして実行される。
+     */
     onSetPoints() {
         this.warnPoints();
         const sumTable = new Array(this._points.length).fill(0);
@@ -40,7 +44,7 @@ export class ParticleWay {
                 ParticleWay.getDistance(array[index - 1], val) + sumTable[index - 1];
         });
         const total = sumTable[sumTable.length - 1];
-        this._ratioTable = sumTable.map(val => {
+        this._ratioTable = sumTable.map((val) => {
             return val / total;
         });
     }

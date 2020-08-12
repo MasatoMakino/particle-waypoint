@@ -18,7 +18,7 @@ export class ParticleGenerator {
         this.pathSelectionCount = 0;
         this._visible = true;
         this._particles = [];
-        this.isPlaying = false;
+        this._isPlaying = false;
         //animation setting
         this._particleInterval = 300;
         this.speedPerSec = 0.07;
@@ -63,13 +63,19 @@ export class ParticleGenerator {
         this._ease = (_b = option.ease) !== null && _b !== void 0 ? _b : this._ease;
         this._probability = (_c = option.probability) !== null && _c !== void 0 ? _c : this._probability;
     }
+    get particles() {
+        return this._particles;
+    }
+    get isPlaying() {
+        return this._isPlaying;
+    }
     /**
      * パーティクルアニメーションを開始する。
      */
     play() {
-        if (this.isPlaying)
+        if (this._isPlaying)
             return;
-        this.isPlaying = true;
+        this._isPlaying = true;
         if (this._isLoop) {
             RAFTicker.addEventListener(RAFTickerEventType.tick, this.loop);
         }
@@ -81,9 +87,9 @@ export class ParticleGenerator {
      * パーティクルアニメーションを停止する。
      */
     stop() {
-        if (!this.isPlaying)
+        if (!this._isPlaying)
             return;
-        this.isPlaying = false;
+        this._isPlaying = false;
         RAFTicker.removeEventListener(RAFTickerEventType.tick, this.loop);
         RAFTicker.removeEventListener(RAFTickerEventType.tick, this.animate);
     }
@@ -138,7 +144,7 @@ export class ParticleGenerator {
      */
     move(delta) {
         const movement = (delta / 1000) * this.speedPerSec;
-        this._particles.forEach(p => {
+        this._particles.forEach((p) => {
             p.add(movement);
         });
     }
@@ -202,13 +208,13 @@ export class ParticleGenerator {
      */
     removeCompletedParticles() {
         const removed = this._particles
-            .filter(p => {
+            .filter((p) => {
             return p.ratio >= 1.0;
         })
-            .forEach(p => {
+            .forEach((p) => {
             p.dispose();
         });
-        this._particles = this._particles.filter(p => {
+        this._particles = this._particles.filter((p) => {
             return p.ratio < 1.0;
         });
     }
@@ -216,7 +222,7 @@ export class ParticleGenerator {
      * 終端にたどり着いたパーティクルを始点に巻き戻す。
      */
     rollupParticles() {
-        this._particles.forEach(p => {
+        this._particles.forEach((p) => {
             p.update(p.ratio % 1);
         });
     }
@@ -227,7 +233,7 @@ export class ParticleGenerator {
     removeParticle(particle) {
         const i = this._particles.indexOf(particle);
         const popped = this._particles.splice(i, 1);
-        popped.forEach(val => {
+        popped.forEach((val) => {
             val.dispose();
         });
     }
@@ -235,7 +241,7 @@ export class ParticleGenerator {
      * 全てのパーティクルを削除する。
      */
     removeAllParticles() {
-        this._particles.forEach(p => {
+        this._particles.forEach((p) => {
             p.dispose();
         });
         this._particles = [];
@@ -302,7 +308,7 @@ export class ParticleGenerator {
             this.removeAllParticles();
         }
         //再生中なら一旦停止して再度再生
-        if (this.isPlaying) {
+        if (this._isPlaying) {
             this.stop();
             this.play();
         }
@@ -316,6 +322,9 @@ export class ParticleGenerator {
     set probability(value) {
         this._probability = value;
     }
+    get isOpenValve() {
+        return this._isOpenValve;
+    }
     /**
      * 各パーティクルのEase関数を更新する。
      * @param ease イージング関数。
@@ -328,7 +337,7 @@ export class ParticleGenerator {
             console.trace();
         }
         if (override || this._isLoop) {
-            this._particles.forEach(p => {
+            this._particles.forEach((p) => {
                 p.ease = ease;
             });
         }

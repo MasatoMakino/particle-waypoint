@@ -16,6 +16,10 @@ export declare class ParticleWay {
      */
     set points(points: number[][]);
     private warnPoints;
+    /**
+     * pointsが更新された際の処理。
+     * set pointsをトリガーにして実行される。
+     */
     protected onSetPoints(): void;
     get points(): number[][];
     /**
