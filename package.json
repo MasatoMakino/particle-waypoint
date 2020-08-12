@@ -21,15 +21,13 @@
     "jest": "^26.1.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
-    "replace-in-file": "^6.1.0",
     "ts-jest": "^26.1.2",
     "typescript": "^3.9.7"
   },
   "scripts": {
     "test": "jest --coverage",
     "start_dev": "gulp start_dev",
-    "build": "gulp build && npm run doc:card",
-    "doc:card": "repoimg -n MasatoMakino/particle-waypoint -o ./docs/card.png"
+    "build": "gulp build"
   },
   "husky": {
     "hooks": {
