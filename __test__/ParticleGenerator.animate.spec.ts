@@ -48,6 +48,21 @@ describe("ParticleGenerator", () => {
     expect(generator.particles[0].ratio).toBeCloseTo(0.0);
   });
 
+  test("play and loop", () => {
+    const { generator } = getTestGenerators();
+    generator.play();
+    generator.generateAll();
+
+    generator.isLoop = true;
+    expect(generator.isPlaying).toBe(true);
+    expect(generator.particles.length).toBe(0);
+
+    generator.isLoop = true;
+    expect(generator.isPlaying).toBe(true);
+
+    generator.isLoop = false;
+  });
+
   test("dispose and play", () => {
     const { generator } = getTestGenerators();
     generator.play();
