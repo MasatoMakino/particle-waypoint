@@ -1,3 +1,4 @@
+import { ParticleValve } from "./ParticleValve";
 import { ParticleContainer } from "./ParticleContainer";
 import { MultipleParticleWays } from "./MultipleParticleWays";
 import { ParticleWay } from "./ParticleWay";
@@ -12,6 +13,7 @@ import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
 export class ParticleGenerator {
   public multipleWays: MultipleParticleWays;
   public particleContainer: ParticleContainer;
+  public valve: ParticleValve;
 
   private _isPlaying: boolean = false;
   get isPlaying(): boolean {
@@ -44,7 +46,6 @@ export class ParticleGenerator {
   }
 
   private _probability: number = 1.0;
-  private _isOpenValve: boolean = true;
 
   /**
    * 前回パーティクル生成時からの経過時間 単位ms
@@ -65,6 +66,7 @@ export class ParticleGenerator {
   ) {
     this.multipleWays = new MultipleParticleWays({ ways: path });
     this.particleContainer = new ParticleContainer();
+    this.valve = new ParticleValve(this);
 
     if (option == null) return;
     this._isLoop = option.isLoop ?? this._isLoop;
@@ -97,35 +99,6 @@ export class ParticleGenerator {
   }
 
   /**
-   * パーティクル生成を開始する。
-   */
-  public openValve(): void {
-    if (this._isOpenValve) return;
-
-    this._isOpenValve = true;
-    this.warnValve();
-  }
-
-  /**
-   * パーティクル生成を停止する。
-   * アニメーションは続行される。
-   */
-  public closeValve(): void {
-    if (!this._isOpenValve) return;
-
-    this._isOpenValve = false;
-    this.warnValve();
-  }
-
-  private warnValve(): void {
-    if (!this._isLoop) return;
-    console.warn(
-      "ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。"
-    );
-    console.trace();
-  }
-
-  /**
    * パーティクルをアニメーションさせる。
    * @param e
    */
@@ -142,7 +115,7 @@ export class ParticleGenerator {
    * @param delta
    */
   private addParticle(delta: number): void {
-    if (!this._isOpenValve) return;
+    if (!this.valve.isOpenValve) return;
 
     this.elapsedFromGenerate += delta;
     while (this.elapsedFromGenerate > this._particleInterval) {
@@ -292,10 +265,6 @@ export class ParticleGenerator {
 
   set probability(value: number) {
     this._probability = value;
-  }
-
-  get isOpenValve(): boolean {
-    return this._isOpenValve;
   }
 
   /**

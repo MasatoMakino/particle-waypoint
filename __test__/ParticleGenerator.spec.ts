@@ -58,7 +58,7 @@ describe("ParticleGenerator", () => {
     expect(gen.isPlaying).toBe(true);
     expect(gen.isLoop).toBe(true);
 
-    gen.closeValve();
+    gen.valve.closeValve();
     expect(spyWarn).toBeCalled();
     expect(spyTrace).toBeCalled();
     spyWarn.mockClear();
@@ -73,17 +73,18 @@ describe("ParticleGenerator", () => {
   });
 
   test("valve", () => {
-    expect(generator.isOpenValve).toBe(true);
-    generator.openValve();
-    expect(generator.isOpenValve).toBe(true);
-    generator.openValve();
-    expect(generator.isOpenValve).toBe(true);
-    generator.closeValve();
-    expect(generator.isOpenValve).toBe(false);
-    generator.closeValve();
-    expect(generator.isOpenValve).toBe(false);
-    generator.openValve();
-    expect(generator.isOpenValve).toBe(true);
+    const valve = generator.valve;
+    expect(valve.isOpenValve).toBe(true);
+    valve.openValve();
+    expect(valve.isOpenValve).toBe(true);
+    valve.openValve();
+    expect(valve.isOpenValve).toBe(true);
+    valve.closeValve();
+    expect(valve.isOpenValve).toBe(false);
+    valve.closeValve();
+    expect(valve.isOpenValve).toBe(false);
+    valve.openValve();
+    expect(valve.isOpenValve).toBe(true);
 
     //TODO バルブ閉塞時にアニメーションをして、パーティクルが生成されないことを確認する
   });
