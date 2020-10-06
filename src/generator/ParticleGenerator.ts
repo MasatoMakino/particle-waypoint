@@ -1,8 +1,8 @@
 import { ParticleValve } from "./ParticleValve";
 import { ParticleContainer } from "./ParticleContainer";
 import { MultipleParticleWays } from "./MultipleParticleWays";
-import { ParticleWay } from "./ParticleWay";
-import { Particle } from "./Particle";
+import { ParticleWay } from "../ParticleWay";
+import { Particle } from "../Particle";
 import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
 import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
 

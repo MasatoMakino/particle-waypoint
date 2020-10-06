@@ -1,4 +1,4 @@
-import { Particle } from "./Particle";
+import { Particle } from "../Particle";
 
 /**
  * 複数のパーティクルを格納、移動、管理するためのクラスです。
