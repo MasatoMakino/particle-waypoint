@@ -1,3 +1,4 @@
+import { GeneratorWays } from "./GeneratorWays";
 import { ParticleWay } from "./ParticleWay";
 import { Particle } from "./Particle";
 import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
@@ -8,15 +9,24 @@ import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
  * パーティクルインスタンスの生成と管理を行う。
  */
 export class ParticleGenerator {
-  public path: ParticleWay[] = [];
-  public pathSelectType: PathSelectType = PathSelectType.Sequential;
-  private pathSelectionCount: number = 0;
+  public ways: GeneratorWays;
+
   private _visible: boolean = true;
+  get visible(): boolean {
+    return this._visible;
+  }
+  set visible(value: boolean) {
+    this._visible = value;
+    for (let i in this._particles) {
+      this._particles[i].visible = this._visible;
+    }
+  }
 
   protected _particles: Particle[] = [];
   get particles(): Particle[] {
     return this._particles;
   }
+
   private _isPlaying: boolean = false;
   get isPlaying(): boolean {
     return this._isPlaying;
@@ -26,11 +36,35 @@ export class ParticleGenerator {
   private _particleInterval: number = 300;
   public speedPerSec: number = 0.07;
   private _ease: (number) => number;
+
   private _isLoop: boolean = false;
+  get isLoop(): boolean {
+    return this._isLoop;
+  }
+  set isLoop(value: boolean) {
+    if (value === this._isLoop) return;
+
+    this._isLoop = value;
+
+    if (this._isLoop) {
+      this.removeAllParticles();
+    }
+
+    //再生中なら一旦停止して再度再生
+    if (this._isPlaying) {
+      this.stop();
+      this.play();
+    }
+  }
+
   private _probability: number = 1.0;
   private _isOpenValve: boolean = true;
 
-  private elapsedFromGenerate: number = 0; //前回パーティクル生成時からの経過時間　単位ms
+  /**
+   * 前回パーティクル生成時からの経過時間 単位ms
+   * @private
+   */
+  private elapsedFromGenerate: number = 0;
 
   private isDisposed: boolean = false;
 
@@ -43,11 +77,7 @@ export class ParticleGenerator {
     path: ParticleWay | ParticleWay[],
     option?: ParticleGeneratorOption
   ) {
-    if (Array.isArray(path)) {
-      this.path = path;
-    } else {
-      this.path = [path];
-    }
+    this.ways = new GeneratorWays({ ways: path });
 
     if (option == null) return;
     this._isLoop = option.isLoop ?? this._isLoop;
@@ -63,9 +93,9 @@ export class ParticleGenerator {
     this._isPlaying = true;
 
     if (this._isLoop) {
-      RAFTicker.addEventListener(RAFTickerEventType.tick, this.loop);
+      RAFTicker.addListener(RAFTickerEventType.tick, this.loop);
     } else {
-      RAFTicker.addEventListener(RAFTickerEventType.tick, this.animate);
+      RAFTicker.addListener(RAFTickerEventType.tick, this.animate);
     }
   }
 
@@ -75,8 +105,8 @@ export class ParticleGenerator {
   public stop(): void {
     if (!this._isPlaying) return;
     this._isPlaying = false;
-    RAFTicker.removeEventListener(RAFTickerEventType.tick, this.loop);
-    RAFTicker.removeEventListener(RAFTickerEventType.tick, this.animate);
+    RAFTicker.removeListener(RAFTickerEventType.tick, this.loop);
+    RAFTicker.removeListener(RAFTickerEventType.tick, this.animate);
   }
 
   /**
@@ -171,14 +201,14 @@ export class ParticleGenerator {
    * パーティクルを1つ追加する。
    */
   private generate(): Particle {
-    this.pathSelectionCount = (this.pathSelectionCount + 1) % this.path.length;
+    this.ways.countUp();
 
     //発生確率に応じて生成の可否を判定する。
     if (this._probability !== 1.0) {
       if (Math.random() > this._probability) return null;
     }
 
-    const path = this.getPath(this.pathSelectionCount);
+    const path = this.ways.getPath();
     const particle: Particle = this.generateParticle(path);
 
     this._particles.push(particle);
@@ -187,19 +217,6 @@ export class ParticleGenerator {
       particle.ease = this._ease;
     }
     return particle;
-  }
-
-  private getPath(count: number): ParticleWay {
-    let index;
-    switch (this.pathSelectType) {
-      case PathSelectType.Sequential:
-        index = count;
-        break;
-      case PathSelectType.Random:
-        index = Math.floor(Math.random() * this.path.length);
-        break;
-    }
-    return this.path[index];
   }
 
   /**
@@ -309,7 +326,7 @@ export class ParticleGenerator {
 
     this.removeAllParticles();
     this._particles = null;
-    this.path = null;
+    this.ways = null;
   }
 
   get particleInterval(): number {
@@ -325,36 +342,6 @@ export class ParticleGenerator {
         "ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。"
       );
       console.trace();
-    }
-  }
-
-  get visible(): boolean {
-    return this._visible;
-  }
-  set visible(value: boolean) {
-    this._visible = value;
-    for (let i in this._particles) {
-      this._particles[i].visible = this._visible;
-    }
-  }
-
-  get isLoop(): boolean {
-    return this._isLoop;
-  }
-
-  set isLoop(value: boolean) {
-    if (value === this._isLoop) return;
-
-    this._isLoop = value;
-
-    if (this._isLoop) {
-      this.removeAllParticles();
-    }
-
-    //再生中なら一旦停止して再度再生
-    if (this._isPlaying) {
-      this.stop();
-      this.play();
     }
   }
 
@@ -402,9 +389,4 @@ export interface ParticleGeneratorOption {
   isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティクルを巻き戻して再利用する = false. デフォルトはtrue.
   ease?: (number) => number;
   probability?: number;
-}
-
-export enum PathSelectType {
-  Random,
-  Sequential,
 }

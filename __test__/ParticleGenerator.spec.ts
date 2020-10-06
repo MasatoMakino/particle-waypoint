@@ -16,12 +16,12 @@ describe("ParticleGenerator", () => {
     expect(generator.probability).toBe(1.0);
     expect(generator.isLoop).toBe(false);
     expect(generator.visible).toBe(true);
-    expect(generator.pathSelectType).toBe(PathSelectType.Sequential);
+    expect(generator.ways.pathSelectType).toBe(PathSelectType.Sequential);
   });
 
   test("constructor : array of way", () => {
     const gen = new ParticleGenerator([way]);
-    expect(gen.path.length).toBe([way].length);
+    expect(gen.ways.path.length).toBe([way].length);
   });
 
   test("constructor : empty option", () => {
@@ -169,7 +169,7 @@ describe("ParticleGenerator", () => {
 
   test("dispose", () => {
     generator.dispose();
-    expect(generator.path).toBeNull();
+    expect(generator.ways).toBeNull();
     expect(generator.particles).toBeNull();
   });
 });
