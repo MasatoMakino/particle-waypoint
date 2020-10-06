@@ -120,14 +120,14 @@ export class ParticleGenerator {
     this.elapsedFromGenerate += delta;
     while (this.elapsedFromGenerate > this._particleInterval) {
       this.elapsedFromGenerate -= this._particleInterval;
+      const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
       //すでに寿命切れのパーティクルは生成をスキップ。
-      if (this.elapsedFromGenerate > (1.0 / this.speedPerSec) * 1000) {
+      if (move > Particle.MAX_RATIO) {
         continue;
       }
 
       const particle = this.generate();
-      const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
-      if (particle) particle.add(move);
+      particle?.add(move);
     }
   }
 
@@ -148,7 +148,7 @@ export class ParticleGenerator {
 
   /**
    * パーティクルの位置を経過時間分移動する。
-   * @param delta 前回アニメーションが実行されてからの経過時間
+   * @param delta 前回アニメーションが実行されてからの経過時間 単位ms
    */
   private move(delta: number): void {
     const movement = (delta / 1000) * this.speedPerSec;
@@ -158,7 +158,7 @@ export class ParticleGenerator {
   /**
    * パーティクルを1つ追加する。
    */
-  private generate(): Particle {
+  private generate(): Particle | null {
     this.multipleWays.countUp();
 
     //発生確率に応じて生成の可否を判定する。

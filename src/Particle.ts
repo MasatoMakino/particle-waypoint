@@ -11,6 +11,9 @@ export class Particle {
   private _visible: boolean = true;
   public ease: (number) => number;
 
+  public static MAX_RATIO: number = 1.0;
+  public static MIN_RATIO: number = 0.0;
+
   /**
    * 指定されたパスに沿って移動するパーティクルを生成する。
    * @param path
@@ -34,7 +37,7 @@ export class Particle {
 
   /**
    * パーティクル位置を指定された量移動する。
-   * @param t 移動量
+   * @param t 移動量 0.0 ~ 1.0
    */
   add(t: number): number {
     return this.update(this._ratio + t);
