@@ -15,13 +15,15 @@ describe("ParticleGenerator", () => {
     expect(generator.particleInterval).toBe(300);
     expect(generator.probability).toBe(1.0);
     expect(generator.isLoop).toBe(false);
-    expect(generator.visible).toBe(true);
-    expect(generator.ways.pathSelectType).toBe(PathSelectType.Sequential);
+    expect(generator.particleContainer.visible).toBe(true);
+    expect(generator.multipleWays.pathSelectType).toBe(
+      PathSelectType.Sequential
+    );
   });
 
   test("constructor : array of way", () => {
     const gen = new ParticleGenerator([way]);
-    expect(gen.ways.path.length).toBe([way].length);
+    expect(gen.multipleWays.path.length).toBe([way].length);
   });
 
   test("constructor : empty option", () => {
@@ -89,33 +91,36 @@ describe("ParticleGenerator", () => {
   test("generate all", () => {
     generator.generateAll();
     const n = 48;
-    expect(generator.particles.length).toBe(n);
-    expect(generator.particles[0].ratio).toBe(1.0);
-    expect(generator.particles[n - 1].ratio).toBeCloseTo(0.0129);
+    const container = generator.particleContainer;
+    expect(container.particles.length).toBe(n);
+    expect(container.particles[0].ratio).toBe(1.0);
+    expect(container.particles[n - 1].ratio).toBeCloseTo(0.0129);
 
-    generator.removeAllParticles();
-    expect(generator.particles.length).toBe(0);
+    container.removeAll();
+    expect(container.particles.length).toBe(0);
   });
 
   test("visible", () => {
+    const container = generator.particleContainer;
     generator.generateAll();
-    generator.visible = true;
+    container.visible = true;
     testParticleVisible(generator, true);
-    generator.visible = false;
+    container.visible = false;
     testParticleVisible(generator, false);
-    generator.visible = true;
+    container.visible = true;
     testParticleVisible(generator, true);
-    generator.removeAllParticles();
+    container.removeAll();
   });
 
   test("update ease", () => {
     const gen = new ParticleGenerator(way);
+    const container = gen.particleContainer;
     const easing = (n) => {
       return n;
     };
     gen.generateAll();
     gen.updateEase(easing);
-    gen.particles.forEach((p) => {
+    container.particles.forEach((p) => {
       expect(p.ease).toBe(easing);
     });
   });
@@ -169,8 +174,8 @@ describe("ParticleGenerator", () => {
 
   test("dispose", () => {
     generator.dispose();
-    expect(generator.ways).toBeNull();
-    expect(generator.particles).toBeNull();
+    expect(generator.multipleWays).toBeNull();
+    expect(generator.particleContainer).toBeNull();
   });
 });
 
@@ -178,8 +183,8 @@ function testParticleVisible(
   generator: ParticleGenerator,
   visible: boolean
 ): void {
-  expect(generator.visible).toBe(visible);
-  generator.particles.forEach((particle) => {
+  expect(generator.particleContainer.visible).toBe(visible);
+  generator.particleContainer.particles.forEach((particle) => {
     expect(particle.visible).toBe(visible);
   });
 }

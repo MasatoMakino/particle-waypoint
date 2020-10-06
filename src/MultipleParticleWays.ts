@@ -6,7 +6,7 @@ export enum PathSelectType {
 /**
  * このクラスは、ParticleGeneratorに設定された複数の経路を管理するためのものです。
  */
-export class GeneratorWays {
+export class MultipleParticleWays {
   public path: ParticleWay[];
   public pathSelectType: PathSelectType;
   private pathSelectionCount: number = 0;

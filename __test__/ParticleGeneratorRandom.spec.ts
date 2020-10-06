@@ -9,7 +9,7 @@ describe("ParticleGenerator", () => {
     const { generator } = getTestGenerators();
     generator.probability = 0.1;
     generator.generateAll();
-    expect(generator.particles.length).toBe(0);
+    expect(generator.particleContainer.particles.length).toBe(0);
   });
 
   test("generate particle in random : false", () => {
@@ -21,7 +21,7 @@ describe("ParticleGenerator", () => {
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(400, 400));
 
-    expect(generator.particles.length).toBe(0);
+    expect(generator.particleContainer.particles.length).toBe(0);
   });
 
   test("generate particle in random : true", () => {
@@ -33,6 +33,6 @@ describe("ParticleGenerator", () => {
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(400, 400));
 
-    expect(generator.particles.length).toBe(1);
+    expect(generator.particleContainer.particles.length).toBe(1);
   });
 });

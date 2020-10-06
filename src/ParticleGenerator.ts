@@ -1,4 +1,5 @@
-import { GeneratorWays } from "./GeneratorWays";
+import { ParticleContainer } from "./ParticleContainer";
+import { MultipleParticleWays } from "./MultipleParticleWays";
 import { ParticleWay } from "./ParticleWay";
 import { Particle } from "./Particle";
 import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
@@ -9,23 +10,8 @@ import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
  * パーティクルインスタンスの生成と管理を行う。
  */
 export class ParticleGenerator {
-  public ways: GeneratorWays;
-
-  private _visible: boolean = true;
-  get visible(): boolean {
-    return this._visible;
-  }
-  set visible(value: boolean) {
-    this._visible = value;
-    for (let i in this._particles) {
-      this._particles[i].visible = this._visible;
-    }
-  }
-
-  protected _particles: Particle[] = [];
-  get particles(): Particle[] {
-    return this._particles;
-  }
+  public multipleWays: MultipleParticleWays;
+  public particleContainer: ParticleContainer;
 
   private _isPlaying: boolean = false;
   get isPlaying(): boolean {
@@ -47,7 +33,7 @@ export class ParticleGenerator {
     this._isLoop = value;
 
     if (this._isLoop) {
-      this.removeAllParticles();
+      this.particleContainer.removeAll();
     }
 
     //再生中なら一旦停止して再度再生
@@ -77,7 +63,8 @@ export class ParticleGenerator {
     path: ParticleWay | ParticleWay[],
     option?: ParticleGeneratorOption
   ) {
-    this.ways = new GeneratorWays({ ways: path });
+    this.multipleWays = new MultipleParticleWays({ ways: path });
+    this.particleContainer = new ParticleContainer();
 
     if (option == null) return;
     this._isLoop = option.isLoop ?? this._isLoop;
@@ -146,7 +133,7 @@ export class ParticleGenerator {
     if (this.isDisposed) return;
 
     this.move(e.delta);
-    this.removeCompletedParticles();
+    this.particleContainer.removeCompletedParticles();
     this.addParticle(e.delta);
   };
 
@@ -178,12 +165,12 @@ export class ParticleGenerator {
   private loop = (e: RAFTickerEvent) => {
     if (this.isDisposed) return;
 
-    if (this._particles.length === 0) {
+    if (this.particleContainer.particles.length === 0) {
       this.generateAll();
     }
 
     this.move(e.delta);
-    this.rollupParticles();
+    this.particleContainer.rollupParticles();
   };
 
   /**
@@ -192,30 +179,27 @@ export class ParticleGenerator {
    */
   private move(delta: number): void {
     const movement = (delta / 1000) * this.speedPerSec;
-    this._particles.forEach((p) => {
-      p.add(movement);
-    });
+    this.particleContainer.move(movement);
   }
 
   /**
    * パーティクルを1つ追加する。
    */
   private generate(): Particle {
-    this.ways.countUp();
+    this.multipleWays.countUp();
 
     //発生確率に応じて生成の可否を判定する。
     if (this._probability !== 1.0) {
       if (Math.random() > this._probability) return null;
     }
 
-    const path = this.ways.getPath();
+    const path = this.multipleWays.getPath();
     const particle: Particle = this.generateParticle(path);
-
-    this._particles.push(particle);
-    particle.visible = this._visible;
     if (this._ease != null) {
       particle.ease = this._ease;
     }
+    this.particleContainer.add(particle);
+
     return particle;
   }
 
@@ -243,53 +227,6 @@ export class ParticleGenerator {
       lifeTime -= this._particleInterval;
     }
     this.elapsedFromGenerate = 0;
-  }
-
-  /**
-   * 寿命切れのパーティクルを一括で削除する。
-   */
-  private removeCompletedParticles(): void {
-    const removed = this._particles
-      .filter((p) => {
-        return p.ratio >= 1.0;
-      })
-      .forEach((p) => {
-        p.dispose();
-      });
-    this._particles = this._particles.filter((p) => {
-      return p.ratio < 1.0;
-    });
-  }
-
-  /**
-   * 終端にたどり着いたパーティクルを始点に巻き戻す。
-   */
-  private rollupParticles(): void {
-    this._particles.forEach((p) => {
-      p.update(p.ratio % 1);
-    });
-  }
-
-  /**
-   * 指定されたパーティクルを削除する。
-   * @param particle
-   */
-  public removeParticle(particle: Particle): void {
-    const i: number = this._particles.indexOf(particle);
-    const popped: Particle[] = this._particles.splice(i, 1);
-    popped.forEach((val) => {
-      val.dispose();
-    });
-  }
-
-  /**
-   * 全てのパーティクルを削除する。
-   */
-  public removeAllParticles(): void {
-    this._particles.forEach((p) => {
-      p.dispose();
-    });
-    this._particles = [];
   }
 
   /**
@@ -324,9 +261,9 @@ export class ParticleGenerator {
     this.stop();
     this.isDisposed = true;
 
-    this.removeAllParticles();
-    this._particles = null;
-    this.ways = null;
+    this.particleContainer.removeAll();
+    this.particleContainer = null;
+    this.multipleWays = null;
   }
 
   get particleInterval(): number {
@@ -375,9 +312,7 @@ export class ParticleGenerator {
       console.trace();
     }
     if (override || this._isLoop) {
-      this._particles.forEach((p) => {
-        p.ease = ease;
-      });
+      this.particleContainer.overrideEase(ease);
     }
   }
 }
