@@ -1,10 +1,15 @@
-import { ParticleValve } from "./ParticleValve";
-import { ParticleContainer } from "./ParticleContainer";
-import { MultipleParticleWays } from "./MultipleParticleWays";
-import { ParticleWay } from "../ParticleWay";
-import { Particle } from "../Particle";
 import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
-import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
+import { Particle } from "../Particle";
+import { ParticleWay } from "../ParticleWay";
+import {
+  GenerationMode,
+  GenerationModeEventType,
+  GenerationModeManager,
+} from "./GenerationModeManager";
+import { MultipleParticleWays } from "./MultipleParticleWays";
+import { ParticleAnimator } from "./ParticleAnimator";
+import { ParticleContainer } from "./ParticleContainer";
+import { ParticleValve } from "./ParticleValve";
 
 /**
  * 一定間隔でパーティクルを生成し、アニメーションさせるクラス。
@@ -14,35 +19,17 @@ export class ParticleGenerator {
   public multipleWays: MultipleParticleWays;
   public particleContainer: ParticleContainer;
   public valve: ParticleValve;
+  public animator: ParticleAnimator;
+  public modeManager: GenerationModeManager;
 
   private _isPlaying: boolean = false;
   get isPlaying(): boolean {
     return this._isPlaying;
   }
 
-  //animation setting
-  private _particleInterval: number = 300;
-  public speedPerSec: number = 0.07;
   private _ease: (number) => number;
-
-  private _isLoop: boolean = false;
-  get isLoop(): boolean {
-    return this._isLoop;
-  }
-  set isLoop(value: boolean) {
-    if (value === this._isLoop) return;
-
-    this._isLoop = value;
-
-    if (this._isLoop) {
-      this.particleContainer.removeAll();
-    }
-
-    //再生中なら一旦停止して再度再生
-    if (this._isPlaying) {
-      this.stop();
-      this.play();
-    }
+  get ease(): (number) => number {
+    return this._ease;
   }
 
   private _probability: number = 1.0;
@@ -53,7 +40,7 @@ export class ParticleGenerator {
    */
   private elapsedFromGenerate: number = 0;
 
-  private isDisposed: boolean = false;
+  private _isDisposed: boolean = false;
 
   /**
    * コンストラクタ
@@ -64,12 +51,26 @@ export class ParticleGenerator {
     path: ParticleWay | ParticleWay[],
     option?: ParticleGeneratorOption
   ) {
+    this.modeManager = new GenerationModeManager();
     this.multipleWays = new MultipleParticleWays({ ways: path });
-    this.particleContainer = new ParticleContainer();
-    this.valve = new ParticleValve(this);
+    this.particleContainer = new ParticleContainer(this.modeManager);
+    this.valve = new ParticleValve(this.modeManager);
+    this.animator = new ParticleAnimator(
+      this.modeManager,
+      this.particleContainer
+    );
+    this.modeManager.on(
+      GenerationModeEventType.change,
+      (val: GenerationMode) => {
+        if (this._isPlaying) {
+          this.stop();
+          this.play();
+        }
+      }
+    );
 
     if (option == null) return;
-    this._isLoop = option.isLoop ?? this._isLoop;
+    this.modeManager.mode = option.generationMode ?? GenerationMode.SEQUENTIAL;
     this._ease = option.ease ?? this._ease;
     this._probability = option.probability ?? this._probability;
   }
@@ -81,10 +82,13 @@ export class ParticleGenerator {
     if (this._isPlaying) return;
     this._isPlaying = true;
 
-    if (this._isLoop) {
-      RAFTicker.addListener(RAFTickerEventType.tick, this.loop);
-    } else {
-      RAFTicker.addListener(RAFTickerEventType.tick, this.animate);
+    switch (this.modeManager.mode) {
+      case GenerationMode.LOOP:
+        RAFTicker.addListener(RAFTickerEventType.tick, this.loop);
+        break;
+      case GenerationMode.SEQUENTIAL:
+        RAFTicker.addListener(RAFTickerEventType.tick, this.animate);
+        break;
     }
   }
 
@@ -103,9 +107,9 @@ export class ParticleGenerator {
    * @param e
    */
   private animate = (e: RAFTickerEvent) => {
-    if (this.isDisposed) return;
+    if (this._isDisposed) return;
 
-    this.move(e.delta);
+    this.animator.move(e.delta);
     this.particleContainer.removeCompletedParticles();
     this.addParticle(e.delta);
   };
@@ -117,10 +121,12 @@ export class ParticleGenerator {
   private addParticle(delta: number): void {
     if (!this.valve.isOpenValve) return;
 
+    const anim = this.animator;
     this.elapsedFromGenerate += delta;
-    while (this.elapsedFromGenerate > this._particleInterval) {
-      this.elapsedFromGenerate -= this._particleInterval;
-      const move = (this.elapsedFromGenerate * this.speedPerSec) / 1000;
+
+    while (this.elapsedFromGenerate > anim.particleInterval) {
+      this.elapsedFromGenerate -= anim.particleInterval;
+      const move = (this.elapsedFromGenerate * anim.speedPerSec) / 1000;
       //すでに寿命切れのパーティクルは生成をスキップ。
       if (move > Particle.MAX_RATIO) {
         continue;
@@ -136,24 +142,15 @@ export class ParticleGenerator {
    * @param e
    */
   private loop = (e: RAFTickerEvent) => {
-    if (this.isDisposed) return;
+    if (this._isDisposed) return;
 
     if (this.particleContainer.particles.length === 0) {
       this.generateAll();
     }
 
-    this.move(e.delta);
+    this.animator.move(e.delta);
     this.particleContainer.rollupParticles();
   };
-
-  /**
-   * パーティクルの位置を経過時間分移動する。
-   * @param delta 前回アニメーションが実行されてからの経過時間 単位ms
-   */
-  private move(delta: number): void {
-    const movement = (delta / 1000) * this.speedPerSec;
-    this.particleContainer.move(movement);
-  }
 
   /**
    * パーティクルを1つ追加する。
@@ -192,39 +189,15 @@ export class ParticleGenerator {
    */
   public generateAll(): void {
     //パーティクルの最大生存期間 単位ミリ秒
-    let lifeTime = 1000.0 / this.speedPerSec;
+    let lifeTime = 1000.0 / this.animator.speedPerSec;
 
     while (lifeTime > 0.0) {
       const particle = this.generate();
-      if (particle) particle.update((lifeTime / 1000) * this.speedPerSec);
-      lifeTime -= this._particleInterval;
+      if (particle)
+        particle.update((lifeTime / 1000) * this.animator.speedPerSec);
+      lifeTime -= this.animator.particleInterval;
     }
     this.elapsedFromGenerate = 0;
-  }
-
-  /**
-   * 生成インターバルと経路上のパーティクル数から移動スピードを算出し設定する。
-   * loop時に破綻しない値が得られる。
-   * @param interval
-   * @param particleNum
-   */
-  public setSpeed(interval: number, particleNum: number): void {
-    this._particleInterval = interval;
-    this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
-  }
-
-  /**
-   * 移動スピードと経路上のパーティクル数から生成インターバルを算出し設定する。
-   * loop時に破綻しない値が得られる。
-   * @param speed
-   * @param particleNum
-   */
-  public setInterval(speed: number, particleNum: number): void {
-    this.speedPerSec = speed;
-    this._particleInterval = ParticleGeneratorUtility.getInterval(
-      speed,
-      particleNum
-    );
   }
 
   /**
@@ -232,37 +205,16 @@ export class ParticleGenerator {
    */
   public dispose(): void {
     this.stop();
-    this.isDisposed = true;
+    this._isDisposed = true;
 
     this.particleContainer.removeAll();
     this.particleContainer = null;
     this.multipleWays = null;
   }
 
-  get particleInterval(): number {
-    return this._particleInterval;
-  }
-
-  set particleInterval(value: number) {
-    if (this._particleInterval === value) return;
-
-    this._particleInterval = value;
-    if (this._isLoop) {
-      console.warn(
-        "ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。"
-      );
-      console.trace();
-    }
-  }
-
-  get ease(): (number) => number {
-    return this._ease;
-  }
-
   get probability(): number {
     return this._probability;
   }
-
   set probability(value: number) {
     this._probability = value;
   }
@@ -274,13 +226,13 @@ export class ParticleGenerator {
    */
   updateEase(ease: (number) => number, override: boolean = true) {
     this._ease = ease;
-    if (!override && this._isLoop) {
+    if (!override && this.modeManager.mode === GenerationMode.LOOP) {
       console.warn(
         "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
       );
       console.trace();
     }
-    if (override || this._isLoop) {
+    if (override || this.modeManager.mode === GenerationMode.LOOP) {
       this.particleContainer.overrideEase(ease);
     }
   }
@@ -290,7 +242,7 @@ export class ParticleGenerator {
  * パーティクル生成方法を指定するオプション
  */
 export interface ParticleGeneratorOption {
-  isLoop?: boolean; //パーティクルを随時生成する = true , 終端にたどり着いたパーティクルを巻き戻して再利用する = false. デフォルトはtrue.
+  generationMode?: GenerationMode;
   ease?: (number) => number;
   probability?: number;
 }

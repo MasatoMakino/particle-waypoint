@@ -1,4 +1,9 @@
 import { Particle } from "../Particle";
+import {
+  GenerationMode,
+  GenerationModeEventType,
+  GenerationModeManager,
+} from "./GenerationModeManager";
 
 /**
  * 複数のパーティクルを格納、移動、管理するためのクラスです。
@@ -23,7 +28,13 @@ export class ParticleContainer {
     });
   }
 
-  constructor() {}
+  constructor(modeManager: GenerationModeManager) {
+    modeManager.on(GenerationModeEventType.change, (mode: GenerationMode) => {
+      if (mode === GenerationMode.LOOP) {
+        this.removeAll();
+      }
+    });
+  }
 
   /**
    * パーティクルを格納する。

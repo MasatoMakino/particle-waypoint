@@ -1,5 +1,5 @@
 import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
-import { ParticleGenerator } from "../src";
+import { GenerationMode, ParticleGenerator } from "../src";
 import { getTestGenerators } from "./ParticleGenerator.common";
 
 describe("ParticleGenerator", () => {
@@ -43,7 +43,7 @@ describe("ParticleGenerator", () => {
   test("loop", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
-    generator.isLoop = true;
+    generator.modeManager.mode = GenerationMode.LOOP;
     generator.play();
 
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
@@ -58,14 +58,14 @@ describe("ParticleGenerator", () => {
     generator.play();
     generator.generateAll();
 
-    generator.isLoop = true;
+    generator.modeManager.mode = GenerationMode.LOOP;
     expect(generator.isPlaying).toBe(true);
     expect(container.particles.length).toBe(0);
 
-    generator.isLoop = true;
+    generator.modeManager.mode = GenerationMode.LOOP;
     expect(generator.isPlaying).toBe(true);
 
-    generator.isLoop = false;
+    generator.modeManager.mode = GenerationMode.SEQUENTIAL;
   });
 
   test("dispose and play", () => {
@@ -82,7 +82,7 @@ describe("ParticleGenerator", () => {
 
   test("dispose and play loop", () => {
     const { generator } = getTestGenerators();
-    generator.isLoop = true;
+    generator.modeManager.mode = GenerationMode.LOOP;
     generator.play();
     generator.dispose();
     expect(generator.particleContainer).toBeNull();

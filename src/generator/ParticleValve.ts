@@ -1,4 +1,4 @@
-import { ParticleGenerator } from "./ParticleGenerator";
+import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
 
 /**
  * パーティクル新規生成のバルブ開閉を行うクラス
@@ -9,10 +9,10 @@ export class ParticleValve {
     return this._isOpenValve;
   }
   private _isOpenValve: boolean = true;
-  private _generator: ParticleGenerator;
+  private _modeManager: GenerationModeManager;
 
-  constructor(generator: ParticleGenerator) {
-    this._generator = generator;
+  constructor(modeManager: GenerationModeManager) {
+    this._modeManager = modeManager;
   }
   /**
    * パーティクル生成を開始する。
@@ -34,7 +34,7 @@ export class ParticleValve {
   }
 
   private warnValve(): void {
-    if (!this._generator.isLoop) return;
+    if (this._modeManager.mode !== GenerationMode.LOOP) return;
     console.warn(
       "ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。"
     );

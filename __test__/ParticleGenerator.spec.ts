@@ -1,5 +1,9 @@
+import {
+  GenerationMode,
+  ParticleGenerator,
+  PathSelectType,
+} from "../src/index";
 import { getTestGenerators } from "./ParticleGenerator.common";
-import { ParticleGenerator, ParticleWay, PathSelectType } from "../src/index";
 
 describe("ParticleGenerator", () => {
   const spyWarn = jest.spyOn(console, "warn");
@@ -11,10 +15,11 @@ describe("ParticleGenerator", () => {
 
   test("constructor", () => {
     expect(generator).toBeTruthy();
-    expect(generator.speedPerSec).toBe(0.07);
-    expect(generator.particleInterval).toBe(300);
+    expect(generator.animator.speedPerSec).toBe(0.07);
+    expect(generator.animator.particleInterval).toBe(300);
     expect(generator.probability).toBe(1.0);
-    expect(generator.isLoop).toBe(false);
+    expect(generator.modeManager).toBeTruthy();
+    expect(generator.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
     expect(generator.particleContainer.visible).toBe(true);
     expect(generator.multipleWays.pathSelectType).toBe(
       PathSelectType.Sequential
@@ -28,18 +33,18 @@ describe("ParticleGenerator", () => {
 
   test("constructor : empty option", () => {
     const gen = new ParticleGenerator(way, {});
-    expect(gen.isLoop).toBe(false);
+    expect(gen.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
     expect(gen.ease).toBeFalsy();
     expect(gen.probability).toBe(1.0);
   });
 
   test("constructor : option", () => {
     const gen = new ParticleGenerator(way, {
-      isLoop: true,
+      generationMode: GenerationMode.LOOP,
       ease: (n) => n,
       probability: 0.8,
     });
-    expect(gen.isLoop).toBe(true);
+    expect(gen.modeManager.mode).toBe(GenerationMode.LOOP);
     expect(gen.ease).toBeTruthy();
     expect(gen.probability).toBe(0.8);
   });
@@ -53,10 +58,12 @@ describe("ParticleGenerator", () => {
   });
 
   test("play : loop", () => {
-    const gen = new ParticleGenerator(way, { isLoop: true });
+    const gen = new ParticleGenerator(way, {
+      generationMode: GenerationMode.LOOP,
+    });
     gen.play();
     expect(gen.isPlaying).toBe(true);
-    expect(gen.isLoop).toBe(true);
+    expect(gen.modeManager.mode).toBe(GenerationMode.LOOP);
 
     gen.valve.closeValve();
     expect(spyWarn).toBeCalled();
@@ -127,7 +134,9 @@ describe("ParticleGenerator", () => {
   });
 
   test("update ease : loop", () => {
-    const gen = new ParticleGenerator(way, { isLoop: true });
+    const gen = new ParticleGenerator(way, {
+      generationMode: GenerationMode.LOOP,
+    });
     const easing = (n) => {
       return n;
     };
@@ -142,20 +151,20 @@ describe("ParticleGenerator", () => {
 
   test("interval", () => {
     const gen = new ParticleGenerator(way);
-    gen.particleInterval = gen.particleInterval;
-    //default value
-    expect(gen.particleInterval).toBe(300);
 
-    gen.particleInterval = 500;
+    //default value
+    expect(gen.animator.particleInterval).toBe(300);
+
+    gen.animator.particleInterval = 500;
     expect(spyWarn).toBeCalledTimes(0);
     expect(spyTrace).toBeCalledTimes(0);
-    expect(gen.particleInterval).toBe(500);
+    expect(gen.animator.particleInterval).toBe(500);
 
-    gen.isLoop = true;
-    gen.particleInterval = 800;
+    gen.modeManager.mode = GenerationMode.LOOP;
+    gen.animator.particleInterval = 800;
     expect(spyWarn).toBeCalledTimes(1);
     expect(spyTrace).toBeCalledTimes(1);
-    expect(gen.particleInterval).toBe(800);
+    expect(gen.animator.particleInterval).toBe(800);
 
     spyWarn.mockClear();
     spyTrace.mockClear();
@@ -163,14 +172,16 @@ describe("ParticleGenerator", () => {
 
   test("set interval", () => {
     const gen = new ParticleGenerator(way);
-    gen.setInterval(0.5, 4);
-    expect(gen.particleInterval).toBeCloseTo(500);
+    const anim = gen.animator;
+    anim.setInterval(0.5, 4);
+    expect(anim.particleInterval).toBeCloseTo(500);
   });
 
   test("set speed", () => {
     const gen = new ParticleGenerator(way);
-    gen.setSpeed(300, 4);
-    expect(gen.speedPerSec).toBeCloseTo((1.0 / 1200) * 1000);
+    const anim = gen.animator;
+    anim.setSpeed(300, 4);
+    expect(anim.speedPerSec).toBeCloseTo((1.0 / 1200) * 1000);
   });
 
   test("dispose", () => {
