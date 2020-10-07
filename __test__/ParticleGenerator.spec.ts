@@ -1,8 +1,4 @@
-import {
-  GenerationMode,
-  ParticleGenerator,
-  PathSelectType,
-} from "../src/index";
+import { GenerationMode, ParticleGenerator, WaySelectType } from "../src/index";
 import { getTestGenerators } from "./ParticleGenerator.common";
 
 describe("ParticleGenerator", () => {
@@ -21,14 +17,12 @@ describe("ParticleGenerator", () => {
     expect(generator.modeManager).toBeTruthy();
     expect(generator.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
     expect(generator.particleContainer.visible).toBe(true);
-    expect(generator.multipleWays.pathSelectType).toBe(
-      PathSelectType.Sequential
-    );
+    expect(generator.multipleWays.waySelectType).toBe(WaySelectType.Sequential);
   });
 
   test("constructor : array of way", () => {
     const gen = new ParticleGenerator([way]);
-    expect(gen.multipleWays.path.length).toBe([way].length);
+    expect(gen.multipleWays.ways.length).toBe([way].length);
   });
 
   test("constructor : empty option", () => {

@@ -1,5 +1,5 @@
 import { ParticleWay } from "../ParticleWay";
-export enum PathSelectType {
+export enum WaySelectType {
   Random,
   Sequential,
 }
@@ -7,46 +7,48 @@ export enum PathSelectType {
  * このクラスは、ParticleGeneratorに設定された複数の経路を管理するためのものです。
  */
 export class MultipleParticleWays {
-  public path: ParticleWay[];
-  public pathSelectType: PathSelectType;
-  private pathSelectionCount: number = 0;
+  public ways: ParticleWay[];
+  public waySelectType: WaySelectType;
+  private waySelectionCount: number = 0;
 
-  constructor(option?: GeneratorWaysOption) {
-    GeneratorWaysOption.initOption(option);
-    this.path = option.ways as ParticleWay[];
-    this.pathSelectType = option.type;
+  constructor(option?: MultipleParticleWaysOption) {
+    MultipleParticleWaysOption.initOption(option);
+    this.ways = option.ways as ParticleWay[];
+    this.waySelectType = option.type;
   }
 
   public countUp(): void {
-    this.pathSelectionCount = (this.pathSelectionCount + 1) % this.path.length;
+    this.waySelectionCount = (this.waySelectionCount + 1) % this.ways.length;
   }
 
-  public getPath(): ParticleWay {
+  public getParticleWay(): ParticleWay {
     let index;
-    switch (this.pathSelectType) {
-      case PathSelectType.Sequential:
-        index = this.pathSelectionCount;
+    switch (this.waySelectType) {
+      case WaySelectType.Sequential:
+        index = this.waySelectionCount;
         break;
-      case PathSelectType.Random:
-        index = Math.floor(Math.random() * this.path.length);
+      case WaySelectType.Random:
+        index = Math.floor(Math.random() * this.ways.length);
         break;
     }
-    return this.path[index];
+    return this.ways[index];
   }
 }
 
-export class GeneratorWaysOption {
+export class MultipleParticleWaysOption {
   ways?: ParticleWay | ParticleWay[];
-  type?: PathSelectType;
+  type?: WaySelectType;
 
-  public static initOption(option?: GeneratorWaysOption): GeneratorWaysOption {
+  public static initOption(
+    option?: MultipleParticleWaysOption
+  ): MultipleParticleWaysOption {
     option ??= {};
 
     option.ways ??= [];
     if (!Array.isArray(option.ways)) {
       option.ways = [option.ways];
     }
-    option.type ??= PathSelectType.Sequential;
+    option.type ??= WaySelectType.Sequential;
     return option;
   }
 }

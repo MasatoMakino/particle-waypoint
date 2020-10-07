@@ -158,7 +158,7 @@ export class ParticleGenerator {
       if (Math.random() > this.probability) return null;
     }
 
-    const path = this.multipleWays.getPath();
+    const path = this.multipleWays.getParticleWay();
     const particle: Particle = this.generateParticle(path);
     if (this.animator.ease != null) {
       particle.ease = this.animator.ease;
