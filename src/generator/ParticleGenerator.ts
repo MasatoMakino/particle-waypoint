@@ -27,12 +27,7 @@ export class ParticleGenerator {
     return this._isPlaying;
   }
 
-  private _ease: (number) => number;
-  get ease(): (number) => number {
-    return this._ease;
-  }
-
-  private _probability: number = 1.0;
+  public probability: number = 1.0;
 
   /**
    * 前回パーティクル生成時からの経過時間 単位ms
@@ -71,8 +66,10 @@ export class ParticleGenerator {
 
     if (option == null) return;
     this.modeManager.mode = option.generationMode ?? GenerationMode.SEQUENTIAL;
-    this._ease = option.ease ?? this._ease;
-    this._probability = option.probability ?? this._probability;
+    if (option.ease) {
+      this.animator.updateEase(option.ease);
+    }
+    this.probability = option.probability ?? this.probability;
   }
 
   /**
@@ -159,14 +156,14 @@ export class ParticleGenerator {
     this.multipleWays.countUp();
 
     //発生確率に応じて生成の可否を判定する。
-    if (this._probability !== 1.0) {
-      if (Math.random() > this._probability) return null;
+    if (this.probability !== 1.0) {
+      if (Math.random() > this.probability) return null;
     }
 
     const path = this.multipleWays.getPath();
     const particle: Particle = this.generateParticle(path);
-    if (this._ease != null) {
-      particle.ease = this._ease;
+    if (this.animator.ease != null) {
+      particle.ease = this.animator.ease;
     }
     this.particleContainer.add(particle);
 
@@ -210,31 +207,6 @@ export class ParticleGenerator {
     this.particleContainer.removeAll();
     this.particleContainer = null;
     this.multipleWays = null;
-  }
-
-  get probability(): number {
-    return this._probability;
-  }
-  set probability(value: number) {
-    this._probability = value;
-  }
-
-  /**
-   * 各パーティクルのEase関数を更新する。
-   * @param ease イージング関数。
-   * @param override 現存するパーティクルのEase関数を上書きするか否か。規定値はtrue。
-   */
-  updateEase(ease: (number) => number, override: boolean = true) {
-    this._ease = ease;
-    if (!override && this.modeManager.mode === GenerationMode.LOOP) {
-      console.warn(
-        "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
-      );
-      console.trace();
-    }
-    if (override || this.modeManager.mode === GenerationMode.LOOP) {
-      this.particleContainer.overrideEase(ease);
-    }
   }
 }
 

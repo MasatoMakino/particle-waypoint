@@ -20,8 +20,14 @@ export class ParticleAnimator {
   }
   public speedPerSec: number = 0.07;
 
+  private _ease: (number) => number;
+  get ease(): (number) => number {
+    return this._ease;
+  }
+
   private _modeManager: GenerationModeManager;
   private _particleContainer: ParticleContainer;
+
   constructor(
     modeManager: GenerationModeManager,
     particleContainer: ParticleContainer
@@ -62,5 +68,23 @@ export class ParticleAnimator {
   public move(delta: number): void {
     const movement = (delta / 1000) * this.speedPerSec;
     this._particleContainer.move(movement);
+  }
+
+  /**
+   * 各パーティクルのEase関数を更新する。
+   * @param ease イージング関数。
+   * @param override 現存するパーティクルのEase関数を上書きするか否か。規定値はtrue。
+   */
+  updateEase(ease: (number) => number, override: boolean = true) {
+    this._ease = ease;
+    if (!override && this._modeManager.mode === GenerationMode.LOOP) {
+      console.warn(
+        "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
+      );
+      console.trace();
+    }
+    if (override || this._modeManager.mode === GenerationMode.LOOP) {
+      this._particleContainer.overrideEase(ease);
+    }
   }
 }

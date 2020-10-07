@@ -34,7 +34,7 @@ describe("ParticleGenerator", () => {
   test("constructor : empty option", () => {
     const gen = new ParticleGenerator(way, {});
     expect(gen.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
-    expect(gen.ease).toBeFalsy();
+    expect(gen.animator.ease).toBeFalsy();
     expect(gen.probability).toBe(1.0);
   });
 
@@ -45,7 +45,7 @@ describe("ParticleGenerator", () => {
       probability: 0.8,
     });
     expect(gen.modeManager.mode).toBe(GenerationMode.LOOP);
-    expect(gen.ease).toBeTruthy();
+    expect(gen.animator.ease).toBeTruthy();
     expect(gen.probability).toBe(0.8);
   });
 
@@ -127,7 +127,7 @@ describe("ParticleGenerator", () => {
       return n;
     };
     gen.generateAll();
-    gen.updateEase(easing);
+    gen.animator.updateEase(easing);
     container.particles.forEach((p) => {
       expect(p.ease).toBe(easing);
     });
@@ -141,7 +141,7 @@ describe("ParticleGenerator", () => {
       return n;
     };
     gen.generateAll();
-    gen.updateEase(easing, false);
+    gen.animator.updateEase(easing, false);
 
     expect(spyWarn).toBeCalledTimes(1);
     expect(spyTrace).toBeCalledTimes(1);
