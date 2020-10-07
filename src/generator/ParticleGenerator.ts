@@ -27,7 +27,7 @@ export class ParticleGenerator {
     return this._isPlaying;
   }
 
-  public probability: number = 1.0;
+  public probability: number;
 
   /**
    * 前回パーティクル生成時からの経過時間 単位ms
@@ -64,12 +64,10 @@ export class ParticleGenerator {
       }
     );
 
-    if (option == null) return;
-    this.modeManager.mode = option.generationMode ?? GenerationMode.SEQUENTIAL;
-    if (option.ease) {
-      this.animator.updateEase(option.ease);
-    }
-    this.probability = option.probability ?? this.probability;
+    option = ParticleGeneratorOption.initOption(option);
+    this.modeManager.mode = option.generationMode;
+    this.animator.updateEase(option.ease);
+    this.probability = option.probability;
   }
 
   /**
@@ -213,8 +211,17 @@ export class ParticleGenerator {
 /**
  * パーティクル生成方法を指定するオプション
  */
-export interface ParticleGeneratorOption {
+export class ParticleGeneratorOption {
   generationMode?: GenerationMode;
   ease?: (number) => number;
   probability?: number;
+
+  public static initOption(
+    option?: ParticleGeneratorOption
+  ): ParticleGeneratorOption {
+    option ??= {};
+    option.generationMode ??= GenerationMode.SEQUENTIAL;
+    option.probability ??= 1.0;
+    return option;
+  }
 }
