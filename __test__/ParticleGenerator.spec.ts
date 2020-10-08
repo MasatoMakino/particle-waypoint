@@ -12,7 +12,7 @@ describe("ParticleGenerator", () => {
   test("constructor", () => {
     expect(generator).toBeTruthy();
     expect(generator.animator.speedPerSec).toBe(0.07);
-    expect(generator.animator.particleInterval).toBe(300);
+    expect(generator.animator.generationInterval).toBe(300);
     expect(generator.probability).toBe(1.0);
     expect(generator.modeManager).toBeTruthy();
     expect(generator.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
@@ -59,7 +59,7 @@ describe("ParticleGenerator", () => {
     expect(gen.isPlaying).toBe(true);
     expect(gen.modeManager.mode).toBe(GenerationMode.LOOP);
 
-    gen.valve.closeValve();
+    gen.valve.close();
     expect(spyWarn).toBeCalled();
     expect(spyTrace).toBeCalled();
     spyWarn.mockClear();
@@ -75,17 +75,17 @@ describe("ParticleGenerator", () => {
 
   test("valve", () => {
     const valve = generator.valve;
-    expect(valve.isOpenValve).toBe(true);
-    valve.openValve();
-    expect(valve.isOpenValve).toBe(true);
-    valve.openValve();
-    expect(valve.isOpenValve).toBe(true);
-    valve.closeValve();
-    expect(valve.isOpenValve).toBe(false);
-    valve.closeValve();
-    expect(valve.isOpenValve).toBe(false);
-    valve.openValve();
-    expect(valve.isOpenValve).toBe(true);
+    expect(valve.isOpen).toBe(true);
+    valve.open();
+    expect(valve.isOpen).toBe(true);
+    valve.open();
+    expect(valve.isOpen).toBe(true);
+    valve.close();
+    expect(valve.isOpen).toBe(false);
+    valve.close();
+    expect(valve.isOpen).toBe(false);
+    valve.open();
+    expect(valve.isOpen).toBe(true);
 
     //TODO バルブ閉塞時にアニメーションをして、パーティクルが生成されないことを確認する
   });
@@ -147,18 +147,18 @@ describe("ParticleGenerator", () => {
     const gen = new ParticleGenerator(way);
 
     //default value
-    expect(gen.animator.particleInterval).toBe(300);
+    expect(gen.animator.generationInterval).toBe(300);
 
-    gen.animator.particleInterval = 500;
+    gen.animator.generationInterval = 500;
     expect(spyWarn).toBeCalledTimes(0);
     expect(spyTrace).toBeCalledTimes(0);
-    expect(gen.animator.particleInterval).toBe(500);
+    expect(gen.animator.generationInterval).toBe(500);
 
     gen.modeManager.mode = GenerationMode.LOOP;
-    gen.animator.particleInterval = 800;
+    gen.animator.generationInterval = 800;
     expect(spyWarn).toBeCalledTimes(1);
     expect(spyTrace).toBeCalledTimes(1);
-    expect(gen.animator.particleInterval).toBe(800);
+    expect(gen.animator.generationInterval).toBe(800);
 
     spyWarn.mockClear();
     spyTrace.mockClear();
@@ -167,8 +167,8 @@ describe("ParticleGenerator", () => {
   test("set interval", () => {
     const gen = new ParticleGenerator(way);
     const anim = gen.animator;
-    anim.setInterval(0.5, 4);
-    expect(anim.particleInterval).toBeCloseTo(500);
+    anim.setGenerationInterval(0.5, 4);
+    expect(anim.generationInterval).toBeCloseTo(500);
   });
 
   test("set speed", () => {

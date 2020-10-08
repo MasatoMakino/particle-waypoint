@@ -32,7 +32,7 @@ describe("ParticleGenerator", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
     generator.play();
-    generator.valve.closeValve();
+    generator.valve.close();
 
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
     RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(20000, 20000));

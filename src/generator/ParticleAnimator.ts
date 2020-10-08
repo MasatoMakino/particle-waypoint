@@ -3,13 +3,13 @@ import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
 import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
 
 export class ParticleAnimator {
-  private _particleInterval: number = 300;
-  get particleInterval(): number {
-    return this._particleInterval;
+  private _generationInterval: number = 300;
+  get generationInterval(): number {
+    return this._generationInterval;
   }
-  set particleInterval(value: number) {
-    if (this._particleInterval === value) return;
-    this._particleInterval = value;
+  set generationInterval(value: number) {
+    if (this._generationInterval === value) return;
+    this._generationInterval = value;
 
     if (this._modeManager.mode === GenerationMode.LOOP) {
       console.warn(
@@ -43,7 +43,7 @@ export class ParticleAnimator {
    * @param particleNum
    */
   public setSpeed(interval: number, particleNum: number): void {
-    this._particleInterval = interval;
+    this._generationInterval = interval;
     this.speedPerSec = ParticleGeneratorUtility.getSpeed(interval, particleNum);
   }
 
@@ -53,9 +53,9 @@ export class ParticleAnimator {
    * @param speed
    * @param particleNum
    */
-  public setInterval(speed: number, particleNum: number): void {
+  public setGenerationInterval(speed: number, particleNum: number): void {
     this.speedPerSec = speed;
-    this._particleInterval = ParticleGeneratorUtility.getInterval(
+    this._generationInterval = ParticleGeneratorUtility.getInterval(
       speed,
       particleNum
     );

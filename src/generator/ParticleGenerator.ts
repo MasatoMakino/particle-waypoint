@@ -114,13 +114,13 @@ export class ParticleGenerator {
    * @param delta
    */
   private addParticle(delta: number): void {
-    if (!this.valve.isOpenValve) return;
+    if (!this.valve.isOpen) return;
 
     const anim = this.animator;
     this.elapsedFromGenerate += delta;
 
-    while (this.elapsedFromGenerate > anim.particleInterval) {
-      this.elapsedFromGenerate -= anim.particleInterval;
+    while (this.elapsedFromGenerate > anim.generationInterval) {
+      this.elapsedFromGenerate -= anim.generationInterval;
       const move = (this.elapsedFromGenerate * anim.speedPerSec) / 1000;
       //すでに寿命切れのパーティクルは生成をスキップ。
       if (move > Particle.MAX_RATIO) {
@@ -190,7 +190,7 @@ export class ParticleGenerator {
       const particle = this.generate();
       if (particle)
         particle.update((lifeTime / 1000) * this.animator.speedPerSec);
-      lifeTime -= this.animator.particleInterval;
+      lifeTime -= this.animator.generationInterval;
     }
     this.elapsedFromGenerate = 0;
   }
