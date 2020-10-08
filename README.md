@@ -14,7 +14,7 @@
 
 ### Install
 
-```bash
+```shell script
 npm install https://github.com/MasatoMakino/particle-waypoint.git --save-dev
 ```
 
@@ -24,36 +24,37 @@ particle-waypoint is composed of ES6 modules and TypeScript d.ts files.
 
 At first, import classes.
 
-```.js
-import {
-  ParticleWay,
-  Particle,
-  ParticleGenerator
-} from "particle-waypoint";
+```js
+import { ParticleWay, Particle, ParticleGenerator } from "particle-waypoint";
 ```
 
 ### Create particle way
 
-```.js
-  const points = [[100, 100], [100, 200], [200, 200], [200, 300]];
-  const wayPoint = new ParticleWay(points);
+```js
+const points = [
+  [100, 100],
+  [100, 200],
+  [200, 200],
+  [200, 300],
+];
+const wayPoint = new ParticleWay(points);
 ```
 
 ### Create generator
 
-```.js
-  const generator = new ParticleGenerator( wayPoint, {
-    isLoop: true
-  });
-  generator.setSpeed(600, 20);
-  generator.play();
+```js
+const generator = new ParticleGenerator(wayPoint, {
+  generationMode: GenerationMode.LOOP,
+});
+generator.animator.setSpeed(600, 20);
+generator.play();
 ```
 
 Particles animate on `wayPoint`.
 
 ## Uninstall
 
-```bash
+```shell script
 npm uninstall https://github.com/MasatoMakino/particle-waypoint.git --save-dev
 ```
 
