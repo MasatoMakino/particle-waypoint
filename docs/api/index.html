@@ -70,7 +70,7 @@
 				<blockquote>
 					<p>Path module for calculating waypoints.</p>
 				</blockquote>
-				<p><a href="https://travis-ci.org/MasatoMakino/particle-waypoint"><img src="https://travis-ci.org/MasatoMakino/particle-waypoint.svg?branch=master" alt="Build Status"></a>
+				<p><a href="https://travis-ci.com/MasatoMakino/particle-waypoint"><img src="https://travis-ci.com/MasatoMakino/particle-waypoint.svg?branch=master" alt="Build Status"></a>
 					<a href="https://codeclimate.com/github/MasatoMakino/particle-waypoint/maintainability"><img src="https://api.codeclimate.com/v1/badges/8f61441c3c7b97b4bed8/maintainability" alt="Maintainability"></a>
 				<a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
 				<a href="#api-documents" id="api-documents" style="color: inherit; text-decoration: none;">
@@ -83,35 +83,36 @@
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h3>Install</h3>
 				</a>
-				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/particle-waypoint.git --save-dev</code></pre>
+				<pre><code class="language-shell">npm install https://github.com/MasatoMakino/particle-waypoint.git --save-dev</code></pre>
 				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
 					<h3>Import</h3>
 				</a>
 				<p>particle-waypoint is composed of ES6 modules and TypeScript d.ts files.</p>
 				<p>At first, import classes.</p>
-				<pre><code class="language-.js">import {
-  ParticleWay,
-  Particle,
-  ParticleGenerator
-} from &quot;particle-waypoint&quot;;</code></pre>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { ParticleWay, Particle, ParticleGenerator } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;particle-waypoint&quot;</span>;</code></pre>
 				<a href="#create-particle-way" id="create-particle-way" style="color: inherit; text-decoration: none;">
 					<h3>Create particle way</h3>
 				</a>
-				<pre><code class="language-.js">  const points = [[100, 100], [100, 200], [200, 200], [200, 300]];
-  const wayPoint = new ParticleWay(points);</code></pre>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> points = [
+  [<span class="hljs-number">100</span>, <span class="hljs-number">100</span>],
+  [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>],
+  [<span class="hljs-number">200</span>, <span class="hljs-number">200</span>],
+  [<span class="hljs-number">200</span>, <span class="hljs-number">300</span>],
+];
+<span class="hljs-keyword">const</span> wayPoint = <span class="hljs-keyword">new</span> ParticleWay(points);</code></pre>
 				<a href="#create-generator" id="create-generator" style="color: inherit; text-decoration: none;">
 					<h3>Create generator</h3>
 				</a>
-				<pre><code class="language-.js">  const generator = new ParticleGenerator( wayPoint, {
-    isLoop: true
-  });
-  generator.setSpeed(600, 20);
-  generator.play();</code></pre>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> generator = <span class="hljs-keyword">new</span> ParticleGenerator(wayPoint, {
+  <span class="hljs-attr">generationMode</span>: GenerationMode.LOOP,
+});
+generator.animator.setSpeed(<span class="hljs-number">600</span>, <span class="hljs-number">20</span>);
+generator.play();</code></pre>
 				<p>Particles animate on <code>wayPoint</code>.</p>
 				<a href="#uninstall" id="uninstall" style="color: inherit; text-decoration: none;">
 					<h2>Uninstall</h2>
 				</a>
-				<pre><code class="language-bash">npm uninstall https://github.com/MasatoMakino/particle-waypoint.git --save-dev</code></pre>
+				<pre><code class="language-shell">npm uninstall https://github.com/MasatoMakino/particle-waypoint.git --save-dev</code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>
@@ -129,28 +130,52 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
-						<a href="enums/pathselecttype.html" class="tsd-kind-icon">Path<wbr>Select<wbr>Type</a>
+						<a href="enums/generationmode.html" class="tsd-kind-icon">Generation<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/generationmodeeventtype.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Event<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wayselecttype.html" class="tsd-kind-icon">Way<wbr>Select<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/generationmodemanager.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/multipleparticleways.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/multipleparticlewaysoption.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/particle.html" class="tsd-kind-icon">Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/particleanimator.html" class="tsd-kind-icon">Particle<wbr>Animator</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/particlecontainer.html" class="tsd-kind-icon">Particle<wbr>Container</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="classes/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="classes/particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
 					</li>
 				</ul>
 			</nav>
@@ -176,10 +201,11 @@
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 		</div>
 	</div>

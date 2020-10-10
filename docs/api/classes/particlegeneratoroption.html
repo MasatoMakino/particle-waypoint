@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ParticleGeneratorUtility | particle-waypoint</title>
+	<title>ParticleGeneratorOption | particle-waypoint</title>
 	<meta name="description" content="Documentation for particle-waypoint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="particlegeneratorutility.html">ParticleGeneratorUtility</a>
+					<a href="particlegeneratoroption.html">ParticleGeneratorOption</a>
 				</li>
 			</ul>
-			<h1>Class ParticleGeneratorUtility</h1>
+			<h1>Class ParticleGeneratorOption</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>ParticleGeneratorで利用する各種の値を算出するヘルパークラス</p>
+						<p>パーティクル生成方法を指定するオプション</p>
 					</div>
 				</div>
 			</section>
@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ParticleGeneratorUtility</span>
+						<span class="target">ParticleGeneratorOption</span>
 					</li>
 				</ul>
 			</section>
@@ -86,80 +86,98 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="particlegeneratoroption.html#ease" class="tsd-kind-icon">ease</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="particlegeneratoroption.html#generationmode" class="tsd-kind-icon">generation<wbr>Mode</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="particlegeneratoroption.html#probability" class="tsd-kind-icon">probability</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlegeneratorutility.html#getinterval" class="tsd-kind-icon">get<wbr>Interval</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlegeneratorutility.html#getspeed" class="tsd-kind-icon">get<wbr>Speed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlegeneratoroption.html#initoption" class="tsd-kind-icon">init<wbr>Option</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="ease" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ease</h3>
+					<div class="tsd-signature tsd-kind-icon">ease<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/ParticleGenerator.ts#L216">src/generator/ParticleGenerator.ts:216</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>number: <span class="tsd-signature-type">any</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="generationmode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> generation<wbr>Mode</h3>
+					<div class="tsd-signature tsd-kind-icon">generation<wbr>Mode<span class="tsd-signature-symbol">:</span> <a href="../enums/generationmode.html" class="tsd-signature-type">GenerationMode</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/ParticleGenerator.ts#L215">src/generator/ParticleGenerator.ts:215</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="probability" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> probability</h3>
+					<div class="tsd-signature tsd-kind-icon">probability<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/ParticleGenerator.ts#L217">src/generator/ParticleGenerator.ts:217</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getinterval" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Interval</h3>
+					<a name="initoption" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> init<wbr>Option</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Interval<span class="tsd-signature-symbol">(</span>speed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, particleNum<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">init<wbr>Option<span class="tsd-signature-symbol">(</span>option<span class="tsd-signature-symbol">?: </span><a href="particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/ParticleGeneratorUtility.ts#L19">src/generator/ParticleGeneratorUtility.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/ParticleGenerator.ts#L219">src/generator/ParticleGenerator.ts:219</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>パーティクルの移動速度と経路上の数から、生成インターバルを算出する</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>speed: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>particleNum: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> option: <a href="particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getspeed" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Speed</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Speed<span class="tsd-signature-symbol">(</span>interval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, particleNum<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/ParticleGeneratorUtility.ts#L10">src/generator/ParticleGeneratorUtility.ts:10</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>パーティクルの生成インターバルと経路上の数から、移動速度を算出する</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>interval: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>particleNum: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="particlegeneratoroption.html" class="tsd-signature-type">ParticleGeneratorOption</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -208,24 +226,30 @@
 					<li class=" tsd-kind-class">
 						<a href="particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
+						<a href="particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="particlegeneratorutility.html#getinterval" class="tsd-kind-icon">get<wbr>Interval</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="particlegeneratoroption.html#ease" class="tsd-kind-icon">ease</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="particlegeneratoroption.html#generationmode" class="tsd-kind-icon">generation<wbr>Mode</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="particlegeneratoroption.html#probability" class="tsd-kind-icon">probability</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="particlegeneratorutility.html#getspeed" class="tsd-kind-icon">get<wbr>Speed</a>
+								<a href="particlegeneratoroption.html#initoption" class="tsd-kind-icon">init<wbr>Option</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a>
 					</li>

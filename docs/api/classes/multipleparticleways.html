@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ParticleWayUtil | particle-waypoint</title>
+	<title>MultipleParticleWays | particle-waypoint</title>
 	<meta name="description" content="Documentation for particle-waypoint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,21 +56,28 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="particlewayutil.html">ParticleWayUtil</a>
+					<a href="multipleparticleways.html">MultipleParticleWays</a>
 				</li>
 			</ul>
-			<h1>Class ParticleWayUtil</h1>
+			<h1>Class MultipleParticleWays</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>このクラスは、ParticleGeneratorに設定された複数の経路を管理するためのものです。</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ParticleWayUtil</span>
+						<span class="target">MultipleParticleWays</span>
 					</li>
 				</ul>
 			</section>
@@ -79,117 +86,121 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="multipleparticleways.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="multipleparticleways.html#wayselecttype" class="tsd-kind-icon">way<wbr>Select<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="multipleparticleways.html#wayselectioncount" class="tsd-kind-icon">way<wbr>Selection<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="multipleparticleways.html#ways" class="tsd-kind-icon">ways</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlewayutil.html#clamp" class="tsd-kind-icon">clamp</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlewayutil.html#clampratio" class="tsd-kind-icon">clamp<wbr>Ratio</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlewayutil.html#getpositionwithmaxt" class="tsd-kind-icon">get<wbr>Position<wbr>With<wbr>MaxT</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="particlewayutil.html#gettindex" class="tsd-kind-icon">getTIndex</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="multipleparticleways.html#countup" class="tsd-kind-icon">count<wbr>Up</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="multipleparticleways.html#getparticleway" class="tsd-kind-icon">get<wbr>Particle<wbr>Way</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Multiple<wbr>Particle<wbr>Ways<span class="tsd-signature-symbol">(</span>option<span class="tsd-signature-symbol">?: </span><a href="multipleparticlewaysoption.html" class="tsd-signature-type">MultipleParticleWaysOption</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="multipleparticleways.html" class="tsd-signature-type">MultipleParticleWays</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L12">src/generator/MultipleParticleWays.ts:12</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> option: <a href="multipleparticlewaysoption.html" class="tsd-signature-type">MultipleParticleWaysOption</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="multipleparticleways.html" class="tsd-signature-type">MultipleParticleWays</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="wayselecttype" class="tsd-anchor"></a>
+					<h3>way<wbr>Select<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">way<wbr>Select<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../enums/wayselecttype.html" class="tsd-signature-type">WaySelectType</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L11">src/generator/MultipleParticleWays.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="wayselectioncount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> way<wbr>Selection<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">way<wbr>Selection<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L12">src/generator/MultipleParticleWays.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="ways" class="tsd-anchor"></a>
+					<h3>ways</h3>
+					<div class="tsd-signature tsd-kind-icon">ways<span class="tsd-signature-symbol">:</span> <a href="particleway.html" class="tsd-signature-type">ParticleWay</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L10">src/generator/MultipleParticleWays.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="clamp" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> clamp</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">clamp<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, max<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, min<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="countup" class="tsd-anchor"></a>
+					<h3>count<wbr>Up</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">count<wbr>Up<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L151">src/ParticleWay.ts:151</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L20">src/generator/MultipleParticleWays.ts:20</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>val: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>max: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>min: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="clampratio" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> clamp<wbr>Ratio</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">clamp<wbr>Ratio<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getparticleway" class="tsd-anchor"></a>
+					<h3>get<wbr>Particle<wbr>Way</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Particle<wbr>Way<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="particleway.html" class="tsd-signature-type">ParticleWay</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L154">src/ParticleWay.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L24">src/generator/MultipleParticleWays.ts:24</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>val: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getpositionwithmaxt" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Position<wbr>With<wbr>MaxT</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Position<wbr>With<wbr>MaxT<span class="tsd-signature-symbol">(</span>points<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L158">src/ParticleWay.ts:158</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>points: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="gettindex" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> getTIndex</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">getTIndex<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, ratioTable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L167">src/ParticleWay.ts:167</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>t: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>ratioTable: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="particleway.html" class="tsd-signature-type">ParticleWay</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -220,9 +231,33 @@
 					<li class=" tsd-kind-class">
 						<a href="generationmodemanager.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Manager</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="multipleparticleways.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="multipleparticleways.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="multipleparticleways.html#wayselecttype" class="tsd-kind-icon">way<wbr>Select<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="multipleparticleways.html#wayselectioncount" class="tsd-kind-icon">way<wbr>Selection<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="multipleparticleways.html#ways" class="tsd-kind-icon">ways</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="multipleparticleways.html#countup" class="tsd-kind-icon">count<wbr>Up</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="multipleparticleways.html#getparticleway" class="tsd-kind-icon">get<wbr>Particle<wbr>Way</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="multipleparticlewaysoption.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways<wbr>Option</a>
 					</li>
@@ -250,27 +285,9 @@
 					<li class=" tsd-kind-class">
 						<a href="particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
-						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="particlewayutil.html#clamp" class="tsd-kind-icon">clamp</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="particlewayutil.html#clampratio" class="tsd-kind-icon">clamp<wbr>Ratio</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="particlewayutil.html#getpositionwithmaxt" class="tsd-kind-icon">get<wbr>Position<wbr>With<wbr>MaxT</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="particlewayutil.html#gettindex" class="tsd-kind-icon">getTIndex</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>

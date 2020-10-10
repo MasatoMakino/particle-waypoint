@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PathSelectType | particle-waypoint</title>
+	<title>WaySelectType | particle-waypoint</title>
 	<meta name="description" content="Documentation for particle-waypoint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="pathselecttype.html">PathSelectType</a>
+					<a href="wayselecttype.html">WaySelectType</a>
 				</li>
 			</ul>
-			<h1>Enumeration PathSelectType</h1>
+			<h1>Enumeration WaySelectType</h1>
 		</div>
 	</div>
 </header>
@@ -73,8 +73,8 @@
 						<section class="tsd-index-section ">
 							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="pathselecttype.html#random" class="tsd-kind-icon">Random</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="pathselecttype.html#sequential" class="tsd-kind-icon">Sequential</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="wayselecttype.html#random" class="tsd-kind-icon">Random</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="wayselecttype.html#sequential" class="tsd-kind-icon">Sequential</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,7 +88,7 @@
 					<div class="tsd-signature tsd-kind-icon">Random<span class="tsd-signature-symbol">:</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c036309/src/ParticleGenerator.ts#L408">ParticleGenerator.ts:408</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L3">src/generator/MultipleParticleWays.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -98,7 +98,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sequential<span class="tsd-signature-symbol">:</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/c036309/src/ParticleGenerator.ts#L409">ParticleGenerator.ts:409</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/MultipleParticleWays.ts#L4">src/generator/MultipleParticleWays.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -114,16 +114,22 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="generationmode.html" class="tsd-kind-icon">Generation<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="generationmodeeventtype.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Event<wbr>Type</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-enum">
-						<a href="pathselecttype.html" class="tsd-kind-icon">Path<wbr>Select<wbr>Type</a>
+						<a href="wayselecttype.html" class="tsd-kind-icon">Way<wbr>Select<wbr>Type</a>
 						<ul>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="pathselecttype.html#random" class="tsd-kind-icon">Random</a>
+								<a href="wayselecttype.html#random" class="tsd-kind-icon">Random</a>
 							</li>
 							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="pathselecttype.html#sequential" class="tsd-kind-icon">Sequential</a>
+								<a href="wayselecttype.html#sequential" class="tsd-kind-icon">Sequential</a>
 							</li>
 						</ul>
 					</li>
@@ -133,22 +139,40 @@
 						<a href="../classes/bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="../classes/generationmodemanager.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/multipleparticleways.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/multipleparticlewaysoption.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="../classes/particle.html" class="tsd-kind-icon">Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/particleanimator.html" class="tsd-kind-icon">Particle<wbr>Animator</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/particlecontainer.html" class="tsd-kind-icon">Particle<wbr>Container</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
 					</li>
 					<li class=" tsd-kind-class">
+						<a href="../classes/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-class">
 						<a href="../classes/particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="../classes/particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="../classes/particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="../interfaces/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
 					</li>
 				</ul>
 			</nav>
@@ -174,10 +198,11 @@
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 		</div>
 	</div>

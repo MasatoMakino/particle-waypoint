@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>particle-waypoint</title>
+	<title>GenerationMode | particle-waypoint</title>
 	<meta name="description" content="Documentation for particle-waypoint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">particle-waypoint</a>
+					<a href="../index.html" class="title">particle-waypoint</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,10 +53,13 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="generationmode.html">GenerationMode</a>
 				</li>
 			</ul>
-			<h1>particle-waypoint</h1>
+			<h1>Enumeration GenerationMode</h1>
 		</div>
 	</div>
 </header>
@@ -68,31 +71,45 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumerations</h3>
+							<h3>Enumeration members</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum"><a href="enums/generationmode.html" class="tsd-kind-icon">Generation<wbr>Mode</a></li>
-								<li class="tsd-kind-enum"><a href="enums/generationmodeeventtype.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Event<wbr>Type</a></li>
-								<li class="tsd-kind-enum"><a href="enums/wayselecttype.html" class="tsd-kind-icon">Way<wbr>Select<wbr>Type</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="generationmode.html#loop" class="tsd-kind-icon">LOOP</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="generationmode.html#sequential" class="tsd-kind-icon">SEQUENTIAL</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class"><a href="classes/bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a></li>
-								<li class="tsd-kind-class"><a href="classes/generationmodemanager.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Manager</a></li>
-								<li class="tsd-kind-class"><a href="classes/multipleparticleways.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways</a></li>
-								<li class="tsd-kind-class"><a href="classes/multipleparticlewaysoption.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways<wbr>Option</a></li>
-								<li class="tsd-kind-class"><a href="classes/particle.html" class="tsd-kind-icon">Particle</a></li>
-								<li class="tsd-kind-class"><a href="classes/particleanimator.html" class="tsd-kind-icon">Particle<wbr>Animator</a></li>
-								<li class="tsd-kind-class"><a href="classes/particlecontainer.html" class="tsd-kind-icon">Particle<wbr>Container</a></li>
-								<li class="tsd-kind-class"><a href="classes/particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a></li>
-								<li class="tsd-kind-class"><a href="classes/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a></li>
-								<li class="tsd-kind-class"><a href="classes/particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a></li>
-								<li class="tsd-kind-class"><a href="classes/particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a></li>
-								<li class="tsd-kind-class"><a href="classes/particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a></li>
-								<li class="tsd-kind-class"><a href="classes/particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a></li>
-							</ul>
-						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="loop" class="tsd-anchor"></a>
+					<h3>LOOP</h3>
+					<div class="tsd-signature tsd-kind-icon">LOOP<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/GenerationModeManager.ts#L11">src/generator/GenerationModeManager.ts:11</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>終端にたどり着いたパーティクルを巻き戻して再利用する</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="sequential" class="tsd-anchor"></a>
+					<h3>SEQUENTIAL</h3>
+					<div class="tsd-signature tsd-kind-icon">SEQUENTIAL<span class="tsd-signature-symbol">:</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/generator/GenerationModeManager.ts#L7">src/generator/GenerationModeManager.ts:7</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>パーティクルを随時生成する</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -100,60 +117,72 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals current ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-enum">
+						<a href="generationmode.html" class="tsd-kind-icon">Generation<wbr>Mode</a>
+						<ul>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="generationmode.html#loop" class="tsd-kind-icon">LOOP</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="generationmode.html#sequential" class="tsd-kind-icon">SEQUENTIAL</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-enum">
-						<a href="enums/generationmode.html" class="tsd-kind-icon">Generation<wbr>Mode</a>
+						<a href="generationmodeeventtype.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Event<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-enum">
-						<a href="enums/generationmodeeventtype.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Event<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum">
-						<a href="enums/wayselecttype.html" class="tsd-kind-icon">Way<wbr>Select<wbr>Type</a>
+						<a href="wayselecttype.html" class="tsd-kind-icon">Way<wbr>Select<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a>
+						<a href="../classes/bezierutil.html" class="tsd-kind-icon">Bezier<wbr>Util</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/generationmodemanager.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Manager</a>
+						<a href="../classes/generationmodemanager.html" class="tsd-kind-icon">Generation<wbr>Mode<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/multipleparticleways.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways</a>
+						<a href="../classes/multipleparticleways.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/multipleparticlewaysoption.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways<wbr>Option</a>
+						<a href="../classes/multipleparticlewaysoption.html" class="tsd-kind-icon">Multiple<wbr>Particle<wbr>Ways<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particle.html" class="tsd-kind-icon">Particle</a>
+						<a href="../classes/particle.html" class="tsd-kind-icon">Particle</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particleanimator.html" class="tsd-kind-icon">Particle<wbr>Animator</a>
+						<a href="../classes/particleanimator.html" class="tsd-kind-icon">Particle<wbr>Animator</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particlecontainer.html" class="tsd-kind-icon">Particle<wbr>Container</a>
+						<a href="../classes/particlecontainer.html" class="tsd-kind-icon">Particle<wbr>Container</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
+						<a href="../classes/particlegenerator.html" class="tsd-kind-icon">Particle<wbr>Generator</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
+						<a href="../classes/particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
+						<a href="../classes/particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a>
+						<a href="../classes/particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
+						<a href="../classes/particleway.html" class="tsd-kind-icon">Particle<wbr>Way</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
+						<a href="../classes/particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
 					</li>
 				</ul>
 			</nav>
@@ -192,6 +221,6 @@
 	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
