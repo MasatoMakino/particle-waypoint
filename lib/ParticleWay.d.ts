@@ -34,6 +34,12 @@ export declare class ParticleWay {
      */
     getPoint(t: number): number[] | null;
     /**
+     * getPointのうち、制限にかかる値を取得する。
+     * @param t
+     * @private
+     */
+    private getLimitPoint;
+    /**
      * 線分上の中間点座標を取得する
      * @param pos1 線分の始点
      * @param pos2 線分の終点

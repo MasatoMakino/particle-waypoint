@@ -1,6 +1,7 @@
 /**
  * 中間点の座標の算出が可能な経路を表すクラス
  */
+import { Particle } from "./Particle";
 import { BezierUtil } from "./BezierUtil";
 export class ParticleWay {
     /**
@@ -74,23 +75,32 @@ export class ParticleWay {
      * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
      */
     getPoint(t) {
-        if (!this._points || this._points.length === 0) {
-            return null;
-        }
-        if (this._points.length === 1) {
-            return [...this._points[0]];
-        }
-        t = ParticleWayUtil.clamp(t, 1.0, 0.0);
-        if (t === 1.0) {
-            return ParticleWayUtil.getPositionWithMaxT(this._points);
-        }
-        if (t === 0.0)
-            return [...this._points[0]];
+        t = ParticleWayUtil.clampRatio(t);
+        const limited = this.getLimitPoint(t);
+        if (limited !== false)
+            return limited;
         const i = ParticleWayUtil.getTIndex(t, this._ratioTable);
         const floorPoint = this._points[i];
         const ceilPoint = this._points[i + 1];
         const ratioBase = this._ratioTable[i];
         return this.getCenterPoint(floorPoint, ceilPoint, (t - ratioBase) / (this._ratioTable[i + 1] - ratioBase));
+    }
+    /**
+     * getPointのうち、制限にかかる値を取得する。
+     * @param t
+     * @private
+     */
+    getLimitPoint(t) {
+        if (!this._points || this._points.length === 0) {
+            return null;
+        }
+        if (t === Particle.MAX_RATIO) {
+            return ParticleWayUtil.getPositionWithMaxT(this._points);
+        }
+        if (this._points.length === 1 || t === Particle.MIN_RATIO) {
+            return [...this._points[0]];
+        }
+        return false;
     }
     /**
      * 線分上の中間点座標を取得する
@@ -115,6 +125,9 @@ export class ParticleWay {
 class ParticleWayUtil {
     static clamp(val, max, min) {
         return Math.min(Math.max(val, min), max);
+    }
+    static clampRatio(val) {
+        return this.clamp(val, Particle.MAX_RATIO, Particle.MIN_RATIO);
     }
     static getPositionWithMaxT(points) {
         const n = points.length;

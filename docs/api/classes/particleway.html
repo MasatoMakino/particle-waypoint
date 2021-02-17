@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for particle-waypoint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -53,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">particle-waypoint</a>
 				</li>
 				<li>
 					<a href="particleway.html">ParticleWay</a>
@@ -118,13 +117,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Particle<wbr>Way<span class="tsd-signature-symbol">(</span>points<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="particleway.html" class="tsd-signature-type">ParticleWay</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Particle<wbr>Way<span class="tsd-signature-symbol">(</span>points<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="particleway.html" class="tsd-signature-type" data-tsd-kind="Class">ParticleWay</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L10">src/ParticleWay.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L10">src/ParticleWay.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -137,16 +136,14 @@
 								<li>
 									<h5>points: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>経路を表す座標の配列。要素数によってどのようなパスかが判定される。
-												要素数2 : 2次元パス
-												要素数3 : 3次元パス
-											要素数6 : 平面3次元ベジェ曲線</p>
-										</div>
+										<p>経路を表す座標の配列。要素数によってどのようなパスかが判定される。
+											要素数2 : 2次元パス
+											要素数3 : 3次元パス
+										要素数6 : 平面3次元ベジェ曲線</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="particleway.html" class="tsd-signature-type">ParticleWay</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="particleway.html" class="tsd-signature-type" data-tsd-kind="Class">ParticleWay</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -159,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">_points<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L9">src/ParticleWay.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L9">src/ParticleWay.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">_ratio<wbr>Table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L10">src/ParticleWay.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L10">src/ParticleWay.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,7 +176,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L8">src/ParticleWay.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L8">src/ParticleWay.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -197,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L65">src/ParticleWay.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L65">src/ParticleWay.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -210,7 +207,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L27">src/ParticleWay.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L27">src/ParticleWay.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -243,7 +240,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L135">src/ParticleWay.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L135">src/ParticleWay.ts:135</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -280,13 +277,13 @@
 					<a name="getlimitpoint" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>Limit<wbr>Point</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Limit<wbr>Point<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Limit<wbr>Point<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L114">src/ParticleWay.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L114">src/ParticleWay.ts:114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -300,7 +297,7 @@
 									<h5>t: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -308,13 +305,13 @@
 					<a name="getpoint" class="tsd-anchor"></a>
 					<h3>get<wbr>Point</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Point<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Point<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L93">src/ParticleWay.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L93">src/ParticleWay.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -331,7 +328,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -345,7 +342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L49">src/ParticleWay.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L49">src/ParticleWay.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -368,7 +365,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L32">src/ParticleWay.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L32">src/ParticleWay.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -385,7 +382,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/9c225c7/src/ParticleWay.ts#L74">src/ParticleWay.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/MasatoMakino/particle-waypoint/blob/eddac2c/src/ParticleWay.ts#L74">src/ParticleWay.ts:74</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -413,8 +410,8 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -445,9 +442,6 @@
 						<a href="particle.html" class="tsd-kind-icon">Particle</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="particleanimator.html" class="tsd-kind-icon">Particle<wbr>Animator</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="particlecontainer.html" class="tsd-kind-icon">Particle<wbr>Container</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -455,12 +449,6 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="particlegeneratoroption.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Option</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="particlegeneratorutility.html" class="tsd-kind-icon">Particle<wbr>Generator<wbr>Utility</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="particlevalve.html" class="tsd-kind-icon">Particle<wbr>Valve</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -504,9 +492,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class">
-						<a href="particlewayutil.html" class="tsd-kind-icon">Particle<wbr>Way<wbr>Util</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -533,9 +518,6 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 		</div>
 	</div>

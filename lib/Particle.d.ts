@@ -9,6 +9,8 @@ export declare class Particle {
     protected path: ParticleWay;
     private _visible;
     ease: (number: any) => number;
+    static MAX_RATIO: number;
+    static MIN_RATIO: number;
     /**
      * 指定されたパスに沿って移動するパーティクルを生成する。
      * @param path
@@ -22,7 +24,7 @@ export declare class Particle {
     update(t: number): number;
     /**
      * パーティクル位置を指定された量移動する。
-     * @param t 移動量
+     * @param t 移動量 0.0 ~ 1.0
      */
     add(t: number): number;
     /**

@@ -27,7 +27,7 @@ export class Particle {
     }
     /**
      * パーティクル位置を指定された量移動する。
-     * @param t 移動量
+     * @param t 移動量 0.0 ~ 1.0
      */
     add(t) {
         return this.update(this._ratio + t);
@@ -47,3 +47,5 @@ export class Particle {
     }
     dispose() { }
 }
+Particle.MAX_RATIO = 1.0;
+Particle.MIN_RATIO = 0.0;
