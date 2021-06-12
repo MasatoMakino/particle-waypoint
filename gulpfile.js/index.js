@@ -2,8 +2,8 @@
 
 const { series } = require("gulp");
 
-const doc = require("gulptask-tsdoc").get();
-const { tsc, tscClean, watchTsc } = require("gulptask-tsc").get({
+const doc = require("gulptask-tsdoc").generateTask();
+const { tsc, tscClean, watchTsc } = require("gulptask-tsc").generateTasks({
   projects: ["tsconfig.cjs.json", "tsconfig.esm.json"],
 });
 
