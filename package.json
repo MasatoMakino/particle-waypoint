@@ -28,7 +28,8 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "test": "jest --coverage",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
     "build": "npm run buildTS && npm run typedocs",
     "buildTS": "npx tsc --project tsconfig.cjs.json & npx tsc --project tsconfig.esm.json",
