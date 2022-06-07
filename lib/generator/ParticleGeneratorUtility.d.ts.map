@@ -1,1 +1,0 @@
-{"version":3,"file":"ParticleGeneratorUtility.d.ts","sourceRoot":"","sources":["../../src/generator/ParticleGeneratorUtility.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,qBAAa,wBAAwB;IACnC;;;;OAIG;WACW,QAAQ,CAAC,QAAQ,EAAE,MAAM,EAAE,WAAW,EAAE,MAAM,GAAG,MAAM;IAIrE;;;;OAIG;WACW,WAAW,CAAC,KAAK,EAAE,MAAM,EAAE,WAAW,EAAE,MAAM,GAAG,MAAM;CAGtE"}

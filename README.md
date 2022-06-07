@@ -2,7 +2,6 @@
 
 > Path module for calculating waypoints.
 
-[![Build Status](https://travis-ci.com/MasatoMakino/particle-waypoint.svg?branch=master)](https://travis-ci.com/MasatoMakino/particle-waypoint)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8f61441c3c7b97b4bed8/maintainability)](https://codeclimate.com/github/MasatoMakino/particle-waypoint/maintainability)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
@@ -14,8 +13,8 @@
 
 ### Install
 
-```shell script
-npm install https://github.com/MasatoMakino/particle-waypoint.git --save-dev
+```shell
+npm install @masatomakino/particle-waypoint --save-dev
 ```
 
 ### Import
@@ -25,7 +24,11 @@ particle-waypoint is composed of ES6 modules and TypeScript d.ts files.
 At first, import classes.
 
 ```js
-import { ParticleWay, Particle, ParticleGenerator } from "particle-waypoint";
+import {
+  ParticleWay,
+  Particle,
+  ParticleGenerator,
+} from "@masatomakino/particle-waypoint";
 ```
 
 ### Create particle way
@@ -55,7 +58,7 @@ Particles animate on `wayPoint`.
 ## Uninstall
 
 ```shell script
-npm uninstall https://github.com/MasatoMakino/particle-waypoint.git --save-dev
+npm uninstall @masatomakino/particle-waypoint --save-dev
 ```
 
 ## License
