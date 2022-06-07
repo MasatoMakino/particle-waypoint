@@ -33,6 +33,6 @@
     "watch:tsc": "npx tsc -W --incremental --project tsconfig.json & npx tsc -W --incremental --project tsconfig.esm.json"
   },
   "dependencies": {
-    "raf-ticker": "https://github.com/MasatoMakino/raf-ticker.git"
+    "@masatomakino/raf-ticker": "0.2.9"
   }
 }

@@ -1,4 +1,8 @@
-import { RAFTicker, RAFTickerEvent, RAFTickerEventType } from "raf-ticker";
+import {
+  RAFTicker,
+  RAFTickerEvent,
+  RAFTickerEventType,
+} from "@masatomakino/raf-ticker";
 import { getTestGenerators } from "./ParticleGenerator.common";
 import { ParticleGenerator } from "../src/index";
 
