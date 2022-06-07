@@ -23,9 +23,13 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
+    "prepare": "husky install",
     "test": "jest --coverage",
-    "start_dev": "gulp start_dev",
-    "build": "gulp build"
+    "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
+    "build": "npm run buildTS && npm run typedocs",
+    "buildTS": "npx tsc --project tsconfig.json & npx tsc --project tsconfig.esm.json",
+    "typedocs": "npx typedoc --out ./docs/api src/index.ts",
+    "watch:tsc": "npx tsc -W --incremental --project tsconfig.json & npx tsc -W --incremental --project tsconfig.esm.json"
   },
   "dependencies": {
     "raf-ticker": "https://github.com/MasatoMakino/raf-ticker.git"
