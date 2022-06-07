@@ -1,5 +1,5 @@
 {
-  "name": "particle-waypoint",
+  "name": "@masatomakino/particle-waypoint",
   "version": "0.5.2",
   "description": "Path module for calculating waypoints.",
   "main": "./lib/index.js",
@@ -9,7 +9,10 @@
     "lib",
     "esm"
   ],
-  "repository": "https://MasatoMakino@github.com/MasatoMakino/particle-waypoint.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://MasatoMakino@github.com/MasatoMakino/particle-waypoint.git"
+  },
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -34,5 +37,13 @@
   },
   "dependencies": {
     "@masatomakino/raf-ticker": "0.2.9"
+  },
+  "bugs": {
+    "url": "https://github.com/MasatoMakino/particle-waypoint/issues"
+  },
+  "homepage": "https://github.com/MasatoMakino/particle-waypoint#readme",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
   }
 }
