@@ -24,6 +24,7 @@
     "prettier": "^2.6.2",
     "pretty-quick": "^3.1.3",
     "ts-jest": "^28.0.4",
+    "typedoc": "^0.23.24",
     "typescript": "^4.7.3"
   },
   "scripts": {
@@ -32,9 +33,9 @@
     "coverage": "jest --coverage",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
     "build": "npm run buildTS && npm run typedocs",
-    "buildTS": "npx tsc --project tsconfig.cjs.json & npx tsc --project tsconfig.esm.json",
-    "typedocs": "npx typedoc --out ./docs/api src/index.ts",
-    "watch:tsc": "npx tsc -W --incremental --project tsconfig.json & npx tsc -W --incremental --project tsconfig.esm.json"
+    "buildTS": "tsc --project tsconfig.cjs.json & tsc --project tsconfig.esm.json",
+    "typedocs": "typedoc --out ./docs/api src/index.ts",
+    "watch:tsc": "tsc -W --incremental --project tsconfig.json & tsc -W --incremental --project tsconfig.esm.json"
   },
   "dependencies": {
     "@masatomakino/raf-ticker": "0.2.9"
