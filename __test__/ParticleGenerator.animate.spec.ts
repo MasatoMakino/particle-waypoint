@@ -1,8 +1,4 @@
-import {
-  RAFTicker,
-  RAFTickerEvent,
-  RAFTickerEventType,
-} from "@masatomakino/raf-ticker";
+import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
 import { GenerationMode, ParticleGenerator } from "../src";
 import { getTestGenerators } from "./ParticleGenerator.common";
 
@@ -12,9 +8,9 @@ describe("ParticleGenerator", () => {
     const container = generator.particleContainer;
     generator.play();
 
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(200, 200));
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(400, 400));
+    RAFTicker.emit("tick", new RAFTickerEventContext(0, 0));
+    RAFTicker.emit("tick", new RAFTickerEventContext(200, 200));
+    RAFTicker.emit("tick", new RAFTickerEventContext(400, 400));
 
     expect(container.particles.length).toBe(1);
     expect(container.particles[0].ratio).toBeCloseTo(0.021);
@@ -25,8 +21,8 @@ describe("ParticleGenerator", () => {
     const container = generator.particleContainer;
     generator.play();
 
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(20000, 20000));
+    RAFTicker.emit("tick", new RAFTickerEventContext(0, 0));
+    RAFTicker.emit("tick", new RAFTickerEventContext(20000, 20000));
 
     expect(container.particles.length).toBe(47);
     expect(container.particles[0].ratio).toBeCloseTo(0.98);
@@ -38,8 +34,8 @@ describe("ParticleGenerator", () => {
     generator.play();
     generator.valve.close();
 
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(20000, 20000));
+    RAFTicker.emit("tick", new RAFTickerEventContext(0, 0));
+    RAFTicker.emit("tick", new RAFTickerEventContext(20000, 20000));
 
     expect(container.particles.length).toBe(0);
   });
@@ -50,7 +46,7 @@ describe("ParticleGenerator", () => {
     generator.modeManager.mode = GenerationMode.LOOP;
     generator.play();
 
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
+    RAFTicker.emit("tick", new RAFTickerEventContext(0, 0));
 
     expect(container.particles.length).toBe(48);
     expect(container.particles[0].ratio).toBeCloseTo(0.0);
@@ -80,7 +76,7 @@ describe("ParticleGenerator", () => {
     expect(generator.particleContainer).toBeNull();
 
     generator.play();
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
+    RAFTicker.emit("tick", new RAFTickerEventContext(0, 0));
     expect(generator.particleContainer).toBeNull();
   });
 
@@ -92,7 +88,7 @@ describe("ParticleGenerator", () => {
     expect(generator.particleContainer).toBeNull();
 
     generator.play();
-    RAFTicker.emit(RAFTickerEventType.tick, new RAFTickerEvent(0, 0));
+    RAFTicker.emit("tick", new RAFTickerEventContext(0, 0));
     expect(generator.particleContainer).toBeNull();
   });
 });
