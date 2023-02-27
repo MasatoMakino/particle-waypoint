@@ -17,7 +17,7 @@ describe("ParticleGenerator", () => {
     expect(generator.modeManager).toBeTruthy();
     expect(generator.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
     expect(generator.particleContainer.visible).toBe(true);
-    expect(generator.multipleWays.waySelectType).toBe(WaySelectType.Sequential);
+    expect(generator.multipleWays.waySelectType).toBe("sequential");
   });
 
   test("constructor : array of way", () => {
