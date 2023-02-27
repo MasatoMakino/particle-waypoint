@@ -1,11 +1,7 @@
 import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
 import { Particle } from "../Particle";
 import { ParticleWay } from "../ParticleWay";
-import {
-  GenerationMode,
-  GenerationModeEventType,
-  GenerationModeManager,
-} from "./GenerationModeManager";
+import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
 import { MultipleParticleWays } from "./MultipleParticleWays";
 import { ParticleAnimator } from "./ParticleAnimator";
 import { ParticleContainer } from "./ParticleContainer";
@@ -54,15 +50,12 @@ export class ParticleGenerator {
       this.modeManager,
       this.particleContainer
     );
-    this.modeManager.on(
-      GenerationModeEventType.change,
-      (val: GenerationMode) => {
-        if (this._isPlaying) {
-          this.stop();
-          this.play();
-        }
+    this.modeManager.on("change", (val: GenerationMode) => {
+      if (this._isPlaying) {
+        this.stop();
+        this.play();
       }
-    );
+    });
 
     option = ParticleGeneratorOption.initOption(option);
     this.modeManager.mode = option.generationMode;

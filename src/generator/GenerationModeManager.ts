@@ -2,10 +2,10 @@ import { EventEmitter } from "eventemitter3";
 
 export type GenerationMode = "sequential" | "loop";
 
-export enum GenerationModeEventType {
-  change = "GenerationModeEventType_Change",
+export interface GenerationModeEvent {
+  change: GenerationMode;
 }
-export class GenerationModeManager extends EventEmitter {
+export class GenerationModeManager extends EventEmitter<GenerationModeEvent> {
   private _mode: GenerationMode = "sequential";
   get mode(): GenerationMode {
     return this._mode;
@@ -14,7 +14,7 @@ export class GenerationModeManager extends EventEmitter {
     if (value === this._mode) return;
     this._mode = value;
 
-    this.emit(GenerationModeEventType.change, this._mode);
+    this.emit("change", this._mode);
   }
 
   constructor() {
