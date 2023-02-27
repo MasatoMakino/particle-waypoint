@@ -78,10 +78,10 @@ export class ParticleGenerator {
     this._isPlaying = true;
 
     switch (this.modeManager.mode) {
-      case GenerationMode.LOOP:
+      case "loop":
         RAFTicker.addListener("tick", this.loop);
         break;
-      case GenerationMode.SEQUENTIAL:
+      case "sequential":
         RAFTicker.addListener("tick", this.animate);
         break;
     }
@@ -220,7 +220,7 @@ export class ParticleGeneratorOption {
     option?: ParticleGeneratorOption
   ): ParticleGeneratorOption {
     option ??= {};
-    option.generationMode ??= GenerationMode.SEQUENTIAL;
+    option.generationMode ??= "sequential";
     option.probability ??= 1.0;
     return option;
   }

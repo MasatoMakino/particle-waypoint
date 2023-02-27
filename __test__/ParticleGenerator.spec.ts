@@ -15,7 +15,7 @@ describe("ParticleGenerator", () => {
     expect(generator.animator.generationInterval).toBe(300);
     expect(generator.probability).toBe(1.0);
     expect(generator.modeManager).toBeTruthy();
-    expect(generator.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
+    expect(generator.modeManager.mode).toBe("sequential");
     expect(generator.particleContainer.visible).toBe(true);
     expect(generator.multipleWays.waySelectType).toBe("sequential");
   });
@@ -27,18 +27,18 @@ describe("ParticleGenerator", () => {
 
   test("constructor : empty option", () => {
     const gen = new ParticleGenerator(way, {});
-    expect(gen.modeManager.mode).toBe(GenerationMode.SEQUENTIAL);
+    expect(gen.modeManager.mode).toBe("sequential");
     expect(gen.animator.ease).toBeFalsy();
     expect(gen.probability).toBe(1.0);
   });
 
   test("constructor : option", () => {
     const gen = new ParticleGenerator(way, {
-      generationMode: GenerationMode.LOOP,
+      generationMode: "loop",
       ease: (n) => n,
       probability: 0.8,
     });
-    expect(gen.modeManager.mode).toBe(GenerationMode.LOOP);
+    expect(gen.modeManager.mode).toBe("loop");
     expect(gen.animator.ease).toBeTruthy();
     expect(gen.probability).toBe(0.8);
   });
@@ -53,11 +53,11 @@ describe("ParticleGenerator", () => {
 
   test("play : loop", () => {
     const gen = new ParticleGenerator(way, {
-      generationMode: GenerationMode.LOOP,
+      generationMode: "loop",
     });
     gen.play();
     expect(gen.isPlaying).toBe(true);
-    expect(gen.modeManager.mode).toBe(GenerationMode.LOOP);
+    expect(gen.modeManager.mode).toBe("loop");
 
     gen.valve.close();
     expect(spyWarn).toBeCalled();
@@ -129,7 +129,7 @@ describe("ParticleGenerator", () => {
 
   test("update ease : loop", () => {
     const gen = new ParticleGenerator(way, {
-      generationMode: GenerationMode.LOOP,
+      generationMode: "loop",
     });
     const easing = (n) => {
       return n;
@@ -154,7 +154,7 @@ describe("ParticleGenerator", () => {
     expect(spyTrace).toBeCalledTimes(0);
     expect(gen.animator.generationInterval).toBe(500);
 
-    gen.modeManager.mode = GenerationMode.LOOP;
+    gen.modeManager.mode = "loop";
     gen.animator.generationInterval = 800;
     expect(spyWarn).toBeCalledTimes(1);
     expect(spyTrace).toBeCalledTimes(1);

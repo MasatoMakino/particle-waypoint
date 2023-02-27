@@ -30,7 +30,7 @@ export class ParticleContainer {
 
   constructor(modeManager: GenerationModeManager) {
     modeManager.on(GenerationModeEventType.change, (mode: GenerationMode) => {
-      if (mode === GenerationMode.LOOP) {
+      if (mode === "loop") {
         this.removeAll();
       }
     });
