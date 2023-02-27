@@ -55,13 +55,15 @@ export class ParticleContainer {
    * 寿命切れのパーティクルを一括で削除する。
    */
   public removeCompletedParticles(): void {
-    const removed = this._particles
+    //remove particles
+    this._particles
       .filter((p) => {
         return p.ratio >= 1.0;
       })
       .forEach((p) => {
         p.dispose();
       });
+    //update particle array
     this._particles = this._particles.filter((p) => {
       return p.ratio < 1.0;
     });
