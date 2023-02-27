@@ -3,7 +3,7 @@ import { EventEmitter } from "eventemitter3";
 export type GenerationMode = "sequential" | "loop";
 
 export interface GenerationModeEvent {
-  change: GenerationMode;
+  change: (mode: GenerationMode) => void;
 }
 export class GenerationModeManager extends EventEmitter<GenerationModeEvent> {
   private _mode: GenerationMode = "sequential";
