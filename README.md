@@ -49,7 +49,7 @@ const wayPoint = new ParticleWay(points);
 
 ```js
 const generator = new ParticleGenerator(wayPoint, {
-  generationMode: GenerationMode.LOOP,
+  generationMode: "loop",
 });
 generator.animator.setSpeed(600, 20);
 generator.play();
