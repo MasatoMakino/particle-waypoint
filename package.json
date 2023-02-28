@@ -38,7 +38,7 @@
     "watch:tsc": "tsc -W --incremental --project tsconfig.json & tsc -W --incremental --project tsconfig.esm.json"
   },
   "dependencies": {
-    "@masatomakino/raf-ticker": "^0.4.1"
+    "@masatomakino/raf-ticker": "^0.4.2"
   },
   "bugs": {
     "url": "https://github.com/MasatoMakino/particle-waypoint/issues"
