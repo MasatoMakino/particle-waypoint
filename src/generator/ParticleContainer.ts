@@ -1,9 +1,5 @@
 import { Particle } from "../Particle";
-import {
-  GenerationMode,
-  GenerationModeEventType,
-  GenerationModeManager,
-} from "./GenerationModeManager";
+import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
 
 /**
  * 複数のパーティクルを格納、移動、管理するためのクラスです。
@@ -29,8 +25,8 @@ export class ParticleContainer {
   }
 
   constructor(modeManager: GenerationModeManager) {
-    modeManager.on(GenerationModeEventType.change, (mode: GenerationMode) => {
-      if (mode === GenerationMode.LOOP) {
+    modeManager.on("change", (mode: GenerationMode) => {
+      if (mode === "loop") {
         this.removeAll();
       }
     });
@@ -59,13 +55,15 @@ export class ParticleContainer {
    * 寿命切れのパーティクルを一括で削除する。
    */
   public removeCompletedParticles(): void {
-    const removed = this._particles
+    //remove particles
+    this._particles
       .filter((p) => {
         return p.ratio >= 1.0;
       })
       .forEach((p) => {
         p.dispose();
       });
+    //update particle array
     this._particles = this._particles.filter((p) => {
       return p.ratio < 1.0;
     });

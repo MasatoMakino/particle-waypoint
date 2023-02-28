@@ -1,8 +1,6 @@
 import { ParticleWay } from "../ParticleWay";
-export enum WaySelectType {
-  Random,
-  Sequential,
-}
+export type WaySelectType = "random" | "sequential";
+
 /**
  * このクラスは、ParticleGeneratorに設定された複数の経路を管理するためのものです。
  */
@@ -24,10 +22,10 @@ export class MultipleParticleWays {
   public getParticleWay(): ParticleWay {
     let index;
     switch (this.waySelectType) {
-      case WaySelectType.Sequential:
+      case "sequential":
         index = this.waySelectionCount;
         break;
-      case WaySelectType.Random:
+      case "random":
         index = Math.floor(Math.random() * this.ways.length);
         break;
     }
@@ -48,7 +46,7 @@ export class MultipleParticleWaysOption {
     if (!Array.isArray(option.ways)) {
       option.ways = [option.ways];
     }
-    option.type ??= WaySelectType.Sequential;
+    option.type ??= "sequential";
     return option;
   }
 }

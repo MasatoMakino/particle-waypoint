@@ -34,7 +34,7 @@ export class ParticleValve {
   }
 
   private warnUpdateValveMode(): void {
-    if (this._modeManager.mode !== GenerationMode.LOOP) return;
+    if (this._modeManager.mode !== "loop") return;
     console.warn(
       "ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。"
     );

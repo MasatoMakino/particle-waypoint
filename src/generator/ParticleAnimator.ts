@@ -11,7 +11,7 @@ export class ParticleAnimator {
     if (this._generationInterval === value) return;
     this._generationInterval = value;
 
-    if (this._modeManager.mode === GenerationMode.LOOP) {
+    if (this._modeManager.mode === "loop") {
       console.warn(
         "ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。"
       );
@@ -77,13 +77,13 @@ export class ParticleAnimator {
    */
   updateEase(ease: (number) => number, override: boolean = true) {
     this._ease = ease;
-    if (!override && this._modeManager.mode === GenerationMode.LOOP) {
+    if (!override && this._modeManager.mode === "loop") {
       console.warn(
         "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
       );
       console.trace();
     }
-    if (override || this._modeManager.mode === GenerationMode.LOOP) {
+    if (override || this._modeManager.mode === "loop") {
       this._particleContainer.overrideEase(ease);
     }
   }

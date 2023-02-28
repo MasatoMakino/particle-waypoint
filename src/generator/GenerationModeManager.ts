@@ -1,21 +1,12 @@
 import { EventEmitter } from "eventemitter3";
 
-export enum GenerationMode {
-  /**
-   * パーティクルを随時生成する
-   */
-  SEQUENTIAL,
-  /**
-   * 終端にたどり着いたパーティクルを巻き戻して再利用する
-   */
-  LOOP,
-}
+export type GenerationMode = "sequential" | "loop";
 
-export enum GenerationModeEventType {
-  change = "GenerationModeEventType_Change",
+export interface GenerationModeEvent {
+  change: (mode: GenerationMode) => void;
 }
-export class GenerationModeManager extends EventEmitter {
-  private _mode: GenerationMode = GenerationMode.SEQUENTIAL;
+export class GenerationModeManager extends EventEmitter<GenerationModeEvent> {
+  private _mode: GenerationMode = "sequential";
   get mode(): GenerationMode {
     return this._mode;
   }
@@ -23,7 +14,7 @@ export class GenerationModeManager extends EventEmitter {
     if (value === this._mode) return;
     this._mode = value;
 
-    this.emit(GenerationModeEventType.change, this._mode);
+    this.emit("change", this._mode);
   }
 
   constructor() {

@@ -1,15 +1,7 @@
-import {
-  RAFTicker,
-  RAFTickerEvent,
-  RAFTickerEventType,
-} from "@masatomakino/raf-ticker";
+import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
 import { Particle } from "../Particle";
 import { ParticleWay } from "../ParticleWay";
-import {
-  GenerationMode,
-  GenerationModeEventType,
-  GenerationModeManager,
-} from "./GenerationModeManager";
+import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
 import { MultipleParticleWays } from "./MultipleParticleWays";
 import { ParticleAnimator } from "./ParticleAnimator";
 import { ParticleContainer } from "./ParticleContainer";
@@ -58,15 +50,12 @@ export class ParticleGenerator {
       this.modeManager,
       this.particleContainer
     );
-    this.modeManager.on(
-      GenerationModeEventType.change,
-      (val: GenerationMode) => {
-        if (this._isPlaying) {
-          this.stop();
-          this.play();
-        }
+    this.modeManager.on("change", (val: GenerationMode) => {
+      if (this._isPlaying) {
+        this.stop();
+        this.play();
       }
-    );
+    });
 
     option = ParticleGeneratorOption.initOption(option);
     this.modeManager.mode = option.generationMode;
@@ -82,11 +71,11 @@ export class ParticleGenerator {
     this._isPlaying = true;
 
     switch (this.modeManager.mode) {
-      case GenerationMode.LOOP:
-        RAFTicker.addListener(RAFTickerEventType.tick, this.loop);
+      case "loop":
+        RAFTicker.addListener("tick", this.loop);
         break;
-      case GenerationMode.SEQUENTIAL:
-        RAFTicker.addListener(RAFTickerEventType.tick, this.animate);
+      case "sequential":
+        RAFTicker.addListener("tick", this.animate);
         break;
     }
   }
@@ -97,15 +86,15 @@ export class ParticleGenerator {
   public stop(): void {
     if (!this._isPlaying) return;
     this._isPlaying = false;
-    RAFTicker.removeListener(RAFTickerEventType.tick, this.loop);
-    RAFTicker.removeListener(RAFTickerEventType.tick, this.animate);
+    RAFTicker.removeListener("tick", this.loop);
+    RAFTicker.removeListener("tick", this.animate);
   }
 
   /**
    * パーティクルをアニメーションさせる。
    * @param e
    */
-  private animate = (e: RAFTickerEvent) => {
+  private animate = (e: RAFTickerEventContext) => {
     if (this._isDisposed) return;
 
     this.animator.move(e.delta);
@@ -140,7 +129,7 @@ export class ParticleGenerator {
    * パーティクルをループアニメーションさせる。
    * @param e
    */
-  private loop = (e: RAFTickerEvent) => {
+  private loop = (e: RAFTickerEventContext) => {
     if (this._isDisposed) return;
 
     if (this.particleContainer.particles.length === 0) {
@@ -224,7 +213,7 @@ export class ParticleGeneratorOption {
     option?: ParticleGeneratorOption
   ): ParticleGeneratorOption {
     option ??= {};
-    option.generationMode ??= GenerationMode.SEQUENTIAL;
+    option.generationMode ??= "sequential";
     option.probability ??= 1.0;
     return option;
   }
