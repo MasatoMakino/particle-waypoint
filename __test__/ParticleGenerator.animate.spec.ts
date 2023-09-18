@@ -1,6 +1,5 @@
 import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
-import { GenerationMode, ParticleGenerator } from "../src";
-import { getTestGenerators } from "./ParticleGenerator.common";
+import { getTestGenerators } from "./ParticleGenerator.common.js";
 
 describe("ParticleGenerator", () => {
   test("animate", () => {

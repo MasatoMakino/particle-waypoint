@@ -1,4 +1,4 @@
-import { Particle, ParticleWay } from "../src/index";
+import { Particle, ParticleWay } from "../src/index.js";
 
 const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
 

@@ -2,11 +2,21 @@
   "name": "@masatomakino/particle-waypoint",
   "version": "0.6.1",
   "description": "Path module for calculating waypoints.",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
-  "module": "./esm/index.js",
+  "type": "module",
+"exports": {
+  ".": {
+    "import": {
+      "types": "./esm/index.d.ts",
+      "default": "./esm/index.js"
+    },
+    "default": {
+      "types": "./esm/index.d.ts",
+      "default": "./esm/index.js"
+    }
+  }
+},
+  "types": "./esm/index.d.ts",
   "files": [
-    "lib",
     "esm"
   ],
   "repository": {
@@ -39,9 +49,9 @@
     "preversion": "git checkout main && git pull && npm ci && npm run test",
     "postversion": "git add package.json package-lock.json && git checkout -b version/$(git describe --tags --abbrev=0)",
     "build": "npm run buildTS && npm run typedocs",
-    "buildTS": "tsc --project tsconfig.cjs.json & tsc --project tsconfig.esm.json",
+    "buildTS": "tsc",
     "typedocs": "typedoc --out ./docs/api src/index.ts",
-    "watch:tsc": "tsc -W --incremental --project tsconfig.json & tsc -W --incremental --project tsconfig.esm.json"
+    "watch:tsc": "tsc -W -incremental"
   },
   "bugs": {
     "url": "https://github.com/MasatoMakino/particle-waypoint/issues"
@@ -49,7 +59,7 @@
   "homepage": "https://github.com/MasatoMakino/particle-waypoint#readme",
   "directories": {
     "doc": "docs",
-    "lib": "lib"
+    "lib": "esm"
   },
   "lint-staged": {
     "*.{js,ts,css,md}": "prettier --write"

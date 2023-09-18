@@ -1,4 +1,4 @@
-import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
+import { GenerationModeManager } from "./GenerationModeManager.js";
 
 /**
  * パーティクル新規生成のバルブ開閉を行うクラス
@@ -36,7 +36,7 @@ export class ParticleValve {
   private warnUpdateValveMode(): void {
     if (this._modeManager.mode !== "loop") return;
     console.warn(
-      "ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。"
+      "ParticleGenerator : ループ指定中にバルブ開閉操作を行いました。この操作はループ指定中には反映されません。",
     );
     console.trace();
   }

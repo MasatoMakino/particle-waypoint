@@ -1,4 +1,4 @@
-import { ParticleGeneratorUtility } from "../src/generator/ParticleGeneratorUtility";
+import { ParticleGeneratorUtility } from "../src/generator/ParticleGeneratorUtility.js";
 
 describe("ParticleGeneratorUtility", () => {
   test("interval", () => {
@@ -6,7 +6,7 @@ describe("ParticleGeneratorUtility", () => {
   });
   test("speed", () => {
     expect(ParticleGeneratorUtility.getSpeed(300, 4)).toBeCloseTo(
-      (1.0 / 1200) * 1000
+      (1.0 / 1200) * 1000,
     );
   });
 });

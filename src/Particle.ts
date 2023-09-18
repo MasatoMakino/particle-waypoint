@@ -1,4 +1,4 @@
-import { ParticleWay } from "./ParticleWay";
+import { ParticleWay } from "./ParticleWay.js";
 
 /**
  * パーティクルを表すクラス。

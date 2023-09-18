@@ -1,6 +1,5 @@
 import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
-import { getTestGenerators } from "./ParticleGenerator.common";
-import { ParticleGenerator } from "../src/index";
+import { getTestGenerators } from "./ParticleGenerator.common.js";
 
 describe("ParticleGenerator", () => {
   const spyMath = jest.spyOn(Math, "random").mockReturnValue(0.5);

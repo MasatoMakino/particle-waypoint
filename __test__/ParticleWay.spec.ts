@@ -1,5 +1,5 @@
-import { ParticleWay } from "../src/index";
-import { BezierPath } from "./BezierPath";
+import { ParticleWay } from "../src/index.js";
+import { BezierPath } from "./BezierPath.js";
 
 const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
 
@@ -90,7 +90,7 @@ describe("Bezier", () => {
     isNear(
       way.getPoint(0.25 / 3),
       [Math.cos((Math.PI / 180) * 30), Math.sin((Math.PI / 180) * 30)],
-      2
+      2,
     );
   });
 

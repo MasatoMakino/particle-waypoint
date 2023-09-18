@@ -1,5 +1,5 @@
-import { BezierUtil, ParticleWay } from "../src/index";
-import { BezierPath } from "./BezierPath";
+import { BezierUtil, ParticleWay } from "../src/index.js";
+import { BezierPath } from "./BezierPath.js";
 
 const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
 
@@ -66,7 +66,7 @@ describe("BezierUtil : arc", () => {
     const lengthC = BezierUtil.getLengthFromCommand(
       command[0],
       command[1],
-      div
+      div,
     );
     expect(length).toEqual(lengthC);
   };
