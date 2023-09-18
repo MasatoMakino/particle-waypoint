@@ -1,20 +1,20 @@
 {
   "name": "@masatomakino/particle-waypoint",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Path module for calculating waypoints.",
   "type": "module",
-"exports": {
-  ".": {
-    "import": {
-      "types": "./esm/index.d.ts",
-      "default": "./esm/index.js"
-    },
-    "default": {
-      "types": "./esm/index.d.ts",
-      "default": "./esm/index.js"
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "default": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      }
     }
-  }
-},
+  },
   "types": "./esm/index.d.ts",
   "files": [
     "esm"
