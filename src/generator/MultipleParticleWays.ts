@@ -1,4 +1,4 @@
-import { ParticleWay } from "../ParticleWay";
+import { ParticleWay } from "../index.js";
 export type WaySelectType = "random" | "sequential";
 
 /**
@@ -38,7 +38,7 @@ export class MultipleParticleWaysOption {
   type?: WaySelectType;
 
   public static initOption(
-    option?: MultipleParticleWaysOption
+    option?: MultipleParticleWaysOption,
   ): MultipleParticleWaysOption {
     option ??= {};
 

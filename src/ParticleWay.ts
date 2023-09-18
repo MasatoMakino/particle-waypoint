@@ -1,8 +1,7 @@
 /**
  * 中間点の座標の算出が可能な経路を表すクラス
  */
-import { Particle } from "./Particle";
-import { BezierUtil } from "./BezierUtil";
+import { Particle, BezierUtil } from "./index.js";
 
 export class ParticleWay {
   public name: string = "";
@@ -32,12 +31,12 @@ export class ParticleWay {
   private warnPoints(): void {
     if (this._points.length === 0) {
       console.warn(
-        "ParticleWay : 長さゼロの配列が指定されました。座標が算出できないため、getPoint関数は常にnullを返します。"
+        "ParticleWay : 長さゼロの配列が指定されました。座標が算出できないため、getPoint関数は常にnullを返します。",
       );
     }
     if (this._points.length === 1) {
       console.warn(
-        "ParticleWay : 長さ1の配列が指定されました。座標が算出できないため、getPoint関数は常に固定の座標を返します。"
+        "ParticleWay : 長さ1の配列が指定されました。座標が算出できないため、getPoint関数は常に固定の座標を返します。",
       );
     }
   }
@@ -102,7 +101,7 @@ export class ParticleWay {
     return this.getCenterPoint(
       floorPoint,
       ceilPoint,
-      (t - ratioBase) / (this._ratioTable[i + 1] - ratioBase)
+      (t - ratioBase) / (this._ratioTable[i + 1] - ratioBase),
     );
   }
 

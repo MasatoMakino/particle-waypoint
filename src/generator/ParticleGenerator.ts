@@ -1,11 +1,13 @@
 import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
-import { Particle } from "../Particle";
-import { ParticleWay } from "../ParticleWay";
-import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
-import { MultipleParticleWays } from "./MultipleParticleWays";
-import { ParticleAnimator } from "./ParticleAnimator";
-import { ParticleContainer } from "./ParticleContainer";
-import { ParticleValve } from "./ParticleValve";
+import { Particle, ParticleWay } from "../index.js";
+import {
+  GenerationMode,
+  GenerationModeManager,
+} from "./GenerationModeManager.js";
+import { MultipleParticleWays } from "./MultipleParticleWays.js";
+import { ParticleAnimator } from "./ParticleAnimator.js";
+import { ParticleContainer } from "./ParticleContainer.js";
+import { ParticleValve } from "./ParticleValve.js";
 
 /**
  * 一定間隔でパーティクルを生成し、アニメーションさせるクラス。
@@ -40,7 +42,7 @@ export class ParticleGenerator {
    */
   constructor(
     path: ParticleWay | ParticleWay[],
-    option?: ParticleGeneratorOption
+    option?: ParticleGeneratorOption,
   ) {
     this.modeManager = new GenerationModeManager();
     this.multipleWays = new MultipleParticleWays({ ways: path });
@@ -48,7 +50,7 @@ export class ParticleGenerator {
     this.valve = new ParticleValve(this.modeManager);
     this.animator = new ParticleAnimator(
       this.modeManager,
-      this.particleContainer
+      this.particleContainer,
     );
     this.modeManager.on("change", (val: GenerationMode) => {
       if (this._isPlaying) {
@@ -210,7 +212,7 @@ export class ParticleGeneratorOption {
   probability?: number;
 
   public static initOption(
-    option?: ParticleGeneratorOption
+    option?: ParticleGeneratorOption,
   ): ParticleGeneratorOption {
     option ??= {};
     option.generationMode ??= "sequential";

@@ -1,4 +1,4 @@
-import { ParticleGenerator, ParticleWay } from "../src";
+import { ParticleGenerator, ParticleWay } from "../src/index.js";
 
 export function getTestGenerators(): {
   generator: ParticleGenerator;

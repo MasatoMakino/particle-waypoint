@@ -1,5 +1,5 @@
-import { GenerationMode, ParticleGenerator, WaySelectType } from "../src/index";
-import { getTestGenerators } from "./ParticleGenerator.common";
+import { ParticleGenerator } from "../src/index.js";
+import { getTestGenerators } from "./ParticleGenerator.common.js";
 
 describe("ParticleGenerator", () => {
   const spyWarn = jest.spyOn(console, "warn");
@@ -187,7 +187,7 @@ describe("ParticleGenerator", () => {
 
 function testParticleVisible(
   generator: ParticleGenerator,
-  visible: boolean
+  visible: boolean,
 ): void {
   expect(generator.particleContainer.visible).toBe(visible);
   generator.particleContainer.particles.forEach((particle) => {

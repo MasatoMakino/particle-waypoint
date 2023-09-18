@@ -1,6 +1,6 @@
-import { ParticleContainer } from "./ParticleContainer";
-import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
-import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility";
+import { ParticleContainer } from "./ParticleContainer.js";
+import { GenerationModeManager } from "./GenerationModeManager.js";
+import { ParticleGeneratorUtility } from "./ParticleGeneratorUtility.js";
 
 export class ParticleAnimator {
   private _generationInterval: number = 300;
@@ -13,7 +13,7 @@ export class ParticleAnimator {
 
     if (this._modeManager.mode === "loop") {
       console.warn(
-        "ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。"
+        "ParticleGenerator : ループ指定中にパーティクル生成間隔を再設定しても反映されません。設定を反映するためにパーティクルを削除して再生成してください。",
       );
       console.trace();
     }
@@ -30,7 +30,7 @@ export class ParticleAnimator {
 
   constructor(
     modeManager: GenerationModeManager,
-    particleContainer: ParticleContainer
+    particleContainer: ParticleContainer,
   ) {
     this._particleContainer = particleContainer;
     this._modeManager = modeManager;
@@ -57,7 +57,7 @@ export class ParticleAnimator {
     this.speedPerSec = speed;
     this._generationInterval = ParticleGeneratorUtility.getInterval(
       speed,
-      particleNum
+      particleNum,
     );
   }
 
@@ -79,7 +79,7 @@ export class ParticleAnimator {
     this._ease = ease;
     if (!override && this._modeManager.mode === "loop") {
       console.warn(
-        "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。"
+        "ParticleGenerator : ループ指定中にEase関数を再設定すると、既存のパーティクルのEase関数は常に上書きされます。",
       );
       console.trace();
     }

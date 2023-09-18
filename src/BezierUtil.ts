@@ -1,4 +1,4 @@
-import { ParticleWay } from "./ParticleWay";
+import { ParticleWay } from "./index.js";
 
 export class BezierUtil {
   /**
@@ -15,7 +15,7 @@ export class BezierUtil {
     from: number[],
     c1: number[],
     c2: number[],
-    to: number[]
+    to: number[],
   ): number[] {
     const addPoint = (p1: number[], p2: number[], coefficient) => {
       p1[0] += coefficient * p2[0];
@@ -49,14 +49,14 @@ export class BezierUtil {
   public static getPointFromCommand(
     t: number,
     command1: number[],
-    command2: number[]
+    command2: number[],
   ): number[] {
     return this.getPoint(
       t,
       command1.slice(-2),
       command2.slice(0, 2),
       command2.slice(2, 4),
-      command2.slice(-2)
+      command2.slice(-2),
     );
   }
 
@@ -75,7 +75,7 @@ export class BezierUtil {
     c1: number[],
     c2: number[],
     to: number[],
-    div: number = 16
+    div: number = 16,
   ): number {
     let result = 0;
     let prevPoint;
@@ -99,14 +99,14 @@ export class BezierUtil {
   public static getLengthFromCommand(
     command1: number[],
     command2: number[],
-    div: number = 16
+    div: number = 16,
   ): number {
     return this.getLength(
       command1.slice(-2),
       command2.slice(0, 2),
       command2.slice(2, 4),
       command2.slice(-2),
-      div
+      div,
     );
   }
 
@@ -129,7 +129,7 @@ export class BezierUtil {
   private static subdivideSubPath(
     command1: number[],
     command2: number[],
-    div: number = 16
+    div: number = 16,
   ): number[][] {
     const points = [];
     for (let i = 0; i < div + 1; i++) {

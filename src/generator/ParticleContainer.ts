@@ -1,5 +1,8 @@
-import { Particle } from "../Particle";
-import { GenerationMode, GenerationModeManager } from "./GenerationModeManager";
+import { Particle } from "../Particle.js";
+import {
+  GenerationMode,
+  GenerationModeManager,
+} from "./GenerationModeManager.js";
 
 /**
  * 複数のパーティクルを格納、移動、管理するためのクラスです。
