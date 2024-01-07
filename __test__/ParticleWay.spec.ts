@@ -1,7 +1,8 @@
+import { describe, test, expect, vi } from "vitest";
 import { ParticleWay } from "../src/index.js";
 import { BezierPath } from "./BezierPath.js";
 
-const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
+const spyWarn = vi.spyOn(console, "warn").mockImplementation((x) => x);
 
 describe("2D", () => {
   const points = [
@@ -145,7 +146,8 @@ describe("Zero Point", () => {
  * @param p1 点を表す座標
  * @param p2 点を表す座標
  */
-const isNear = (p1: number[], p2: number[], precision: number = 6) => {
+const isNear = (p1: number[] | null, p2: number[], precision: number = 6) => {
+  if (p1 == null) throw new Error("null");
   for (let i = 0; i < p1.length; i++) {
     expect(p1[i]).toBeCloseTo(p2[i], precision);
   }

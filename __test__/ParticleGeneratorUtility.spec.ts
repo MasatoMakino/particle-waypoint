@@ -1,3 +1,4 @@
+import { describe, test, expect, vi } from "vitest";
 import { ParticleGeneratorUtility } from "../src/generator/ParticleGeneratorUtility.js";
 
 describe("ParticleGeneratorUtility", () => {
