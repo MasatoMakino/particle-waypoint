@@ -1,10 +1,11 @@
+import { describe, test, expect, vi } from "vitest";
 import { ParticleGenerator } from "../src/index.js";
 import { getTestGenerators } from "./ParticleGenerator.common.js";
 
 describe("ParticleGenerator", () => {
-  const spyWarn = jest.spyOn(console, "warn");
+  const spyWarn = vi.spyOn(console, "warn");
   spyWarn.mockImplementation((x) => x);
-  const spyTrace = jest.spyOn(console, "trace");
+  const spyTrace = vi.spyOn(console, "trace");
   spyTrace.mockImplementation((x) => x);
 
   const { generator, way } = getTestGenerators();

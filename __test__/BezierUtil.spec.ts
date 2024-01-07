@@ -1,7 +1,8 @@
+import { describe, test, expect, vi } from "vitest";
 import { BezierUtil, ParticleWay } from "../src/index.js";
 import { BezierPath } from "./BezierPath.js";
 
-const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
+const spyWarn = vi.spyOn(console, "warn").mockImplementation((x) => x);
 
 describe("BezierUtil : arc", () => {
   const R = 1.0;
@@ -145,6 +146,7 @@ describe("BezierUtil : subdivide", () => {
     const isCloseTo = (t) => {
       const p1 = way.getPoint(t);
       const p2 = differWay.getPoint(t);
+      if (p1 == null || p2 == null) throw new Error("null");
       expect(p1[0]).toBeCloseTo(p2[0]);
       expect(p1[1]).toBeCloseTo(p2[1]);
     };
@@ -152,6 +154,7 @@ describe("BezierUtil : subdivide", () => {
     const isNear = (t) => {
       const p1 = way.getPoint(t);
       const p2 = differWay.getPoint(t);
+      if (p1 == null || p2 == null) throw new Error("null");
       expect(p1[0]).toBeCloseTo(p2[0], 2);
       expect(p1[1]).toBeCloseTo(p2[1], 2);
     };

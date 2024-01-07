@@ -1,3 +1,4 @@
+import { describe, test, expect, vi } from "vitest";
 import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
 import { getTestGenerators } from "./ParticleGenerator.common.js";
 

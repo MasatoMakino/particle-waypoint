@@ -1,6 +1,7 @@
+import { describe, test, expect, vi } from "vitest";
 import { Particle, ParticleWay } from "../src/index.js";
 
-const spyWarn = jest.spyOn(console, "warn").mockImplementation((x) => x);
+const spyWarn = vi.spyOn(console, "warn").mockImplementation((x) => x);
 
 //easing function
 const sineInOut = (t: number): number => {
