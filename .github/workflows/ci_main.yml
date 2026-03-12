@@ -12,6 +12,8 @@ on:
 jobs:
   jest:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
     strategy:
       matrix:
         node-version: [20.x, 22.x, 24.x]
