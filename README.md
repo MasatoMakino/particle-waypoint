@@ -2,7 +2,7 @@
 
 > Path module for calculating waypoints.
 
-[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![npm version](https://badge.fury.io/js/@masatomakino%2Fparticle-waypoint.svg)](https://badge.fury.io/js/@masatomakino%2Fparticle-waypoint)
 [![CI](https://github.com/MasatoMakino/particle-waypoint/actions/workflows/ci_main.yml/badge.svg)](https://github.com/MasatoMakino/particle-waypoint/actions/workflows/ci_main.yml)
 
