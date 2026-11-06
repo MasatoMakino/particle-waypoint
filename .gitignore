@@ -68,3 +68,5 @@ esm/
 
 # 1Password CLI
 .op/
+# pnpm store (bind-mounted DevContainer)
+.pnpm-store/
