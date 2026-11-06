@@ -1,6 +1,6 @@
 {
   "name": "@masatomakino/particle-waypoint",
-  "version": "0.8.3",
+  "version": "0.9.0",
   "description": "Path module for calculating waypoints.",
   "type": "module",
   "packageManager": "pnpm@12.16.1",
