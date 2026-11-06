@@ -6,10 +6,6 @@
 [![npm version](https://badge.fury.io/js/@masatomakino%2Fparticle-waypoint.svg)](https://badge.fury.io/js/@masatomakino%2Fparticle-waypoint)
 [![CI](https://github.com/MasatoMakino/particle-waypoint/actions/workflows/ci_main.yml/badge.svg)](https://github.com/MasatoMakino/particle-waypoint/actions/workflows/ci_main.yml)
 
-## API Documents
-
-[API documents](https://masatomakino.github.io/particle-waypoint/api/)
-
 ## Getting Started
 
 ### Install
