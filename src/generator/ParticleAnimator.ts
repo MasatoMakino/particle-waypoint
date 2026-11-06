@@ -20,8 +20,8 @@ export class ParticleAnimator {
   }
   public speedPerSec: number = 0.07;
 
-  private _ease: (number) => number;
-  get ease(): (number) => number {
+  private _ease?: (t: number) => number;
+  get ease(): ((t: number) => number) | undefined {
     return this._ease;
   }
 
@@ -75,7 +75,7 @@ export class ParticleAnimator {
    * @param ease イージング関数。
    * @param override 現存するパーティクルのEase関数を上書きするか否か。規定値はtrue。
    */
-  updateEase(ease: (number) => number, override: boolean = true) {
+  updateEase(ease?: (t: number) => number, override: boolean = true) {
     this._ease = ease;
     if (!override && this._modeManager.mode === "loop") {
       console.warn(

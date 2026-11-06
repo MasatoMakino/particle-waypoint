@@ -60,9 +60,9 @@ export class ParticleGenerator {
     });
 
     option = ParticleGeneratorOption.initOption(option);
-    this.modeManager.mode = option.generationMode;
+    this.modeManager.mode = option.generationMode!;
     this.animator.updateEase(option.ease);
-    this.probability = option.probability;
+    this.probability = option.probability!;
   }
 
   /**
@@ -198,8 +198,8 @@ export class ParticleGenerator {
     this._isDisposed = true;
 
     this.particleContainer.removeAll();
-    this.particleContainer = null;
-    this.multipleWays = null;
+    this.particleContainer = null!;
+    this.multipleWays = null!;
   }
 }
 
@@ -208,7 +208,7 @@ export class ParticleGenerator {
  */
 export class ParticleGeneratorOption {
   generationMode?: GenerationMode;
-  ease?: (number) => number;
+  ease?: (t: number) => number;
   probability?: number;
 
   public static initOption(

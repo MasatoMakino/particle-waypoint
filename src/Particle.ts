@@ -9,7 +9,7 @@ export class Particle {
   private _ratio: number = 0.0;
   protected path: ParticleWay;
   private _visible: boolean = true;
-  public ease: (number) => number;
+  public ease?: (t: number) => number;
 
   public static MAX_RATIO: number = 1.0;
   public static MIN_RATIO: number = 0.0;

@@ -5,8 +5,8 @@ import { Particle, BezierUtil } from "./index.js";
 
 export class ParticleWay {
   public name: string = "";
-  private _points: number[][];
-  protected _ratioTable: number[];
+  private _points!: number[][];
+  protected _ratioTable!: number[];
 
   /**
    * コンストラクタ
@@ -70,7 +70,10 @@ export class ParticleWay {
    * @param pos1
    * @param pos2
    */
-  public static getDistance(pos1: number[], pos2: number[]): number {
+  public static getDistance(
+    pos1: number[],
+    pos2: number[],
+  ): number | undefined {
     const dx = pos2[0] - pos1[0];
     const dy = pos2[1] - pos1[1];
 
@@ -89,7 +92,7 @@ export class ParticleWay {
    * 経路上の中間点座標を取得する。
    * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
    */
-  public getPoint(t: number): number[] | null {
+  public getPoint(t: number): number[] | null | undefined {
     t = ParticleWayUtil.clampRatio(t);
     const limited = this.getLimitPoint(t);
     if (limited !== false) return limited;
@@ -131,7 +134,11 @@ export class ParticleWay {
    * @param pos2 線分の終点
    * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
    */
-  private getCenterPoint(pos1: number[], pos2: number[], t: number): number[] {
+  private getCenterPoint(
+    pos1: number[],
+    pos2: number[],
+    t: number,
+  ): number[] | undefined {
     const rt = 1.0 - t;
     let pos = [pos1[0] * rt + pos2[0] * t, pos1[1] * rt + pos2[1] * t];
     switch (pos2.length) {

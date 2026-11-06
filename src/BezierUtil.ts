@@ -17,7 +17,7 @@ export class BezierUtil {
     c2: number[],
     to: number[],
   ): number[] {
-    const addPoint = (p1: number[], p2: number[], coefficient) => {
+    const addPoint = (p1: number[], p2: number[], coefficient: number) => {
       p1[0] += coefficient * p2[0];
       p1[1] += coefficient * p2[1];
     };
@@ -82,7 +82,7 @@ export class BezierUtil {
     for (let i = 0; i < div + 1; i++) {
       const p = this.getPoint(i / div, from, c1, c2, to);
       if (prevPoint) {
-        result += ParticleWay.getDistance(prevPoint, p);
+        result += ParticleWay.getDistance(prevPoint, p)!;
       }
       prevPoint = p;
     }
