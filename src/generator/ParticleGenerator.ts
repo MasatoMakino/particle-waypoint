@@ -1,5 +1,5 @@
 import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
-import { Particle, ParticleWay } from "../index.js";
+import { EaseFunction, Particle, ParticleWay } from "../index.js";
 import {
   GenerationMode,
   GenerationModeManager,
@@ -59,10 +59,14 @@ export class ParticleGenerator {
       }
     });
 
-    option = ParticleGeneratorOption.initOption(option);
-    this.modeManager.mode = option.generationMode!;
-    this.animator.updateEase(option.ease);
-    this.probability = option.probability!;
+    const {
+      generationMode = "sequential",
+      ease,
+      probability = 1.0,
+    } = option ?? {};
+    this.modeManager.mode = generationMode;
+    this.animator.updateEase(ease);
+    this.probability = probability;
   }
 
   /**
@@ -206,17 +210,8 @@ export class ParticleGenerator {
 /**
  * パーティクル生成方法を指定するオプション
  */
-export class ParticleGeneratorOption {
+export interface ParticleGeneratorOption {
   generationMode?: GenerationMode;
-  ease?: (t: number) => number;
+  ease?: EaseFunction;
   probability?: number;
-
-  public static initOption(
-    option?: ParticleGeneratorOption,
-  ): ParticleGeneratorOption {
-    option ??= {};
-    option.generationMode ??= "sequential";
-    option.probability ??= 1.0;
-    return option;
-  }
 }

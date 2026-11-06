@@ -9,10 +9,10 @@ export class MultipleParticleWays {
   public waySelectType: WaySelectType;
   private waySelectionCount: number = 0;
 
-  constructor(option?: MultipleParticleWaysOption) {
-    MultipleParticleWaysOption.initOption(option);
-    this.ways = option!.ways as ParticleWay[];
-    this.waySelectType = option!.type!;
+  constructor(option: MultipleParticleWaysOption) {
+    const { ways, type = "sequential" } = option;
+    this.ways = Array.isArray(ways) ? ways : [ways];
+    this.waySelectType = type;
   }
 
   public countUp(): void {
@@ -33,20 +33,7 @@ export class MultipleParticleWays {
   }
 }
 
-export class MultipleParticleWaysOption {
-  ways?: ParticleWay | ParticleWay[];
+export interface MultipleParticleWaysOption {
+  ways: ParticleWay | ParticleWay[];
   type?: WaySelectType;
-
-  public static initOption(
-    option?: MultipleParticleWaysOption,
-  ): MultipleParticleWaysOption {
-    option ??= {};
-
-    option.ways ??= [];
-    if (!Array.isArray(option.ways)) {
-      option.ways = [option.ways];
-    }
-    option.type ??= "sequential";
-    return option;
-  }
 }

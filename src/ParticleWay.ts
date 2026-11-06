@@ -14,6 +14,7 @@ export class ParticleWay {
    *   要素数2 : 2次元パス
    *   要素数3 : 3次元パス
    *   要素数6 : 平面3次元ベジェ曲線
+   * @throws 座標の配列が空のとき、または要素数が 2、3、6 以外の座標を含むとき。
    */
   constructor(points: number[][]) {
     this.points = points;
@@ -22,18 +23,15 @@ export class ParticleWay {
   /**
    * 経路の座標配列を更新する。
    * @param points
+   * @throws 座標の配列が空のとき、または要素数が 2、3、6 以外の座標を含むとき。
    */
   public set points(points: number[][]) {
+    ParticleWayUtil.validatePoints(points);
     this._points = points;
     this.onSetPoints();
   }
 
   private warnPoints(): void {
-    if (this._points.length === 0) {
-      console.warn(
-        "ParticleWay : 長さゼロの配列が指定されました。座標が算出できないため、getPoint関数は常にnullを返します。",
-      );
-    }
     if (this._points.length === 1) {
       console.warn(
         "ParticleWay : 長さ1の配列が指定されました。座標が算出できないため、getPoint関数は常に固定の座標を返します。",
@@ -70,10 +68,7 @@ export class ParticleWay {
    * @param pos1
    * @param pos2
    */
-  public static getDistance(
-    pos1: number[],
-    pos2: number[],
-  ): number | undefined {
+  public static getDistance(pos1: number[], pos2: number[]): number {
     const dx = pos2[0] - pos1[0];
     const dy = pos2[1] - pos1[1];
 
@@ -85,6 +80,8 @@ export class ParticleWay {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
       case 2:
         return Math.sqrt(dx * dx + dy * dy);
+      default:
+        throw ParticleWayUtil.createLengthError(pos2);
     }
   }
 
@@ -92,7 +89,7 @@ export class ParticleWay {
    * 経路上の中間点座標を取得する。
    * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
    */
-  public getPoint(t: number): number[] | null | undefined {
+  public getPoint(t: number): number[] {
     t = ParticleWayUtil.clampRatio(t);
     const limited = this.getLimitPoint(t);
     if (limited !== false) return limited;
@@ -113,11 +110,7 @@ export class ParticleWay {
    * @param t
    * @private
    */
-  private getLimitPoint(t: number): number[] | null | false {
-    if (!this._points || this._points.length === 0) {
-      return null;
-    }
-
+  private getLimitPoint(t: number): number[] | false {
     if (t === Particle.MAX_RATIO) {
       return ParticleWayUtil.getPositionWithMaxT(this._points);
     }
@@ -134,11 +127,7 @@ export class ParticleWay {
    * @param pos2 線分の終点
    * @param t 算出する座標の位置。0.0(始点) ~ 1.0(終点)の間。
    */
-  private getCenterPoint(
-    pos1: number[],
-    pos2: number[],
-    t: number,
-  ): number[] | undefined {
+  private getCenterPoint(pos1: number[], pos2: number[], t: number): number[] {
     const rt = 1.0 - t;
     let pos = [pos1[0] * rt + pos2[0] * t, pos1[1] * rt + pos2[1] * t];
     switch (pos2.length) {
@@ -149,11 +138,29 @@ export class ParticleWay {
         return pos;
       case 2:
         return pos;
+      default:
+        throw ParticleWayUtil.createLengthError(pos2);
     }
   }
 }
 
 class ParticleWayUtil {
+  static validatePoints(points: number[][]): void {
+    if (points.length === 0) {
+      throw new Error("ParticleWay : 経路には 1 つ以上の座標が必要です。");
+    }
+    const invalid = points.find((point) => ![2, 3, 6].includes(point.length));
+    if (invalid) {
+      throw this.createLengthError(invalid);
+    }
+  }
+
+  static createLengthError(point: number[]): Error {
+    return new Error(
+      `ParticleWay : 要素数 ${point.length} の座標は扱えません。要素数は 2、3、6 のいずれかにします。`,
+    );
+  }
+
   static clamp(val: number, max: number, min: number): number {
     return Math.min(Math.max(val, min), max);
   }

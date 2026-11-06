@@ -82,7 +82,7 @@ export class BezierUtil {
     for (let i = 0; i < div + 1; i++) {
       const p = this.getPoint(i / div, from, c1, c2, to);
       if (prevPoint) {
-        result += ParticleWay.getDistance(prevPoint, p)!;
+        result += ParticleWay.getDistance(prevPoint, p);
       }
       prevPoint = p;
     }

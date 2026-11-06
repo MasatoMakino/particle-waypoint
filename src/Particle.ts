@@ -1,6 +1,11 @@
 import { ParticleWay } from "./ParticleWay.js";
 
 /**
+ * パーティクルの経路上の位置 t (0.0 ~ 1.0) を補正するイージング関数。
+ */
+export type EaseFunction = (t: number) => number;
+
+/**
  * パーティクルを表すクラス。
  * このクラス自体には描画のための機能はない。
  * 各種の描画ライブラリと組み合わせて利用する。
@@ -9,7 +14,7 @@ export class Particle {
   private _ratio: number = 0.0;
   protected path: ParticleWay;
   private _visible: boolean = true;
-  public ease?: (t: number) => number;
+  public ease?: EaseFunction;
 
   public static MAX_RATIO: number = 1.0;
   public static MIN_RATIO: number = 0.0;
