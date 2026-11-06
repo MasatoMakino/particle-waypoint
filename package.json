@@ -3,6 +3,7 @@
   "version": "0.8.3",
   "description": "Path module for calculating waypoints.",
   "type": "module",
+  "packageManager": "pnpm@12.16.1",
   "exports": {
     ".": {
       "import": {
@@ -34,15 +35,16 @@
     "jsdom": "^27.0.0",
     "prettier": "^3.3.3",
     "typedoc": "^0.28.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "3.2.4"
   },
   "scripts": {
     "test": "vitest --run",
     "coverage": "vitest --coverage --run",
     "test:watch": "vitest",
     "pre-commit": "prettier --write --ignore-unknown",
-    "pre-push": "npm test",
-    "build": "npm run buildTS && npm run typedocs",
+    "pre-push": "pnpm test",
+    "build": "pnpm run buildTS && pnpm run typedocs",
     "buildTS": "tsc",
     "typedocs": "typedoc --out ./docs/api src/index.ts",
     "watch:tsc": "tsc -W -incremental"
