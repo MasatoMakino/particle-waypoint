@@ -126,27 +126,25 @@ describe("1Point", () => {
   });
 });
 
-describe("Zero Point", () => {
-  const points = [];
-  const way = new ParticleWay(points);
-
-  test("点がない経路は、どの t でも null を返す : 中間", () => {
-    expect(way.getPoint(0.5)).toBeNull();
+describe("invalid points", () => {
+  test("空の座標の配列は、生成時に例外を投げる", () => {
+    expect(() => new ParticleWay([])).toThrow();
   });
-  test("点がない経路は、どの t でも null を返す : 始点", () => {
-    expect(way.getPoint(0.0)).toBeNull();
+  test("要素数が 2、3、6 以外の座標を含む配列は、生成時に例外を投げる", () => {
+    expect(
+      () =>
+        new ParticleWay([
+          [0, 0],
+          [1, 1, 1, 1],
+        ]),
+    ).toThrow();
   });
-  test("点がない経路は、どの t でも null を返す : 終点", () => {
-    expect(way.getPoint(1.0)).toBeNull();
+  test("getDistance は要素数が 2、3、6 以外の座標に例外を投げる", () => {
+    expect(() => ParticleWay.getDistance([0, 0], [1, 1, 1, 1])).toThrow();
   });
 });
 
-const isNear = (
-  p1: number[] | null | undefined,
-  p2: number[],
-  precision: number = 6,
-) => {
-  if (p1 == null) throw new Error("null");
+const isNear = (p1: number[], p2: number[], precision: number = 6) => {
   for (let i = 0; i < p1.length; i++) {
     expect(p1[i]).toBeCloseTo(p2[i], precision);
   }

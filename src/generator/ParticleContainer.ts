@@ -1,4 +1,4 @@
-import { Particle } from "../Particle.js";
+import { EaseFunction, Particle } from "../Particle.js";
 import {
   GenerationMode,
   GenerationModeManager,
@@ -103,7 +103,7 @@ export class ParticleContainer {
     });
   }
 
-  public overrideEase(ease?: (t: number) => number): void {
+  public overrideEase(ease?: EaseFunction): void {
     this._particles.forEach((p) => {
       p.ease = ease;
     });
