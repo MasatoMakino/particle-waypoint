@@ -3,7 +3,7 @@ import { RAFTicker, RAFTickerEventContext } from "@masatomakino/raf-ticker";
 import { getTestGenerators } from "./ParticleGenerator.common.js";
 
 describe("ParticleGenerator", () => {
-  test("animate", () => {
+  test("再生中は生成間隔ごとにパーティクルを生成し、経路上を移動させる", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
     generator.play();
@@ -16,7 +16,7 @@ describe("ParticleGenerator", () => {
     expect(container.particles[0].ratio).toBeCloseTo(0.021);
   });
 
-  test("animate : skip generate", () => {
+  test("長い経過時間のフレームでは、その間に生成されるはずのパーティクルをまとめて生成する", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
     generator.play();
@@ -28,7 +28,7 @@ describe("ParticleGenerator", () => {
     expect(container.particles[0].ratio).toBeCloseTo(0.98);
   });
 
-  test("animate : close valve", () => {
+  test("バルブを閉じている間は、再生中でもパーティクルを生成しない", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
     generator.play();
@@ -40,7 +40,7 @@ describe("ParticleGenerator", () => {
     expect(container.particles.length).toBe(0);
   });
 
-  test("loop", () => {
+  test("loop モードで再生すると、経路を埋めるパーティクルを最初のフレームで生成する", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
     generator.modeManager.mode = "loop";
@@ -52,7 +52,7 @@ describe("ParticleGenerator", () => {
     expect(container.particles[0].ratio).toBeCloseTo(0.0);
   });
 
-  test("play and loop", () => {
+  test("再生中にモードを変えると、パーティクルを消して再生を続ける", () => {
     const { generator } = getTestGenerators();
     const container = generator.particleContainer;
     generator.play();
@@ -66,9 +66,10 @@ describe("ParticleGenerator", () => {
     expect(generator.isPlaying).toBe(true);
 
     generator.modeManager.mode = "sequential";
+    expect(generator.isPlaying).toBe(true);
   });
 
-  test("dispose and play", () => {
+  test("dispose の後は、play してもパーティクルを生成しない", () => {
     const { generator } = getTestGenerators();
 
     generator.play();
@@ -80,7 +81,7 @@ describe("ParticleGenerator", () => {
     expect(generator.particleContainer).toBeNull();
   });
 
-  test("dispose and play loop", () => {
+  test("loop モードでも、dispose の後は play してもパーティクルを生成しない", () => {
     const { generator } = getTestGenerators();
     generator.modeManager.mode = "loop";
     generator.play();

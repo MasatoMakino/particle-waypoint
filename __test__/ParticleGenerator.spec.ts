@@ -10,30 +10,28 @@ describe("ParticleGenerator", () => {
 
   const { generator, way } = getTestGenerators();
 
-  test("constructor", () => {
-    expect(generator).toBeTruthy();
+  test("オプションなしで生成すると、既定の速度・間隔・確率・モードになる", () => {
     expect(generator.animator.speedPerSec).toBe(0.07);
     expect(generator.animator.generationInterval).toBe(300);
     expect(generator.probability).toBe(1.0);
-    expect(generator.modeManager).toBeTruthy();
     expect(generator.modeManager.mode).toBe("sequential");
     expect(generator.particleContainer.visible).toBe(true);
     expect(generator.multipleWays.waySelectType).toBe("sequential");
   });
 
-  test("constructor : array of way", () => {
+  test("経路の配列を渡すと、すべての経路を使う", () => {
     const gen = new ParticleGenerator([way]);
     expect(gen.multipleWays.ways.length).toBe([way].length);
   });
 
-  test("constructor : empty option", () => {
+  test("空のオプションでは、各項目が既定値になり ease は設定されない", () => {
     const gen = new ParticleGenerator(way, {});
     expect(gen.modeManager.mode).toBe("sequential");
     expect(gen.animator.ease).toBeFalsy();
     expect(gen.probability).toBe(1.0);
   });
 
-  test("constructor : option", () => {
+  test("オプションで指定したモード・ease・確率を使う", () => {
     const gen = new ParticleGenerator(way, {
       generationMode: "loop",
       ease: (n) => n,
@@ -44,7 +42,7 @@ describe("ParticleGenerator", () => {
     expect(gen.probability).toBe(0.8);
   });
 
-  test("play", () => {
+  test("play は再生状態にし、2 回呼んでも再生状態のままにする", () => {
     expect(generator.isPlaying).toBe(false);
     generator.play();
     expect(generator.isPlaying).toBe(true);
@@ -52,7 +50,7 @@ describe("ParticleGenerator", () => {
     expect(generator.isPlaying).toBe(true);
   });
 
-  test("play : loop", () => {
+  test("loop モードでの再生中にバルブを閉じると、効果がないことを警告する", () => {
     const gen = new ParticleGenerator(way, {
       generationMode: "loop",
     });
@@ -67,14 +65,14 @@ describe("ParticleGenerator", () => {
     spyTrace.mockClear();
   });
 
-  test("stop", () => {
+  test("stop は停止状態にし、2 回呼んでも停止状態のままにする", () => {
     generator.stop();
     expect(generator.isPlaying).toBe(false);
     generator.stop();
     expect(generator.isPlaying).toBe(false);
   });
 
-  test("valve", () => {
+  test("バルブは初期状態で開いており、open と close を繰り返しても指定した状態になる", () => {
     const valve = generator.valve;
     expect(valve.isOpen).toBe(true);
     valve.open();
@@ -87,11 +85,9 @@ describe("ParticleGenerator", () => {
     expect(valve.isOpen).toBe(false);
     valve.open();
     expect(valve.isOpen).toBe(true);
-
-    //TODO バルブ閉塞時にアニメーションをして、パーティクルが生成されないことを確認する
   });
 
-  test("generate all", () => {
+  test("generateAll は経路を埋めるパーティクルを生成し、removeAll はすべて消す", () => {
     generator.generateAll();
     const n = 48;
     const container = generator.particleContainer;
@@ -103,7 +99,7 @@ describe("ParticleGenerator", () => {
     expect(container.particles.length).toBe(0);
   });
 
-  test("visible", () => {
+  test("コンテナの visible は、すべてのパーティクルの visible に反映される", () => {
     const container = generator.particleContainer;
     generator.generateAll();
     container.visible = true;
@@ -115,7 +111,7 @@ describe("ParticleGenerator", () => {
     container.removeAll();
   });
 
-  test("update ease", () => {
+  test("updateEase は既存のパーティクルの ease を上書きする", () => {
     const gen = new ParticleGenerator(way);
     const container = gen.particleContainer;
     const easing = (n) => {
@@ -128,7 +124,7 @@ describe("ParticleGenerator", () => {
     });
   });
 
-  test("update ease : loop", () => {
+  test("loop モードで上書きしない updateEase を呼ぶと、常に上書きされることを警告する", () => {
     const gen = new ParticleGenerator(way, {
       generationMode: "loop",
     });
@@ -144,11 +140,8 @@ describe("ParticleGenerator", () => {
     spyTrace.mockClear();
   });
 
-  test("interval", () => {
+  test("loop モードで生成間隔を変えたときだけ、反映されないことを警告する", () => {
     const gen = new ParticleGenerator(way);
-
-    //default value
-    expect(gen.animator.generationInterval).toBe(300);
 
     gen.animator.generationInterval = 500;
     expect(spyWarn).toBeCalledTimes(0);
@@ -165,21 +158,21 @@ describe("ParticleGenerator", () => {
     spyTrace.mockClear();
   });
 
-  test("set interval", () => {
+  test("setGenerationInterval は、速度と経路上の個数から生成間隔を決める", () => {
     const gen = new ParticleGenerator(way);
     const anim = gen.animator;
     anim.setGenerationInterval(0.5, 4);
     expect(anim.generationInterval).toBeCloseTo(500);
   });
 
-  test("set speed", () => {
+  test("setSpeed は、生成間隔と経路上の個数から速度を決める", () => {
     const gen = new ParticleGenerator(way);
     const anim = gen.animator;
     anim.setSpeed(300, 4);
     expect(anim.speedPerSec).toBeCloseTo((1.0 / 1200) * 1000);
   });
 
-  test("dispose", () => {
+  test("dispose は、コンテナと経路の参照を null にして解放する", () => {
     generator.dispose();
     expect(generator.multipleWays).toBeNull();
     expect(generator.particleContainer).toBeNull();
