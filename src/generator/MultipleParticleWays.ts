@@ -11,8 +11,8 @@ export class MultipleParticleWays {
 
   constructor(option?: MultipleParticleWaysOption) {
     MultipleParticleWaysOption.initOption(option);
-    this.ways = option.ways as ParticleWay[];
-    this.waySelectType = option.type;
+    this.ways = option!.ways as ParticleWay[];
+    this.waySelectType = option!.type!;
   }
 
   public countUp(): void {

@@ -4,6 +4,8 @@
     "module": "node16",
     "lib": ["ES2021", "DOM"],
     "outDir": "esm",
+    "rootDir": "src",
+    "strict": true,
     "declaration": true,
     "declarationMap": true,
     "moduleResolution": "node16",

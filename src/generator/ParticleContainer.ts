@@ -103,7 +103,7 @@ export class ParticleContainer {
     });
   }
 
-  public overrideEase(ease: (number) => number): void {
+  public overrideEase(ease?: (t: number) => number): void {
     this._particles.forEach((p) => {
       p.ease = ease;
     });
